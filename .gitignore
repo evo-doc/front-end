@@ -1,0 +1,10 @@
+# Directories
+/node_modules/
+/app/
+/docs/
+
+# Files
+*.log
+
+# Enable gitkeep files everywhere
+!.gitkeep
