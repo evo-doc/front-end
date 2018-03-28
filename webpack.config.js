@@ -3,16 +3,29 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Constants
 //----------------------------------------------------------------------------------------------------------------------
-const plugin = {
+const plugin  = {
 			path    : require("path"),
 			webpack : require("webpack"),
 			html    : require("html-webpack-plugin"),
 			clean   : require("clean-webpack-plugin")
 		},
-		paths  = {
+		modules = {
+			// Globally required modules & their variables
+			global : {
+				_   : "lodash",
+				log : "logger.module.js"
+			},
+			// Search paths
+			search : [
+				"node_modules",
+				"src/core/modules"
+			]
+		},
+		paths   = {
 			dest      : plugin.path.join(__dirname, "/app"),
 			bootstrap : plugin.path.join(__dirname, "/src/bootstrap.js"),
-			electron  : plugin.path.join(__dirname, "/electron.config.js")
+			electron  : plugin.path.join(__dirname, "/electron.config.js"),
+			clean     : ["app"]
 		};
 
 
@@ -78,14 +91,15 @@ let application = {
 		filename : "[name].[hash].js",
 		path     : paths.dest
 	},
+	resolve : {
+		modules : modules.search
+	},
 	plugins : [
-		// Remove directory
-		new plugin.clean(["app"]),
+		// Remove app directory
+		new plugin.clean(paths.clean),
 
 		// Globally defined dependencies
-		new plugin.webpack.ProvidePlugin({
-			_ : "lodash"
-		}),
+		new plugin.webpack.ProvidePlugin(modules.global),
 
 		// Main page
 		new plugin.html({
