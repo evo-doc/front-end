@@ -9,7 +9,6 @@
     "Monika Nováková",
     "Sergey Dunaevskiy <dunaevskiy.s@gmail.com>"
   ],
-  "license": "UNLICENSED",
   "private": true,
   "dependencies": {
     "animate.css": "^3.6.1",
