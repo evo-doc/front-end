@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "EvoDoc client-side application",
   "main": "./app/app.js",
-  "repository": "git@github.com:inviqus/evodoc__front-end.git",
+  "repository": "git@github.com:evo-doc/front-end.git",
   "author": "CTU FIT EvoDoc Team",
   "contributors": [
     "Monika Nováková",
