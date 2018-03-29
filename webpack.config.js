@@ -14,7 +14,7 @@ const plugin  = {
 			global : {
 				_     : "lodash",
 				log   : "logger.module.js",
-				Error : "errors.module.js"
+				Error : "error.module.js"
 			},
 			// Search paths
 			search : [
