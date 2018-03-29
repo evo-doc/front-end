@@ -12,20 +12,27 @@ const plugin  = {
 		modules = {
 			// Globally required modules & their variables
 			global : {
-				_   : "lodash",
-				log : "logger.module.js"
+				_     : "lodash",
+				log   : "logger.module.js",
+				Error : "errors.module.js"
 			},
 			// Search paths
 			search : [
 				"node_modules",
-				"src/core/modules"
+				"src/config",
+				"src/core/modules",
+				"src/core",
+				"src/local"
 			]
 		},
 		paths   = {
 			dest      : plugin.path.join(__dirname, "/app"),
 			bootstrap : plugin.path.join(__dirname, "/src/bootstrap.js"),
 			electron  : plugin.path.join(__dirname, "/electron.config.js"),
-			clean     : ["app"]
+			rootTpl   : plugin.path.join(__dirname, "/src/local/routes/root.ejs"),
+			clean     : [
+				plugin.path.join(__dirname, "/app")
+			]
 		};
 
 
@@ -104,7 +111,7 @@ let application = {
 		// Main page
 		new plugin.html({
 			title    : "EvoDoc",
-			template : "./src/local/routes/default.ejs"
+			template : paths.rootTpl
 		})
 	]
 };
