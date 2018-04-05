@@ -3,7 +3,8 @@
     "host": "http://jsonplaceholder.typicode.com/"
   },
   "localization": {
-    "defaultLanguage": "en"
+    "default": "en",
+    "placeholder": "???"
   },
   "logger": {
     "levels": {
