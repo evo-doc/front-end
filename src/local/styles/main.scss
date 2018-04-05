@@ -1,18 +1,17 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Description: Common file, collects all style sheets.
-// Created: 12/03/2018
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Global variables
 @import "variables";
 // Palette
 @import "palette";
 // Mixins
-@import "mixins/button";
+@import "mixins/*";
 // UI elements
-@import "ui/title";
-@import "~animate.css";
+@import "ui/*";
+// Libraries
+// @import "~animate.css";
 
 body {
-	background-color : #f1f2f6;
-	background-color : rebeccapurple;
-	}
+	font-family: Arial, Helvetica, sans-serif;
+}
