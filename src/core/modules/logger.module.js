@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Logger - globally required module via webpack. Reserves `log` as a global variable.
+ * @summary Logger - globally required module via webpack. Reserves `log` as a global variable.
  * @module Logger
  *
  * @example <caption>If you need to require this module explicitely</caption>
@@ -15,77 +15,74 @@
  * log.trace("Message");
  */
 
-
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Dependencies
-//----------------------------------------------------------------------------------------------------------------------
-const moment  = require("moment");
+//--------------------------------------------------------------------------------------------------
+const moment = require("moment");
 const winston = require("winston");
-const config  = require("app.config");
+const config = require("app.config");
 
-const {combine, timestamp, printf} = winston.format;
+const { combine, timestamp, printf } = winston.format;
 
-
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Winston init
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 const getUserFriendlyFormat = printf(info => {
-	let level = ("[" + info.level + "]").padEnd(7).toUpperCase();
-	let time  = moment().format("YYYY-MM-DD HH:mm:ss");
+	let level = `[${info.level}]`.padEnd(7).toUpperCase();
+	let time = moment().format("YYYY-MM-DD HH:mm:ss");
 	return `${time} ${level} ${info.message}`;
 });
 
 const logger = winston.createLogger({
-	levels     : {
-		error : 0,
-		warn  : 1,
-		info  : 2,
-		debug : 4,
-		trace : 5
+	levels: {
+		error: 0,
+		warn: 1,
+		info: 2,
+		debug: 4,
+		trace: 5
 	},
-	format     : timestamp(),
-	transports : [
+	format: timestamp(),
+	transports: [
+		// NodeJS Console
 		new winston.transports.Console({
-			level    : "trace",
-			colorize : true,
-			format   : getUserFriendlyFormat
-
+			level: "trace",
+			colorize: true,
+			format: getUserFriendlyFormat
 		}),
 
 		// JSON logs
 		new winston.transports.File({
-			filename  : config.logger.paths.json.warn,
-			format    : winston.format.json(),
-			level     : "warn",
-			json      : true,
-			timestamp : true
+			filename: config.logger.paths.json.warn,
+			format: winston.format.json(),
+			level: "warn",
+			json: true,
+			timestamp: true
 		}),
 		new winston.transports.File({
-			filename  : config.logger.paths.json.trace,
-			format    : winston.format.json(),
-			level     : "trace",
-			json      : true,
-			timestamp : true
+			filename: config.logger.paths.json.trace,
+			format: winston.format.json(),
+			level: "trace",
+			json: true,
+			timestamp: true
 		}),
 
 		// User friendly logs
 		new winston.transports.File({
-			filename : config.logger.paths.txt.warn,
-			format   : getUserFriendlyFormat,
-			level    : "warn"
+			filename: config.logger.paths.txt.warn,
+			format: getUserFriendlyFormat,
+			level: "warn"
 		}),
 		new winston.transports.File({
-			filename : config.logger.paths.txt.trace,
-			format   : getUserFriendlyFormat,
-			level    : "trace"
+			filename: config.logger.paths.txt.trace,
+			format: getUserFriendlyFormat,
+			level: "trace"
 		})
 	]
 });
 
-
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Export interface
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 /**
  * Create error message.
  * Log it as JSON, user friendly text (see app configuration) and write as console.error; into the app.
@@ -93,13 +90,12 @@ const logger = winston.createLogger({
  * @example
  * log.error("Error description");
  */
-module.exports.error = (message) => {
+module.exports.error = message => {
 	if (config.logger.levels.global && config.logger.levels.error) {
 		logger.error(message);
 		console.error(message);
 	}
 };
-
 
 /**
  * Create warn message.
@@ -108,7 +104,7 @@ module.exports.error = (message) => {
  * @example
  * log.warn("Warning description");
  */
-module.exports.warn = (message) => {
+module.exports.warn = message => {
 	if (config.logger.levels.global && config.logger.levels.warn) {
 		logger.warn(message);
 		console.warn(message);
@@ -122,13 +118,12 @@ module.exports.warn = (message) => {
  * @example
  * log.info("Information");
  */
-module.exports.info = (message) => {
+module.exports.info = message => {
 	if (config.logger.levels.global && config.logger.levels.info) {
 		logger.info(message);
 		console.info(message);
 	}
 };
-
 
 /**
  * Create info message.
@@ -137,13 +132,12 @@ module.exports.info = (message) => {
  * @example
  * log.debug("Debug information");
  */
-module.exports.debug = (message) => {
+module.exports.debug = message => {
 	if (config.logger.levels.global && config.logger.levels.debug) {
 		logger.debug(message);
 		console.debug(message);
 	}
 };
-
 
 /**
  * Create trace message.
@@ -152,7 +146,7 @@ module.exports.debug = (message) => {
  * @example
  * log.log("Debug information");
  */
-module.exports.trace = (message) => {
+module.exports.trace = message => {
 	if (config.logger.levels.global && config.logger.levels.trace) {
 		logger.trace(message);
 		console.log(message);

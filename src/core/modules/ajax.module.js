@@ -3,9 +3,6 @@
 /**
  * Error - globally required modul via webpack. Reserves `Error` as a global variable. Provides an interface for ajax requests.
  * @module Ajax
- *
- * @example
- *
  */
 
 // TODO Write module
