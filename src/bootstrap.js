@@ -1,23 +1,14 @@
 "use strict";
 
-/**
- * Bootstrap file of the whole electron main process.
- */
-
-//----------------------------------------------------------------------------------------------------------------------
-// Dependencies
-//----------------------------------------------------------------------------------------------------------------------
-require("styles/main.scss");
-const config      = require("app.config");
 const Application = require("application.class");
+const sass = require("./local/styles/main.scss");
 
-//----------------------------------------------------------------------------------------------------------------------
-// Initialisation
-//----------------------------------------------------------------------------------------------------------------------
-//const APP = new Application(config);
-//APP.init();
-//APP.getLoader();
+// Initialisation, APP is a global variable
+global.APP = new Application();
+APP.init();
 
-// TODO Get router
-// TODO Load routes
-
+// Initialization page
+// FIXME: It's just a placeholder
+setTimeout(() => {
+	APP.getRequest().redirect("/login/default");
+}, 500);
