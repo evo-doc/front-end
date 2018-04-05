@@ -1,150 +1,177 @@
 "use strict";
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Constants
-//----------------------------------------------------------------------------------------------------------------------
-const plugin  = {
-			path    : require("path"),
-			webpack : require("webpack"),
-			html    : require("html-webpack-plugin"),
-			clean   : require("clean-webpack-plugin")
-		},
-		modules = {
-			// Globally required modules & their variables
-			global : {
-				_     : "lodash",
-				log   : "logger.module.js",
-				Error : "error.module.js"
-			},
-			// Search paths
-			search : [
-				"node_modules",
-				"src/config",
-				"src/core/modules",
-				"src/core",
-				"src/local"
-			]
-		},
-		paths   = {
-			dest      : plugin.path.join(__dirname, "/app"),
-			bootstrap : plugin.path.join(__dirname, "/src/bootstrap.js"),
-			electron  : plugin.path.join(__dirname, "/electron.config.js"),
-			rootTpl   : plugin.path.join(__dirname, "/src/local/routes/root.ejs"),
-			clean     : [
-				plugin.path.join(__dirname, "/app")
-			]
-		};
-
-
-//----------------------------------------------------------------------------------------------------------------------
-// Application Configuration
-//----------------------------------------------------------------------------------------------------------------------
-let application = {
-	mode    : process.env.MODE,
-	target  : "electron-main",
-	entry   : {
-		"bundle" : paths.bootstrap
+//--------------------------------------------------------------------------------------------------
+const plugin = {
+		/**
+		 * All required plugins for the webpack config.
+		 */
+		path: require("path"),
+		webpack: require("webpack"),
+		html: require("html-webpack-plugin"),
+		clean: require("clean-webpack-plugin"),
+		extract: require("extract-text-webpack-plugin")
 	},
-	module  : {
-		rules : [
+	modules = {
+		/**
+		 * Globally required modules & their variables.
+		 * Instead of writing e.g.
+		 * const log = require("logger.module");
+		 * in each module.
+		 */
+		global: {
+			_: "lodash",
+			log: "logger.module",
+			exception: "error.module"
+		},
+		/**
+		 * All required modules via
+		 * require("module");
+		 * are searched in these directories (listed by a priority).
+		 */
+		search: ["node_modules", "src/config", "src/core/modules", "src/core", "src/local"]
+	},
+	paths = {
+		dest: plugin.path.join(__dirname, "/app"),
+		bootstrap: plugin.path.join(__dirname, "/src/bootstrap.js"),
+		electron: plugin.path.join(__dirname, "/electron.config.js"),
+		rootTpl: plugin.path.join(__dirname, "/src/local/routes/root.ejs"),
+		clean: [plugin.path.join(__dirname, "/app")]
+	};
+
+//--------------------------------------------------------------------------------------------------
+// Application Configuration
+//--------------------------------------------------------------------------------------------------
+let application = {
+	mode: process.env.MODE,
+	target: "electron-renderer",
+	entry: {
+		bundle: paths.bootstrap
+	},
+	/**
+	 * Modules discribes what webpack should to do with non-javascript files.
+	 */
+	module: {
+		rules: [
 			// SCSS Styles
 			{
-				test : /\.scss$/,
-				use  : [
-					"style-loader",
-					{
-						loader  : "css-loader",
-						options : {
-							minimize  : {
-								discardComments : {
-									removeAll : process.env.MODE === "development"
-								}
-							},
-							sourceMap : process.env.MODE === "development"
-						}
-					},
-					"sass-loader",
-					"import-glob-loader"
-				]
+				test: /\.scss$/,
+				use: plugin.extract.extract({
+					fallback: "style-loader",
+					use: [
+						{
+							loader: "css-loader",
+							options: {
+								minimize: {
+									discardComments: {
+										removeAll: process.env.MODE === "development"
+									}
+								},
+								sourceMap: process.env.MODE === "development"
+							}
+						},
+						"sass-loader",
+						"import-glob-loader"
+					]
+				})
 			},
 
 			// EJS Templates
 			{
-				test   : /\.ejs$/,
-				loader : "ejs-loader"
+				test: /\.ejs$/,
+				loader: "ejs-loader"
 			},
 
 			// Images
 			{
-				test : /\.(png|svg|jpg|gif)$/,
-				use  : [
+				test: /\.(png|svg|jpg|gif)$/,
+				use: [
 					{
-						loader  : "file-loader",
-						options : {
-							outputPath : "images"
+						loader: "file-loader",
+						options: {
+							outputPath: "images"
 						}
 					}
 				]
 			}
 		]
 	},
-	watch   : true,
-	node    : {
+	node: {
 		// Enable __dirname and __filename passing
-		__dirname  : false,
-		__filename : false
+		__dirname: false,
+		__filename: false
 	},
-	output  : {
-		filename : "[name].[hash].js",
-		path     : paths.dest
+	output: {
+		filename: "[name].[hash].js",
+		path: paths.dest
 	},
-	resolve : {
-		modules : modules.search
+	resolve: {
+		modules: modules.search
 	},
-	plugins : [
-		// Remove app directory
-		new plugin.clean(paths.clean),
+	plugins:
+		process.env.MODE === "development"
+			? [
+					// Remove app directory
+					new plugin.clean(paths.clean),
 
-		// Globally defined dependencies
-		new plugin.webpack.ProvidePlugin(modules.global),
+					// Globally defined dependencies
+					new plugin.webpack.ProvidePlugin(modules.global),
 
-		// Main page
-		new plugin.html({
-			title    : "EvoDoc",
-			template : paths.rootTpl
-		})
-	]
+					// Extract CSS
+					new plugin.extract({
+						filename: "[name].[hash].css"
+					}),
+
+					// Main page
+					new plugin.html({
+						title: "EvoDoc",
+						template: paths.rootTpl
+					}),
+
+					// JS Sourcemaps
+					new plugin.webpack.SourceMapDevToolPlugin({
+						filename: "[name].[hash].js.map"
+					})
+			  ]
+			: [
+					// Remove app directory
+					new plugin.clean(paths.clean),
+
+					// Extract CSS
+					new plugin.extract({
+						filename: "[name].[hash].css"
+					}),
+
+					// Globally defined dependencies
+					new plugin.webpack.ProvidePlugin(modules.global),
+
+					// Main page
+					new plugin.html({
+						title: "EvoDoc",
+						template: paths.rootTpl
+					})
+			  ]
 };
 
-if (process.env.MODE === "development") {
-	application.plugins.push(
-		// JS Sourcemaps
-		new plugin.webpack.SourceMapDevToolPlugin({
-			filename : "[name].[hash].js.map"
-		})
-	);
-}
-
-
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // ElectronJS Configuration
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 let electron = {
-	mode   : process.env.MODE,
-	target : "electron-main",
-	entry  : paths.electron,
-	node   : {
-		__dirname  : false,
-		__filename : false
+	mode: process.env.MODE,
+	target: "electron-main",
+	entry: paths.electron,
+	node: {
+		__dirname: false,
+		__filename: false
 	},
-	output : {
-		filename : "app.js",
-		path     : paths.dest
+	output: {
+		filename: "app.js",
+		path: paths.dest
 	}
 };
 
-
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Export
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 module.exports = [electron, application];
