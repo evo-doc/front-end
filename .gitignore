@@ -3,6 +3,10 @@
 /app/
 /docs/
 
+# Directory Content
+/log/*
+/tmp/*
+
 # Files
 *.log
 
