@@ -4,21 +4,22 @@
 
 class Router {
 	constructor() {
+		this._pages = null;
 		this._routes = [];
 		this._current = null;
 	}
 
 	init() {
 		// Load all page generators
-		this.pages = require("pages");
+		this._pages = require("pages");
 
-		for (let page in this.pages) {
+		for (let page in this._pages) {
 			// Add route
 			this._routes.push({
 				// Pattern regex
 				pattern: new RegExp("^" + page.replace(/:\w+/, "(\\w+)") + "$"),
 				// Page generator (options, page class)
-				generator: this.pages[page]
+				generator: this._pages[page]
 			});
 		}
 	}
