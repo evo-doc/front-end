@@ -3,7 +3,7 @@
 const Route = require("route.class");
 
 class Index extends Route {
-	constructor(options) {
+	constructor(options, params) {
 		super();
 		this._template = require("./index.ejs");
 		this._style = null;
@@ -17,14 +17,27 @@ class Index extends Route {
 	// 	};
 	// 	document.getElementById(element).innerHTML = this._template(data);
 	// }
+
 	render(element = "root") {
 		document.getElementById(element).innerHTML = this._template();
+
+		connect
+			.getJSON()
+			.then(data => {
+				console.log("YEAH");
+				console.log(data);
+			})
+			.catch(data => {
+				console.log("NOPE");
+				console.log(data);
+			});
 	}
 }
 
 module.exports = function(options = {}) {
-	options.parent = options.parent || "root";
-
-	// return "dd";
-	return new Index(options);
+	// Defautl options
+	return {
+		options: options,
+		page: Index
+	};
 };

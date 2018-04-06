@@ -3,13 +3,20 @@
 const Route = require("route.class");
 
 class Index extends Route {
-	constructor(options) {
+	constructor(options, params) {
 		super();
 		this._name = "Default.Error.404";
+	}
+
+	render() {
+		this._getRoot().innerHTML = "404";
 	}
 }
 
 module.exports = function(options = {}) {
-	options.parent = options.parent || "root";
-	return new Index(options);
+	// Defautl options
+	return {
+		options: options,
+		page: Index
+	};
 };

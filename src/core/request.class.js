@@ -18,7 +18,7 @@ class Request {
 	 */
 	_startListening() {
 		let self = this;
-		let root = document.getElementById("root");
+		// let root = document.getElementById("root");
 
 		/*
 			// Link Autofixer
@@ -29,6 +29,7 @@ class Request {
 		*/
 
 		document.addEventListener("click", function(e) {
+			console.log(e);
 			if (e.target.tagName === "A") {
 				let href = e.target.getAttribute("href");
 				let link = self._getLinkFromHref(href);

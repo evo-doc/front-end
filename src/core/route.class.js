@@ -11,12 +11,17 @@
  */
 
 class Route {
-	constructor() {
+	constructor(root = "root") {
 		this._name = null;
 		this._template = null;
+		this._root = root;
 	}
 
 	init() {}
+
+	_getRoot() {
+		return document.getElementById(this._root);
+	}
 
 	_getLocalization() {
 		return APP.getLocalization().getLocalization();

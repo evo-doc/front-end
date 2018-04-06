@@ -25,5 +25,8 @@
         "trace": "log/trace.json.log"
       }
     }
+  },
+  "routes": {
+    "root": "root"
   }
 }

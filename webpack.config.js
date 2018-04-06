@@ -23,6 +23,7 @@ const plugin = {
 		global: {
 			_: "lodash",
 			log: "logger.module",
+			connect: "ajax.module",
 			exception: "error.module"
 		},
 		/**

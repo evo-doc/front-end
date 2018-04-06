@@ -33,7 +33,7 @@ class Localization {
 	 */
 	init() {
 		// Load localization
-		this._localizations = require("../local/localization.js");
+		this._localizations = require("localization.js");
 		log.trace(`Loaded localizations: ${Object.keys(this._localizations).join(", ")}`);
 
 		// Check default l10n

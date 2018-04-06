@@ -5,57 +5,57 @@
 class Router {
 	constructor() {
 		this._routes = [];
+		this._current = null;
 	}
 
 	init() {
-		// FIXME: Routes must be required - require("routes");
+		// Load all page generators
+		this.pages = require("pages");
 
-		// Obsahuje string rout a instanci stranky
-		this.pages = require("routes.js");
-
-		console.log(this.pages);
-		// Obsahuje REGEX a instance
-		this._routes = [];
-
-		// Pro kazdou definovanou stranku
-		for (let route in this.pages) {
-			// Do pravych routu pridam regex a
+		for (let page in this.pages) {
+			// Add route
 			this._routes.push({
-				// Regex
-				pattern: new RegExp("^" + route.replace(/:\w+/, "(\\w+)") + "$"),
-				// WTF?
-				pageClass: this.pages[route]
+				// Pattern regex
+				pattern: new RegExp("^" + page.replace(/:\w+/, "(\\w+)") + "$"),
+				// Page generator (options, page class)
+				generator: this.pages[page]
 			});
 		}
 	}
 
-	addRoute(route) {}
-
+	/**
+	 * @summary Search requested path and load suitable page (or 404)
+	 * @description Gets requested path and checks all route patterns via regex.
+	 *
+	 * @param {any} path
+	 */
 	route(path) {
-		console.log(`Routing to ${path}`);
+		// console.log(`Routing to ${path}`);
 
-		// Vsechny routes
 		let i = this._routes.length;
-
-		// Hledam v nich ten, ktery mi bude sedet s patternem
 		while (i--) {
 			// Pokud dotaz odpovida nejakemu z patternu
 			let args = path.match(this._routes[i].pattern);
-			console.log(args);
+
 			if (args) {
 				// this._routes[i].callback.apply(this, args.slice(1));
 				// let a = new this._routes[i].pageClass();
 				// a.render();
 				console.log(this._routes[i]);
-				this._routes[i].pageClass.render();
+
+				this._current = new this._routes[i].generator.page(
+					// Send options
+					this._routes[i].options,
+					// Send params
+					args
+				);
+				this._current.render();
 				break;
 			}
 		}
 
-		console.log(`${i} is i`);
-		if (i === -1) {
-			APP.getRequest().redirect("/error/404");
-		}
+		// Error 404
+		if (i === -1) APP.getRequest().redirect("/error/404");
 	}
 }
 
