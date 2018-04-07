@@ -1,0 +1,42 @@
+<!--
+this.getComponent().example({
+	_lang: this._getLocalization(),
+	_data: {
+		animals: ["kitten", "puppy", "fawn"],
+		classes: [
+			"component-example__subtitle_red",
+			"component-example__subtitle_green"
+		],
+		text: "Lorem ipsum"
+	}
+});
+ -->
+
+<div class="component-example">
+	<h1>Title is static</h1>
+	<h2 class='<%= _data.classes[0] %>'>Subtitle Class Red</h2>
+
+	<h3>Standard string value</h3>
+	<p>
+		<%= _data.text %>
+	</p>
+
+	<h3>Text from localization fil</h3>
+	<p>
+		<%= _lang.login.email %>
+	</p>
+	<p>
+		<%= _lang.login.pass %>
+	</p>
+
+
+	<h3>Print all animals</h3>
+	<ul>
+		<% _data.animals.forEach(function(animal){ %>
+			<li><%= animal %></li>
+		<%}); %>
+	</ul>
+
+	<h2 class="<%= _data.classes[1] %>">Subtitle Class Green</h2>
+	<div class="component-example__image"></div>
+</div>

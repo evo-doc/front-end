@@ -1,0 +1,16 @@
+@import "./scss/*";
+
+.component-example {
+	padding: 10px;
+	background-color: rebeccapurple;
+
+	&__subtitle {
+		&_red {
+			color: red;
+		}
+
+		&_green {
+			color: greenyellow;
+		}
+	}
+}
