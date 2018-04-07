@@ -29,7 +29,6 @@ class Request {
 		*/
 
 		document.addEventListener("click", function(e) {
-			console.log(e);
 			if (e.target.tagName === "A") {
 				let href = e.target.getAttribute("href");
 				let link = self._getLinkFromHref(href);
