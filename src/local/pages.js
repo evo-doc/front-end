@@ -15,19 +15,13 @@
  */
 
 module.exports = {
-	"/login/default": require("routes/login/default")({
-		root: "root"
-	}),
+	"/login/default": require("routes/login/default")(),
 
-	"/login/verification": require("routes/login/verification")({
-		root: "root"
-	}),
+	"/login/default/:neco": require("routes/login/default")(),
 
-	"/registry/package/:packageName": require("routes/default/error/404")({
-		root: "root"
-	}),
+	"/login/verification": require("routes/login/verification")(),
 
-	"/error/404": require("routes/default/error/404")({
-		root: "root"
-	})
+	"/registry/package/:packageName": require("routes/default/error/404")(),
+
+	"/error/404": require("routes/default/error/404")()
 };

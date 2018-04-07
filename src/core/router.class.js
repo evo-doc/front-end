@@ -13,12 +13,10 @@ class Router {
 		// Load all page generators
 		this._pages = require("pages");
 
+		// Create routes
 		for (let page in this._pages) {
-			// Add route
 			this._routes.push({
-				// Pattern regex
 				pattern: new RegExp("^" + page.replace(/:\w+/, "(\\w+)") + "$"),
-				// Page generator (options, page class)
 				generator: this._pages[page]
 			});
 		}
@@ -28,28 +26,24 @@ class Router {
 	 * @summary Search requested path and load suitable page (or 404)
 	 * @description Gets requested path and checks all route patterns via regex.
 	 *
-	 * @param {any} path
+	 * @param {string} path
 	 */
 	route(path) {
-		// console.log(`Routing to ${path}`);
-
 		let i = this._routes.length;
 		while (i--) {
-			// Pokud dotaz odpovida nejakemu z patternu
+			// Get array of args from the URL (according to page pattern)
 			let args = path.match(this._routes[i].pattern);
 
 			if (args) {
-				// this._routes[i].callback.apply(this, args.slice(1));
-				// let a = new this._routes[i].pageClass();
-				// a.render();
-				console.log(this._routes[i]);
+				log.trace(`Routing to ${path}`);
 
+				// Create page instance with its config & args
 				this._current = new this._routes[i].generator.page(
-					// Send options
-					this._routes[i].options,
-					// Send params
+					this._routes[i].generator.config,
 					args
 				);
+
+				// Run renderer process
 				this._current.render();
 				break;
 			}

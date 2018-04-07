@@ -1,22 +1,21 @@
 "use strict";
 
-const Route = require("route.class");
+const Page = require("page.class");
 
-class Index extends Route {
-	constructor(options, params) {
-		super();
-		this._name = "Default.Error.404";
+class Index extends Page {
+	constructor(config, args) {
+		super(config, args);
+		this._template = require("./index.ejs");
 	}
 
 	render() {
-		this._getRoot().innerHTML = "404";
+		this._getRoot().innerHTML = this._template();
 	}
 }
 
-module.exports = function(options = {}) {
-	// Defautl options
+module.exports = function(config = {}) {
 	return {
-		options: options,
+		config: config,
 		page: Index
 	};
 };

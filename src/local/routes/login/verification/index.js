@@ -1,10 +1,10 @@
 "use strict";
 
-const Route = require("route.class");
+const Page = require("page.class");
 
-class Index extends Route {
-	constructor(options, params) {
-		super();
+class Index extends Page {
+	constructor(config, params) {
+		super(config);
 		this._template = require("./index.ejs");
 		this._style = null;
 	}
@@ -18,26 +18,14 @@ class Index extends Route {
 	// 	document.getElementById(element).innerHTML = this._template(data);
 	// }
 
-	render(element = "root") {
-		document.getElementById(element).innerHTML = this._template();
-
-		connect
-			.getJSON()
-			.then(data => {
-				console.log("YEAH");
-				console.log(data);
-			})
-			.catch(data => {
-				console.log("NOPE");
-				console.log(data);
-			});
+	render() {
+		this._getRoot().innerHTML = this._template();
 	}
 }
 
-module.exports = function(options = {}) {
-	// Defautl options
+module.exports = function(config = {}) {
 	return {
-		options: options,
+		config: config,
 		page: Index
 	};
 };

@@ -39,7 +39,7 @@ const plugin = {
 		dest: plugin.path.join(__dirname, "/app"),
 		bootstrap: plugin.path.join(__dirname, "/src/bootstrap.js"),
 		electron: plugin.path.join(__dirname, "/electron.config.js"),
-		rootTpl: plugin.path.join(__dirname, "/src/local/routes/default/root.ejs"),
+		rootTpl: plugin.path.join(__dirname, "/src/local/routes/default/template.ejs"),
 		clean: [plugin.path.join(__dirname, "/app")]
 	};
 
