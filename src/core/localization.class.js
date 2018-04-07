@@ -39,7 +39,6 @@ class Localization {
 		// Check default l10n
 		this._localizationDefault = config.localization.default;
 		if (Object.keys(this._localizations).indexOf(this._localizationDefault) === -1) {
-			log.trace(`Defaut localization: ${this._localizationDefault}`);
 			log.error(`Cannot find default localization [${this._localizationDefault}] file.`);
 		}
 
@@ -75,7 +74,9 @@ class Localization {
 	changeUserLocalization(localization) {
 		// Check language OR set default
 		if (Object.keys(this._localizations).indexOf(localization) === -1) {
-			log.error(`Localization change: requested localization [${localization}] not found.`);
+			log.error(
+				`Localization change: requested localization [${localization}] not found. User localization is set to default`
+			);
 			this._storage.setData("userLocalization", this._localizationDefault);
 			throw new exception.LocalizationError(localization);
 		}
@@ -116,7 +117,7 @@ class Localization {
 	 *
 	 * @returns {object} Localization object with all phrases
 	 */
-	getLocalization() {
+	getPhrases() {
 		try {
 			// Try user language
 			return this._findLocalization(this._localizationUser);
