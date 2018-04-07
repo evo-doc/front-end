@@ -3,6 +3,7 @@
 //--------------------------------------------------------------------------------------------------
 // Constants
 //--------------------------------------------------------------------------------------------------
+
 const plugin = {
 		/**
 		 * All required plugins for the webpack config.
@@ -11,7 +12,8 @@ const plugin = {
 		webpack: require("webpack"),
 		html: require("html-webpack-plugin"),
 		clean: require("clean-webpack-plugin"),
-		extract: require("extract-text-webpack-plugin")
+		extract: require("extract-text-webpack-plugin"),
+		globSCSS: require("node-sass-glob-importer")
 	},
 	modules = {
 		/**
@@ -44,6 +46,7 @@ const plugin = {
 //--------------------------------------------------------------------------------------------------
 // Application Configuration
 //--------------------------------------------------------------------------------------------------
+
 let application = {
 	mode: process.env.MODE,
 	target: "electron-renderer",
@@ -72,8 +75,12 @@ let application = {
 								sourceMap: process.env.MODE === "development"
 							}
 						},
-						"sass-loader",
-						"import-glob-loader"
+						{
+							loader: "sass-loader",
+							options: {
+								importer: plugin.globSCSS()
+							}
+						}
 					]
 				})
 			},
@@ -158,6 +165,7 @@ let application = {
 //--------------------------------------------------------------------------------------------------
 // ElectronJS Configuration
 //--------------------------------------------------------------------------------------------------
+
 let electron = {
 	mode: process.env.MODE,
 	target: "electron-main",
@@ -175,4 +183,5 @@ let electron = {
 //--------------------------------------------------------------------------------------------------
 // Export
 //--------------------------------------------------------------------------------------------------
+
 module.exports = [electron, application];
