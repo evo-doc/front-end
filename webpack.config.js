@@ -102,6 +102,19 @@ let application = {
 						}
 					}
 				]
+			},
+
+			// Fonts
+			{
+				test: /\.(woff2)$/,
+				use: [
+					{
+						loader: "file-loader",
+						options: {
+							outputPath: "fonts"
+						}
+					}
+				]
 			}
 		]
 	},
