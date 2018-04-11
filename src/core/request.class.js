@@ -43,7 +43,7 @@ class Request {
 	 *
 	 * @returns {string} Route link
 	 */
-	getCurrentUrl() {
+	_getCurrentUrl() {
 		return window.location.href.split("#")[1] || "/";
 	}
 
@@ -80,7 +80,7 @@ class Request {
 	 * APP.getRequest().reload();
 	 */
 	reload() {
-		this.load(this._getCurrentUrl);
+		this.load(this._getCurrentUrl());
 	}
 
 	/**
