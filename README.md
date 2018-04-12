@@ -21,7 +21,8 @@ yarn docs   # generate a documentation from js files
 ## Code style
 
 ### JavaScript
-Project is optimised for [ECMAScript 6](http://es6-features.org/). Don't use old versions of ajax requests (XMLHttpRequest), prototype declarations etc.
+Project is optimised for [ECMAScript 6](http://es6-features.org/).
+Don't use old versions of ajax requests (XMLHttpRequest), prototype declarations etc.
 
 ```
 xxx.class.js    # module exports one class
@@ -34,24 +35,10 @@ xxx.module.js   # module exports some kind of interface
 yarn docs
 ```
 
-JavaScript files are documented according to [JSDoc](http://usejsdoc.org/). The destination folder is `./docs/`. The whole configuration file is `./jsdoc.config.json`.
+JavaScript files are documented according to [JSDoc](http://usejsdoc.org/).
+The destination folder is `./docs/`. A configuration file is `./jsdoc.config.json`.
 
-### How to write [annotations](http://usejsdoc.org/tags-type.html)
-
-**Variable types**
-
-*  Simple type: `{boolean}`, `{string}`, `{number}`, `{object}`, `{promise}`
-*  More types: `{(string|number)}`
-*  Class instances: `{MyClass}`
-*  Arrays: `{MyClass[]}`
-*  Object with string keys and number values: `{Object.<string, number>}`
-
-**Parameters**
-
-*  Variable params: `{...args}`
-*  Optional params with default value: `{number} [name=default]`
-
-TODO: JSDoc examples
+How to write [annotations](http://usejsdoc.org/tags-type.html).
 
 ## Structure
 ```
@@ -80,7 +67,7 @@ TODO: JSDoc examples
 ├── tmp                     # temporary files (created by the app or a user)
 ├── .editorconfig           # code style (see editorconfig.org)
 ├── .gitignore
-├── .prettierignore         # code style (see editorconfig.org)
+├── .prettierignore         # code style
 ├── .travis.yml
 ├── LICENSE.md
 ├── README.md
