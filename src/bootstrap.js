@@ -7,8 +7,8 @@ const sass = require("./local/styles/main.scss");
 global.APP = new Application();
 APP.init();
 
-// Initialization page
-// FIXME: It's just a placeholder
-setTimeout(() => {
-	APP.getRequest().redirect("/login/default");
-}, 500);
+// Show loader just for sure
+loader.show();
+
+// Try to reload last page
+APP.getRequest().reload();
