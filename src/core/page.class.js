@@ -19,7 +19,7 @@ class Page {
 		this._template = null;
 		this._components = null;
 		this._args = args;
-		this._templateDefault = require("routes/default/default/index.ejs");
+		this._templateDefault = require("routes/default/render/default/index.ejs");
 
 		// Initialization
 		this.init();
@@ -65,6 +65,7 @@ class Page {
 					localization: JSON.stringify(this._getLocalization(), null, "  ")
 				}
 			});
+			1;
 			resolve();
 		}).then(() => {
 			renderDone();

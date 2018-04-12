@@ -29,5 +29,5 @@ module.exports = {
 
 	// Examples
 	"/default/example/empty/:size/:color": require("routes/default/example/empty")(),
-	"/default/example/render/:behaviour/": require("routes/default/example/render")()
+	"/default/example/render/:behaviour/": require("routes/default/example/renderer")()
 };
