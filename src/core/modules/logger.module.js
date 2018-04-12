@@ -135,7 +135,6 @@ module.exports.info = message => {
 module.exports.debug = message => {
 	if (config.logger.levels.global && config.logger.levels.debug) {
 		logger.debug(message);
-		console.debug(message);
 	}
 };
 
