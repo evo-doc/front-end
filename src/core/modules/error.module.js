@@ -37,7 +37,7 @@ module.exports.LocalizationError = class LocalizationError extends Error {
  */
 module.exports.PhraseError = class PhraseError extends Error {
 	constructor(language, namespace, key) {
-		language = language || super();
+		super();
 		this.name = this.constructor.name;
 		this.status = status || 500;
 		Error.captureStackTrace(this, this.constructor);
