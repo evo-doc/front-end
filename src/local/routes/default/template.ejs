@@ -9,99 +9,64 @@
 </head>
 
 <body>
+	<ul>
+		<li>
+			<a href="#/">Homepage</a>
+		</li>
+		<li> Login
+			<ul>
+				<li>
+					<a href="#/login/default">Default</a>
+				</li>
+				<li>
+					<a href="#/login/verification">Verification</a>
+				</li>
+			</ul>
+		</li>
 
-	<a href="#/">////////</a>
-	<a href="#/login/default">/login/default</a>
-	<a href="#/login/default/LOL">/login/default</a>
-	<a href="#/login/verification">/login/verification</a>
-	<a href="#/registry">/registry</a>
-	<a href="#/login/form">/login/form</a>
-	<a href="#/login/rest">/login/form</a>
-	<div id="root">
-		<div class="fulfilling-square-spinner">
-			<div class="spinner-inner"></div>
+		<li>
+			<a href="#/registry">Registry</a>
+		</li>
+		<li>
+			<a href="#/">Page</a>
+		</li>
+		<li>
+			<a href="#/">Page</a>
+		</li>
+		<li>
+			<a href="#/">Page</a>
+		</li>
+		<li>
+			<a href="#/">Page</a>
+		</li>
+		<li>
+			<a href="#/">Page</a>
+		</li>
+
+		<li>
+			<a href="#/default/example/empty/small/white">Example: Empty</a>
+		</li>
+		<li>
+			<a href="#/default/example/render/cute">Example: Render</a>
+		</li>
+	</ul>
+
+	<div id="root"></div>
+
+	<footer> CTU FIT EvoDoc Team &copy; 2018</footer>
+
+
+	<div id="loader">
+		<div class="loader__inner">
+			<div class="sk-folding-cube">
+				<div class="sk-cube1 sk-cube"></div>
+				<div class="sk-cube2 sk-cube"></div>
+				<div class="sk-cube4 sk-cube"></div>
+				<div class="sk-cube3 sk-cube"></div>
+			</div>
 		</div>
 	</div>
 
-	<style>
-		body {
-
-			margin: 0;
-			padding: 0;
-		}
-
-		.fulfilling-square-spinner {
-			position: absolute;
-			top: 200px;
-			left: 50%;
-		}
-
-		.fulfilling-square-spinner,
-		.fulfilling-square-spinner * {
-			box-sizing: border-box;
-		}
-
-		.fulfilling-square-spinner {
-			height: 50px;
-			width: 50px;
-			position: relative;
-			border: 4px solid #ff1d5e;
-			animation: fulfilling-square-spinner-animation 4s infinite ease;
-		}
-
-		.fulfilling-square-spinner .spinner-inner {
-			vertical-align: top;
-			display: inline-block;
-			background-color: #ff1d5e;
-			width: 100%;
-			opacity: 1;
-			animation: fulfilling-square-spinner-inner-animation 4s infinite ease-in;
-		}
-
-		@keyframes fulfilling-square-spinner-animation {
-			0% {
-				transform: rotate(0deg);
-			}
-
-			25% {
-				transform: rotate(180deg);
-			}
-
-			50% {
-				transform: rotate(180deg);
-			}
-
-			75% {
-				transform: rotate(360deg);
-			}
-
-			100% {
-				transform: rotate(360deg);
-			}
-		}
-
-		@keyframes fulfilling-square-spinner-inner-animation {
-			0% {
-				height: 0%;
-			}
-
-			25% {
-				height: 0%;
-			}
-
-			50% {
-				height: 100%;
-			}
-
-			75% {
-				height: 100%;
-			}
-
-			100% {
-				height: 0%;
-			}
-		}
-	</style>
 </body>
 
 </html>

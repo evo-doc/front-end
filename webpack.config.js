@@ -26,7 +26,8 @@ const plugin = {
 			_: "lodash",
 			log: "logger.module",
 			connect: "ajax.module",
-			exception: "error.module"
+			exception: "error.module",
+			loader: "loader.module"
 		},
 		/**
 		 * All required modules via
