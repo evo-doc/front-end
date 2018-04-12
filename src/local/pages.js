@@ -15,13 +15,19 @@
  */
 
 module.exports = {
+	// Authorization
 	"/login/default": require("routes/login/default")(),
-
-	"/login/default/:neco": require("routes/login/default")(),
 
 	"/login/verification": require("routes/login/verification")(),
 
+	// Registry
 	"/registry/package/:packageName": require("routes/default/error/404")(),
 
-	"/error/404": require("routes/default/error/404")()
+	// Error Pages
+	"/error/400": require("routes/default/error/400")(),
+	"/error/404": require("routes/default/error/404")(),
+
+	// Examples
+	"/default/example/empty/:size/:color": require("routes/default/example/empty")(),
+	"/default/example/render/:behaviour/": require("routes/default/example/render")()
 };

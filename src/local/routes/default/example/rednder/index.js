@@ -7,11 +7,6 @@ class Index extends Page {
 		super(config, args);
 		this._template = require("./index.ejs");
 	}
-
-	_render(renderDone, renderFail) {
-		this._getRoot().innerHTML = this._template();
-		renderDone();
-	}
 }
 
 module.exports = function(config = {}) {

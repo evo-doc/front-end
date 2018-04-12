@@ -16,7 +16,7 @@ class Router {
 		// Create routes
 		for (let page in this._pages) {
 			this._routes.push({
-				pattern: new RegExp("^" + page.replace(/:\w+/, "(\\w+)") + "$"),
+				pattern: new RegExp("^" + page.replace(/:\w+/g, "(\\w+)") + "$"),
 				generator: this._pages[page]
 			});
 		}
@@ -32,6 +32,7 @@ class Router {
 		let i = this._routes.length;
 		while (i--) {
 			// Get array of args from the URL (according to page pattern)
+			log.debug(`Path ${path} ?= ${this._routes[i].pattern}`);
 			let args = path.match(this._routes[i].pattern);
 
 			if (args) {
@@ -44,7 +45,19 @@ class Router {
 				);
 
 				// Run renderer process
-				this._current.render();
+				loader.show();
+
+				// Async rendering
+				this._current
+					.renderPromise()
+					.then(() => {
+						loader.hide();
+					})
+					.catch((status = 400) => {
+						// Catch all possible statuses from the server
+						if (status === 400) APP.getRequest().redirect("/error/400");
+						if (status === 500) APP.getRequest().redirect("/error/500");
+					});
 				break;
 			}
 		}

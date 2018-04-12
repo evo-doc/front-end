@@ -19,6 +19,7 @@ class Page {
 		this._template = null;
 		this._components = null;
 		this._args = args;
+		this._templateDefault = require("routes/default/default/index.ejs");
 
 		// Initialization
 		this.init();
@@ -49,23 +50,28 @@ class Page {
 		return this._args[0];
 	}
 
-	render() {
-		this._getRoot().innerHTML = "<h1>Default Render Method</h1>";
-		this._getRoot().innerHTML += "<p>You forgot to overload render();</p>";
-
-		this._getRoot().innerHTML += `<p>Requested URL:</p>`;
-		this._getRoot().innerHTML += `<pre>${JSON.stringify(this._getRouteUrl(), null, "  ")}</pre>`;
-
-		this._getRoot().innerHTML += `<p>Arguments:</p>`;
-		this._getRoot().innerHTML += `<pre>${JSON.stringify(this._getArgs(), null, "  ")}</pre>`;
-
-		this._getRoot().innerHTML += `<p>Localization file:</p>`;
-		this._getRoot().innerHTML += `<pre>${JSON.stringify(
-			this._getLocalization(),
-			null,
-			"  "
-		)}</pre>`;
+	renderPromise() {
+		return new Promise((resolve, reject) => {
+			this._render(resolve, reject);
+		});
 	}
+
+	_render(renderDone, renderFail) {
+		new Promise((resolve, reject) => {
+			this._getRoot().innerHTML = this._templateDefault({
+				_data: {
+					requestedUrl: JSON.stringify(this._getRouteUrl(), null, "  "),
+					args: JSON.stringify(this._getArgs(), null, "  "),
+					localization: JSON.stringify(this._getLocalization(), null, "  ")
+				}
+			});
+			resolve();
+		}).then(() => {
+			renderDone();
+		});
+	}
+
+	renderContent() {}
 }
 
 module.exports = Page;

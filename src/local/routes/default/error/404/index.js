@@ -8,8 +8,9 @@ class Index extends Page {
 		this._template = require("./index.ejs");
 	}
 
-	render() {
+	_render(renderDone, renderFail) {
 		this._getRoot().innerHTML = this._template();
+		renderDone();
 	}
 }
 

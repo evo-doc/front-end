@@ -9,8 +9,9 @@ class Index extends Page {
 		this._style = require("./index.scss");
 	}
 
-	render() {
+	_render(renderDone, renderFail) {
 		this._getRoot().innerHTML = this._template();
+		renderDone();
 	}
 }
 
