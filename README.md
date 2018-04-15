@@ -81,11 +81,11 @@ How to write [annotations](http://usejsdoc.org/tags-type.html).
 
 ### Components
 Within pages may exist elements (components) that are used more than once,
-but with different texts etc., e.g. buttons, tiles.
-They are defined in `./src/local/components/**` and auto-loaded into all page classes by `components.js`.
+but with different texts etc., e.g. buttons, tiles, even whole templates (e.g. error pages).
+They are defined in `./src/local/components/**` and auto-loaded into all page classes.
 
-`components.js` assumes the existence of folder(s) with at least one file - `index.ejs`.
-The name of the parent folder will be used as a unique id of the component.
+`components.js` assumes the existence of `index.ejs` file(s), the name of their parent folder will be used as a unique id of the component and as a part of the exported interaface.
+
 All index.scss files are required recursively.
 
 Example of `tileNewsletter` component:
@@ -94,7 +94,6 @@ Example of `tileNewsletter` component:
  ├── tileNewsletter       # unique id
  │   ├── images           # optional images, required in scss files
  │   ├── scss             # optional styles, required in index.scss
- │   │   └── element.scss
  │   ├── index.ejs        # compulsory template file, is required by components.js
  │   └── index.scss       # optional scss file, is required by components.js
  └── components.js
