@@ -91,12 +91,12 @@ All index.scss files are required recursively.
 Example of `tileNewsletter` component:
  ```
  .
- ├── tileNewsletter       # unique id
- │   ├── images           # optional images, required in scss files
- │   ├── scss             # optional styles, required in index.scss
- │   ├── index.ejs        # compulsory template file, is required by components.js
- │   └── index.scss       # optional scss file, is required by components.js
- └── components.js
+ └── tileNewsletter       # unique id
+     ├── images           # optional images, required in scss files
+     ├── scss             # optional styles, required in index.scss
+     ├── index.ejs        # compulsory template file, is required by components.js
+     └── index.scss       # optional scss file, is required by components.js
+
 ```
 
 Pages may use this component in their renderer process as:
