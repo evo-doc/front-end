@@ -7,11 +7,16 @@
 
 var components = {};
 
-// EJS - ./**/index.ejs
+// EJS - ./**/componentId/index.ejs
 let importEJS = files => {
 	files.keys().forEach(file => {
-		let keyName = file.split("/")[1];
-		components[keyName] = files(file);
+		let pathSplit = file.split("/");
+		let keyName = pathSplit[pathSplit.length - 2];
+		if (Object.keys(components).indexOf(keyName) != -1) {
+			log.error(`Component collision: ${keyName} already exists!`);
+		} else {
+			components[keyName] = files(file);
+		}
 	});
 };
 
