@@ -5,5 +5,11 @@
   "login": {
     "email": "E-mail",
     "pass": "Heslo"
+  },
+  "error": {
+    "400_title": "400",
+    "400_message": "Špatný požadavek",
+    "404_title": "404",
+    "404_message": "Stránka nenalezena"
   }
 }

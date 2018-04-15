@@ -5,5 +5,11 @@
   "login": {
     "email": "E-mail",
     "pass": "Password"
+  },
+  "error": {
+    "400_title": "400",
+    "400_message": "Bad request",
+    "404_title": "404",
+    "404_message": "Page not found"
   }
 }
