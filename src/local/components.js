@@ -20,7 +20,7 @@ let importEJS = files => {
 	});
 };
 
-importEJS(require.context("./", true, /index\.ejs$/));
+importEJS(require.context("./components/", true, /index\.ejs$/));
 
 // SCSS - ./**/index.scss
 let importSCSS = files => {
@@ -29,6 +29,6 @@ let importSCSS = files => {
 	});
 };
 
-importSCSS(require.context("./", true, /index\.scss$/));
+importSCSS(require.context("./components/", true, /index\.scss$/));
 
 module.exports = components;

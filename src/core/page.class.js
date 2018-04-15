@@ -26,7 +26,7 @@ class Page {
 	}
 
 	init() {
-		this._components = require("components/components.js");
+		this._components = require("components.js");
 	}
 
 	_getRoot() {
