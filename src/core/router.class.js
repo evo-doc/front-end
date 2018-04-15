@@ -32,11 +32,10 @@ class Router {
 		let i = this._routes.length;
 		while (i--) {
 			// Get array of args from the URL (according to page pattern)
-			log.debug(`Path ${path} ?= ${this._routes[i].pattern}`);
 			let args = path.match(this._routes[i].pattern);
 
 			if (args) {
-				log.trace(`Routing to ${path}`);
+				log.trace(`[PENDIGN] Routing to ${path}`);
 
 				// Create page instance with its config & args
 				this._current = new this._routes[i].generator.page(
@@ -51,9 +50,11 @@ class Router {
 				this._current
 					.renderPromise()
 					.then(() => {
+						log.trace(`[SUCCESS] Routing to ${path}`);
 						loader.hide();
 					})
 					.catch((status = 400) => {
+						log.trace(`[FAILURE] Routing to ${path}`);
 						// Catch all possible statuses from the server
 						if (status === 400) APP.getRequest().redirect("/error/400");
 						if (status === 500) APP.getRequest().redirect("/error/500");
