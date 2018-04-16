@@ -26,6 +26,7 @@ module.exports = {
 	// Error Pages
 	"/error/400": require("routes/default/error/400")(),
 	"/error/404": require("routes/default/error/404")(),
+	"/error/500": require("routes/default/error/500")(),
 
 	// Examples
 	"/default/example/empty/:size/:color": require("routes/default/example/empty")(),
