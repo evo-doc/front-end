@@ -57,7 +57,7 @@ class Storage {
 		try {
 			fs.writeFileSync(this._path, JSON.stringify(this._data));
 		} catch (e) {
-			console.error(e.message);
+			log.error(e.message);
 		}
 
 		return value;
