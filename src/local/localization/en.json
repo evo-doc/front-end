@@ -12,6 +12,6 @@
     "404_title": "404",
     "404_message": "Page not found",
     "500_title": "500",
-    "500_message": "Common server error"
+    "500_message": "Internal server error"
   }
 }

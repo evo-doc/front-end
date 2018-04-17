@@ -3,7 +3,7 @@
 // TODO: Documentation
 
 /**
- * @file Defines all available pages (roots), their paths and options, which ale used for their initialization (e.g. where to render, etc.).
+ * @file Defines all available pages (roots), their paths and options, which are used for their initialization (e.g. where to render, etc.).
  *
  *
  * "/group/page/:param/path/:param"
