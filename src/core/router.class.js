@@ -55,8 +55,8 @@ class Router {
 					})
 					.catch((status = 400) => {
 						log.trace(`[FAILURE] Routing to ${path}`);
-						// Catch all possible statuses from the server
 						loader.hide();
+						// Catch all possible statuses from the server
 						if (status === 400) APP.getRequest().redirect("/error/400");
 						if (status === 500) APP.getRequest().redirect("/error/500");
 					});
