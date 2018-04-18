@@ -35,7 +35,7 @@ class Router {
 			let args = path.match(this._routes[i].pattern);
 
 			if (args) {
-				log.trace(`[PENDIGN] Routing to ${path}`);
+				log.trace(`[PENDING] Routing to ${path}`);
 
 				// Create page instance with its config & args
 				this._current = new this._routes[i].generator.page(
@@ -56,6 +56,7 @@ class Router {
 					.catch((status = 400) => {
 						log.trace(`[FAILURE] Routing to ${path}`);
 						// Catch all possible statuses from the server
+						loader.hide();
 						if (status === 400) APP.getRequest().redirect("/error/400");
 						if (status === 500) APP.getRequest().redirect("/error/500");
 					});
