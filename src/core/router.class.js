@@ -46,6 +46,8 @@ class Router {
 				// Run renderer process
 				loader.show();
 
+				// TODO: Authorization check
+
 				// Async rendering
 				this._current
 					.renderPromise()
