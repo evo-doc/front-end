@@ -33,6 +33,12 @@ class Request {
 				let href = e.target.getAttribute("href");
 				let link = self._getLinkFromHref(href);
 				self.load(link);
+			} else {
+				let closest = e.target.closest("a");
+				if (closest) {
+					let href = closest.getAttribute("href");
+					self.load(self._getLinkFromHref(href));
+				}
 			}
 		});
 	}
