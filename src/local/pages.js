@@ -19,8 +19,13 @@ module.exports = {
 	"/login/default": require("routes/login/default")(),
 	"/login/verification": require("routes/login/verification")(),
 
-	// Homepage
+	// Pages
 	"/": require("routes/homepage")(),
+	"/packages": require("routes/packages")(),
+	"/projects": require("routes/projects")(),
+	"/settings": require("routes/settings")(),
+	"/upload": require("routes/upload")(),
+	"/docs": require("routes/docs")(),
 
 	// Registry
 	"/registry/package/:packageName": require("routes/default/error/404")(),
