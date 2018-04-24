@@ -1,0 +1,73 @@
+.BG0-homepage {
+	width: 100%;
+	height: 750px;
+	padding: 10px;
+	text-align: center;
+	background-color: #7684ff;
+	box-sizing: border-box;
+}
+
+.evodoc-title {
+	margin: 13px;
+	margin-left: 18px;
+	display: inline-block;
+	font-family: "Black Ops";
+	color: black;
+	font-size: 58px;
+}
+
+.circuit-image {
+	background: url("./images/circuit-board.svg") no-repeat center;
+	height: 400px;
+	padding-top: 60px;
+}
+
+.stats {
+	color: white;
+	margin: auto;
+	border: black solid;
+	width: 300px;
+	padding: 20px;
+}
+
+.BG1-homepage {
+	margin-top: 20px;
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	background-color: white;
+	box-sizing: border-box;
+}
+
+.what-is-ED-text {
+	max-width: 1000px;
+	margin: auto;
+}
+
+//3 icons - Documentaion
+.what-is-evodoc-icons {
+	display: flex;
+	justify-content: center;
+	@media screen and (max-width: 1000px) {
+		align-items: center;
+		flex-direction: column;
+	}
+
+	> div {
+		max-height: 350px;
+		width: 200px;
+		margin: 40px;
+
+		> img {
+			max-height: 350px;
+			width: 200px;
+			height: 200px;
+		}
+		> a {
+			color: rgb(2, 2, 66);
+			font-weight: bold;
+			font-size: 19px;
+			text-decoration: none;
+		}
+	}
+}

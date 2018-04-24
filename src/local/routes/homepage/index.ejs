@@ -1,6 +1,47 @@
-<div class="container">
-	<div class="search-box" id="SBox">
-		<input id="search" placeholder="Search..." type="text">
-		<div class="also search-link" id="searchclick"></div>
+<div class="BG0-homepage">
+
+	<img src="<%= require('../../components/logos/64x64.png') %>" alt="create image" class="create-image">
+	<span class="evodoc-title">EVODOC</span>
+
+	<!-- Search bar -->
+	<div class="search-container">
+		<div class="search-box" id="SBox">
+			<input id="search" placeholder="Search packages..." type="text">
+			<div class="also search-link" id="searchclick"></div>
+		</div>
+	</div>
+
+	<div class="circuit-image"></div>
+
+	<div class="stats">stats - packages downloaded cnt, package cnt in register etc.</div>
+
+</div>
+
+<div class="BG1-homepage">
+	<h1>What is EvoDoc ?</h1>
+
+	<p class="what-is-ED-text">EvoDoc is the package manager for .NET. The EvoDoc client tools provide the ability to produce and consume packages. The
+		EvoDoc Gallery is the central package repository used by all package authors and consumers.</p>
+
+	<div class="what-is-evodoc-icons">
+
+		<div>
+			<img src="<%= require('./images/learn_circle.gif') %>" alt="learn image" class="learn-image">
+			<a href="">Learn</a>
+			<p>New to EvoDoc? Start with a walkthrough showing how EvoDoc ...</p>
+		</div>
+
+		<div>
+			<img src="<%= require('./images/create.jpg') %>" alt="create image" class="create-image">
+			<a href="">Build</a>
+			<p>Want to make your first EvoDoc package and share it with the community? Start with this walkthrough!</p>
+		</div>
+
+		<div>
+			<img src="<%= require('./images/explore_circle.gif') %>" alt="explore image" class="explore-image">
+			<a href="">Explore</a>
+			<p>Browse the thousands of packages that developers like you have created and shared with the EvoDoc community.</p>
+		</div>
+
 	</div>
 </div>

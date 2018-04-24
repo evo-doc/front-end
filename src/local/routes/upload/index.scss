@@ -1,0 +1,35 @@
+.BG0-upload {
+	width: 100%;
+	height: calc(100vh - 40px);
+	padding: 10px;
+	text-align: center;
+	box-sizing: border-box;
+	// background: url("./images/circle.jpg") no-repeat center;
+	background: linear-gradient(180deg, #ffffff 68%, #786afa 100%);
+}
+
+.upload-title {
+	font-size: 58px;
+	text-align: center;
+	text-transform: uppercase;
+	padding: 13px;
+	font-family: Black Ops;
+}
+
+.upload-subtitle {
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.text1 {
+	text-align: center;
+	font-style: oblique;
+	padding: 13px;
+}
+
+.upload-image {
+	max-height: 350px;
+	width: 200px;
+	height: 200px;
+}

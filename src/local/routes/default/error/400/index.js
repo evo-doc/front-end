@@ -10,8 +10,8 @@ class Index extends Page {
 	_render(renderDone, renderFail) {
 		this._getRoot().innerHTML = this._getComponent().errors({
 			_data: {
-				title: APP.getLocalization().getPhrase("error", "400_title"),
-				message: APP.getLocalization().getPhrase("error", "400_message")
+				title: APP.getLocalization().getPhrase("error", "404_title"),
+				message: APP.getLocalization().getPhrase("error", "404_message")
 			}
 		});
 
