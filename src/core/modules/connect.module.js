@@ -1,5 +1,7 @@
 "use strict";
 
+// FIXME: Documentation
+
 /**
  * connect - globally required modul via webpack. Reserves `Error` as a global variable. Provides an interface for ajax requests.
  * @module Connect
