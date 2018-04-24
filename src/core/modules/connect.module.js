@@ -64,7 +64,7 @@ module.exports.getJSON = (url, data, optionsUser = {}) => {
  *
  * @return {Promise}
  */
-module.exports.postJSON = (url, data, optionsUser) => {
+module.exports.postJSON = (url, data, optionsUser = {}) => {
 	// Prepare & merge fetch options
 	const optionsDefault = {
 		method: "POST",
