@@ -1,6 +1,6 @@
 {
   "ajax": {
-    "host": "http://jsonplaceholder.typicode.com/"
+    "host": "http://tomsta.cz"
   },
   "localization": {
     "default": "en",
