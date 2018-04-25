@@ -7,6 +7,17 @@
 	box-sizing: border-box;
 }
 
+.logo-container {
+  width:60px;
+  height:60px;
+  display: inline-table;
+  
+    img {
+      width: 100%;
+      height: auto;
+    }
+}
+
 .evodoc-title {
 	margin: 13px;
 	margin-left: 18px;
