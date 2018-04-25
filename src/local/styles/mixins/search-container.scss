@@ -90,6 +90,8 @@
 .label--green {
 	background-color: #72cb36;
 	color: #ffffff;
+  padding-left: 18px;
+  padding-right: 18px;
 }
 // Buttons
 .button {
@@ -104,11 +106,6 @@
 .button--small {
 	font-size: 10px;
 	padding: 10px;
-}
-
-.button--primary {
-	background-color: #72cb36;
-	color: #ffffff;
 }
 .button--outline {
 	border: 1px solid #d3dce6;
