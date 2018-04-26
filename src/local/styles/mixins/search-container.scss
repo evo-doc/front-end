@@ -90,8 +90,8 @@
 .label--green {
 	background-color: #72cb36;
 	color: #ffffff;
-  padding-left: 18px;
-  padding-right: 18px;
+	padding-left: 18px;
+	padding-right: 18px;
 }
 // Buttons
 .button {
@@ -125,6 +125,7 @@
 }
 .text--medium {
 	font-weight: 400;
+	color: black;
 }
 .text--center {
 	text-align: center;
@@ -137,4 +138,8 @@
 
 .package-detail {
 	display: block;
+}
+
+.packagename {
+	color: black;
 }
