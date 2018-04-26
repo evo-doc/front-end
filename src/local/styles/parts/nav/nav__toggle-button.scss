@@ -1,0 +1,16 @@
+.nav__toggle-button {
+	width: 40px;
+	height: 40px;
+	background-color: violet;
+	opacity: 0.7;
+	position: absolute;
+	top: 0;
+	right: -40px;
+	z-index: 1000000;
+	transition: right 1s;
+}
+
+.nav__checkbox:checked + nav .nav__toggle-button {
+	right: 0;
+	transition: right 1s;
+}

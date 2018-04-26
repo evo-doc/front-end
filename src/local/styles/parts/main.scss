@@ -1,0 +1,18 @@
+// -------------------------------------------------------------------------------------------------
+// Main - content container. Necessary for the naviagtion.
+// -------------------------------------------------------------------------------------------------
+
+main {
+	flex: 1 0 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+
+	#wrapper {
+		overflow-y: scroll;
+		height: 100%;
+	}
+
+	#root {
+		min-height: calc(100% - 40px);
+	}
+}
