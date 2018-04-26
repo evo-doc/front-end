@@ -1,3 +1,12 @@
+// -------------------------------------------------------------------------------------------------
+// FIXME: @Monika
+// Nejde se v tom vyznat. Vytvaris slozku errors a tam postupne definujes vsechny elementy.
+// Nejlepe pro kazdy element jeden soubor. Pokud obsuheje BLOKY, tak slozku v slozce "errors"
+// a soubor, ktery to bude nacitat.
+// V tomto souboru import "./errors/*". Ten nerekurzivne nacte vsechny soubory z errors. A tyto
+// soubory pak pripadne nactou podslozky.
+// -------------------------------------------------------------------------------------------------
+
 .wrapper {
 	perspective: 800px;
 	display: flex;

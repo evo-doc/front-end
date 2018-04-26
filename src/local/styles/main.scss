@@ -9,20 +9,7 @@
 @import "mixins/*";
 // UI elements
 @import "ui/*";
+// Parts
+@import "parts/*";
 // Libraries
 // @import "~animate.css";
-
-body {
-	font-family: "Open Sans", Arial, Helvetica, sans-serif;
-}
-
-main {
-	min-height: calc(100vh - 40px);
-	position: relative;
-	transition: all 1.3s ease;
-	transform: translateX(0);
-}
-
-// * {
-// 	transition: all 1.3s ease;
-// }

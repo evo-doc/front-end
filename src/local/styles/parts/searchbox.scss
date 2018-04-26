@@ -1,5 +1,18 @@
+// -------------------------------------------------------------------------------------------------
+// FIXME: @Monika
+// Co to je? Neprehledne. Rozdelit a BLOCK a ELEMENTS a rozhazet do slozek.
+//
+// Proc tu definujes globalni veci pres hvezdicku? Pokud pomineme to, ze tohle se nema delat,
+// tak timhle jeste muzes rozbit vsechno ostatni a budes mit unexpected behaviour u nekterych
+// elementu.
+// -------------------------------------------------------------------------------------------------
+
+// Vedlejsi zavislosti fakt ne. Stahujes soubory, hazis do ./fonts
 @import url("https://fonts.googleapis.com/css?family=Cookie");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+
+// ?? Tohle je zavislost na 3MB, pokud se nemylim. Stahnes a stejne pouzivas vlstni ikonky?
+// EDIT: Jo aha, to asi byl nejaky snippet a ty kvuli 1 ikonce tahas 3MB dat :D
 @import url("https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 * {

@@ -1,0 +1,19 @@
+// -------------------------------------------------------------------------------------------------
+// Navigation
+// -------------------------------------------------------------------------------------------------
+
+@import "./nav/*";
+
+nav {
+	position: relative;
+	display: block;
+	flex: 0 0 auto;
+	background-color: red;
+	transition: width 1s;
+	width: 0;
+}
+
+.nav__checkbox:checked + nav {
+	width: 200px;
+	transition: width 1s;
+}

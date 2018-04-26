@@ -1,4 +1,13 @@
-@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+// -------------------------------------------------------------------------------------------------
+// FIXME: @Monika
+// Tenhle soubor by se mel logicky rozporcovat a patrit do ./nav, protze je to furt navigace
+// Podle BEM si muze rict, ze v BLOCKU "nav" existuje BLOK "menu", takze ve slozce nav vytvoris
+//  "menu.scss" a vedle toho slozku menu, kam poskladas vsechny ELEMENTY menu
+// -------------------------------------------------------------------------------------------------
+
+// FUJ, zadne vnejsi zavislosti, to stasne zpomaluje nacitani. Appka musi mit vsechno, krome dat.
+// Stahnes si jeden soubor toho fontu a pridas jako font do ./ui/fonts.scss
+// @import url("https://fonts.googleapis.com/css?family=Varela+Round");
 
 .menu {
 	top: 0;

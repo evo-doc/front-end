@@ -10,15 +10,15 @@
 
 <body>
 	<script>
-		document.addEventListener("DOMContentLoaded", function (event) {
-			document.getElementById('menu-anchor').addEventListener("click", function (event) {
-				document.getElementsByTagName('html')[0].classList.toggle('menu-active');
-				event.preventDefault();
-			})
-		});
+		// document.addEventListener("DOMContentLoaded", function (event) {
+		// 	document.getElementById('menu-anchor').addEventListener("click", function (event) {
+		// 		document.getElementsByTagName('html')[0].classList.toggle('menu-active');
+		// 		event.preventDefault();
+		// 	})
+		// });
 	</script>
 
-	<span class="menu-anchor" id="menu-anchor"></span>
+	<!-- <span class="menu-anchor" id="menu-anchor"></span>
 
 	<nav class="menu">
 		<header class="avatar">
@@ -99,39 +99,31 @@
 				</a>
 			</li>
 
-			<!-- <li>
-				<a href="#/registration">
-					<span class="menu-label">Registration</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/login/verification">
-					<span class="menu-label">Verification</span>
-				</a>
-			</li> -->
-
-			<!-- <li>Example:
-				<a href="#/default/example/empty/small/white">Empty</a>
-				<a href="#/default/example/render/cute">Render</a>
-			</li> -->
-
 		</ul>
-	</nav>
+	</nav> -->
 
-	<main>
-		<div id="root"></div>
-	</main>
 
-	<footer> CTU FIT EvoDoc Team &copy; 2018</footer>
+	<div class="screen">
+		<input type="checkbox" id="nav__checkbox" class="nav__checkbox">
+		<nav>
+			<label class="nav__toggle-button" for="nav__checkbox"></label>
+			<div class="nav__inner"></div>
+		</nav>
+		<main>
+			<div id="wrapper">
+				<div id="root"></div>
+				<footer> CTU FIT EvoDoc Team &copy; 2018</footer>
+			</div>
+		</main>
+	</div>
 
 	<div id="loader">
-		<div class="loader__inner">
-			<div class="sk-folding-cube">
-				<div class="sk-cube1 sk-cube"></div>
-				<div class="sk-cube2 sk-cube"></div>
-				<div class="sk-cube4 sk-cube"></div>
-				<div class="sk-cube3 sk-cube"></div>
+		<div class="loader__inner ">
+			<div class="sk-folding-cube ">
+				<div class="sk-cube1 sk-cube "></div>
+				<div class="sk-cube2 sk-cube "></div>
+				<div class="sk-cube4 sk-cube "></div>
+				<div class="sk-cube3 sk-cube "></div>
 			</div>
 		</div>
 	</div>
