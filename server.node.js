@@ -1,21 +1,20 @@
-const http = require("http");
-const port = 3001;
+var http = require("http");
+var url = require("url");
 
-const server = http.createServer((request, response) => {
-	console.log(request.url);
-	console.log(request);
-	// response.writeHead(404);
-	let a = {
-		data: "Hi"
-	};
-	// response.end("Hello Node.js Server!");
-	response.end(JSON.stringify(a));
-});
+var server = http
+	.createServer((req, res) => {
+		console.log(request.url);
+		var pathname = url.parse(req.url).pathname;
+		switch (pathname) {
+			case "/subpage":
+				res.statusCode(200);
+				res.end("subpage");
+				break;
+			default:
+				res.end("default");
+				break;
+		}
 
-server.listen(port, err => {
-	if (err) {
-		return console.log("something bad happened", err);
-	}
-
-	console.log(`server is listening on ${port}`);
-});
+		console.log(`Server is listening.`);
+	})
+	.listen(7000);
