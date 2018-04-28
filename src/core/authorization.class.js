@@ -3,31 +3,60 @@
 const Storage = require("storage.module");
 
 class Authorization {
-	constructor() {
-		this._storage;
-		this._key;
-	}
+   constructor() {
+      this._storage;
+   }
 
-	inti() {
-		this._storage = new Storage("localization", {
-			key: "NEW_KEY"
-		});
-	}
+   init() {
+      // Init storage
+      this._storage = new Storage("localization", {
+         token: "NEW_token"
+      });
+   }
 
-	saveKey(key) {
-		this._key = key;
-		this._storage.setData("key", this._key);
-	}
+   _parseIDfromToken(token) {
+      return +token.substr(0, 10);
+   }
 
-	getKey() {
-		return this._key;
-	}
+   _getToken() {
+      return this._storage.getData("token");
+   }
 
-	sendAuthorization(login, pass) {}
-	sendRegistration() {}
-	sendVerification() {}
+   saveToken(token) {
+      this._storage.setData("token", this._token);
+   }
 
-	verifyAuthorization() {
-		return new Promise((verified, unverified) => {});
-	}
+   async sendAuthorization(username, password) {
+      return await connect.postJSON("/login", {
+         username: username,
+         password: password
+      });
+   }
+
+   async sendRegistration(username, password, email) {
+      return await connect.postJSON("/registration", {
+         username: username,
+         password: password,
+         email: email
+      });
+   }
+
+   async sendVerification(code = "") {
+      let token = this._getToken();
+      return await connect.postJSON("/user/activation", {
+         user_id: this._parseIDfromToken(token),
+         token: token,
+         code: code
+      });
+   }
+
+   async sendDelete() {
+      //
+   }
+
+   async isAuthorised() {
+      // return new Promise((verified, unverified) => {});
+   }
 }
+
+module.exports = Authorization;
