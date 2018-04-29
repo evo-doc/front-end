@@ -11,21 +11,7 @@ class Index extends Page {
 
 	_render(renderDone, renderFail) {
 		this._getRoot().innerHTML = this._template();
-		fetch("http://localhost:3000/api", { cache: "no-store" })
-			.then(response => {
-				// console.log(response);
-				return response.text();
-			})
-			.then(text => {
-				this._getRoot().innerHTML += text;
-			})
-			.then(() => {
-				renderDone();
-			})
-			.catch(err => {
-				// console.log(err);
-				renderFail(400);
-			});
+		renderDone();
 	}
 }
 
