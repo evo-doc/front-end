@@ -107,7 +107,7 @@ let application = {
 
 			// Fonts
 			{
-				test: /\.(woff2)$/,
+				test: /\.(woff2|otf)$/,
 				use: [
 					{
 						loader: "file-loader",
