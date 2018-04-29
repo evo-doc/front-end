@@ -28,46 +28,47 @@ class Router {
 	 *
 	 * @param {string} path
 	 */
-	route(path) {
+	async route(path) {
+		// Try to find suitable page pattern & take args
+		let args;
 		let i = this._routes.length;
 		while (i--) {
-			// Get array of args from the URL (according to page pattern)
 			let args = path.match(this._routes[i].pattern);
+			if (args) break;
+		}
+		// Page does not exist
+		if (i === -1) return APP.getRequest().redirect("/error/404");
 
-			if (args) {
-				log.trace(`[PENDING] Routing to ${path}`);
-
-				// Create page instance with its config & args
-				this._current = new this._routes[i].generator.page(
-					this._routes[i].generator.config,
-					args
-				);
-
-				// Run renderer process
-				loader.show();
-
-				// TODO: Authorization check
-
-				// Async rendering
-				this._current
-					.renderPromise()
-					.then(() => {
-						log.trace(`[SUCCESS] Routing to ${path}`);
-						loader.hide();
-					})
-					.catch((status = 400) => {
-						log.trace(`[FAILURE] Routing to ${path}`);
-						loader.hide();
-						// Catch all possible statuses from the server
-						if (status === 400) APP.getRequest().redirect("/error/400");
-						if (status === 500) APP.getRequest().redirect("/error/500");
-					});
-				break;
-			}
+		// Is Authorised
+		if (!(path.match(/\/authorization\/.*/) || path.match(/\/error\/\d{3}/))) {
+			let authorization = await APP._authorization.isAuthorized();
+			if (authorization.status === 403)
+				return APP.getRequest().redirect("/login");
 		}
 
-		// Error 404
-		if (i === -1) APP.getRequest().redirect("/error/404");
+		// Run load process
+		log.trace(`[PENDING] Routing to ${path}`);
+		loader.show();
+		// Create page instance with its config & args
+		this._current = new this._routes[i].generator.page(
+			this._routes[i].generator.config,
+			args
+		);
+
+		// Async rendering
+		this._current
+			.renderPromise()
+			.then(() => {
+				log.trace(`[SUCCESS] Routing to ${path}`);
+				loader.hide();
+			})
+			.catch((status = 400) => {
+				log.trace(`[FAILURE] Routing to ${path}`);
+				loader.hide();
+				// Catch all possible statuses from the server
+				if (status === 400) APP.getRequest().redirect("/error/400");
+				if (status === 500) APP.getRequest().redirect("/error/500");
+			});
 	}
 }
 
