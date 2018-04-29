@@ -15,9 +15,9 @@ const config = require("app.config");
  * @return {Array} An array of JSON responses (in the same order, as arguments)
  */
 module.exports.waitAJAX = function() {
-   return Promise.all([...arguments]).then(responses => {
-      return Promise.all(responses.map(res => res.json()));
-   });
+	return Promise.all([...arguments]).then(responses => {
+		return Promise.all(responses.map(res => res.json()));
+	});
 };
 
 /**
@@ -31,25 +31,25 @@ module.exports.waitAJAX = function() {
  * @return {Promise}
  */
 module.exports.getJSON = (url, data, optionsUser = {}) => {
-   // Prepare URL get request
-   var euc = encodeURIComponent;
-   var getURL = Object.keys(data)
-      .map(key => `${euc(key)}=${euc(data[key])}`)
-      .join("&");
+	// Prepare URL get request
+	var euc = encodeURIComponent;
+	var getURL = Object.keys(data)
+		.map(key => `${euc(key)}=${euc(data[key])}`)
+		.join("&");
 
-   // Prepare & merge fetch options
-   const optionsDefault = {
-      method: "GET",
-      cache: config.ajax.cache
-   };
-   let options = Object.assign(optionsDefault, optionsUser);
-   let requestedURL = `${config.ajax.host}${url}?${getURL}`;
+	// Prepare & merge fetch options
+	const optionsDefault = {
+		method: "GET",
+		cache: config.ajax.cache
+	};
+	let options = Object.assign(optionsDefault, optionsUser);
+	let requestedURL = `${config.ajax.host}${url}?${getURL}`;
 
-   // Log
-   log.trace(`GET REQUEST: ${requestedURL}`);
+	// Log
+	log.trace(`GET REQUEST: ${requestedURL}`);
 
-   // Fetch
-   return fetch(requestedURL, options);
+	// Fetch
+	return fetch(requestedURL, options);
 };
 
 /**
@@ -63,18 +63,18 @@ module.exports.getJSON = (url, data, optionsUser = {}) => {
  * @return {Promise}
  */
 module.exports.postJSON = (url, data, optionsUser = {}) => {
-   // Prepare & merge fetch options
-   const optionsDefault = {
-      method: "POST",
-      cache: config.ajax.cache,
-      data: JSON.stringify(data),
-      headers: {
-         "content-type": "application/json"
-      }
-   };
-   let options = Object.assign(optionsDefault, optionsUser);
+	// Prepare & merge fetch options
+	const optionsDefault = {
+		method: "POST",
+		cache: config.ajax.cache,
+		body: JSON.stringify(data),
+		headers: {
+			"Content-Type": "application/json"
+		}
+	};
+	let options = Object.assign(optionsDefault, optionsUser);
 
-   let requestedURL = `${config.ajax.host}${url}`;
+	let requestedURL = `${config.ajax.host}${url}`;
 
-   return fetch(requestedURL, options);
+	return fetch(requestedURL, options);
 };
