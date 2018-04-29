@@ -10,27 +10,8 @@ class Index extends Page {
 	}
 
 	_render(renderDone, renderFail) {
-		let that = this;
-
-		let token = "00000000037568b5d6-c59d-4dc7-92f8-5e1f571086d5";
-		let allUsers = connect.getJSON(`/user/all`, {
-			token: token,
-			oo: "lol"
-		});
-
-		connect
-			.waitAJAX(allUsers)
-
-			.then(texts => {
-				console.log(texts);
-
-				texts.forEach(currentItem => {
-					console.log(currentItem);
-
-					this._getRoot().innerHTML += JSON.stringify(currentItem);
-				});
-				renderDone();
-			});
+		this._getRoot().innerHTML = this._template();
+		renderDone();
 	}
 }
 

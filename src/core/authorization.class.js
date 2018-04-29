@@ -31,6 +31,7 @@ class Authorization {
 	}
 
 	async sendAuthorization(username, password) {
+		this.removeToken();
 		let res = await connect.postJSON("/login", {
 			username: username,
 			password: password
@@ -45,6 +46,7 @@ class Authorization {
 		if (res.status === 200) {
 			log.trace(`[SIGN IN] [200]: "${username}", "${password}"`);
 			this.saveToken(response.token);
+			APP.getRequest().redirect("/");
 			return 200;
 		}
 
@@ -65,11 +67,21 @@ class Authorization {
 	}
 
 	async sendRegistration(username, password, email) {
-		return await connect.postJSON("/registration", {
+		let res = await connect.postJSON("/registration", {
 			username: username,
 			password: password,
 			email: email
 		});
+
+		if (res.status === 200) {
+			await res.json().then(data => {
+				this.saveToken(data.token);
+			});
+
+			return APP.getRequest().redirect("/");
+		}
+
+		return;
 	}
 
 	async sendVerification(code = "") {
@@ -81,17 +93,23 @@ class Authorization {
 		});
 	}
 
-	async sendDelete() {
-		//
+	async sendLogout() {
+		this.removeToken();
+		APP._request.redirect("/");
 	}
 
 	async isAuthorized() {
 		let token = this._getToken();
 		log.info(`isAuthorised ${token}, ${this._parseIDfromToken(token)}`);
-		let response = await connect.postJSON("/user/authorised", {
+		let res = await connect.postJSON("/user/authorised", {
 			user_id: this._parseIDfromToken(token),
 			token: token
 		});
+
+		if (res.status === 403) {
+			APP.getRequest().redirect("/authorization/sign-in");
+			return false;
+		}
 
 		return true;
 	}

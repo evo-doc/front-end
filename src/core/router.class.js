@@ -29,6 +29,7 @@ class Router {
 	 * @param {string} path
 	 */
 	async route(path) {
+		log.trace("REQUESTED page: " + path);
 		// Try to find suitable page pattern & take args
 		let args;
 		let i = this._routes.length;
@@ -42,18 +43,14 @@ class Router {
 		// Is Authorised
 		if (!(path.match(/\/authorization\/.*/) || path.match(/\/error\/\d{3}/))) {
 			let authorization = await APP._authorization.isAuthorized();
-			if (authorization.status === 403)
-				return APP.getRequest().redirect("/login");
+			if (!authorization) return;
 		}
 
 		// Run load process
 		log.trace(`[PENDING] Routing to ${path}`);
 		loader.show();
 		// Create page instance with its config & args
-		this._current = new this._routes[i].generator.page(
-			this._routes[i].generator.config,
-			args
-		);
+		this._current = new this._routes[i].generator.page(this._routes[i].generator.config, args);
 
 		// Async rendering
 		this._current

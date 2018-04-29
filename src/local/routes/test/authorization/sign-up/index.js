@@ -9,8 +9,25 @@ class Index extends Page {
 		this._style = require("./index.scss");
 	}
 
+	events() {
+		let button = document.getElementById("sign-up");
+		button.addEventListener("click", () => {
+			this.sendRegistration();
+		});
+	}
+
+	async sendRegistration() {
+		let username = document.getElementById("username").value;
+		let email = document.getElementById("email").value;
+		let password = document.getElementById("password").value;
+
+		let response = await APP._authorization.sendRegistration(username, password, email);
+	}
+
 	_render(renderDone, renderFail) {
 		this._getRoot().innerHTML = this._template();
+
+		this.events();
 		renderDone();
 	}
 }
