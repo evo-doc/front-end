@@ -9,15 +9,6 @@
 </head>
 
 <body>
-	<script>
-		// document.addEventListener("DOMContentLoaded", function (event) {
-		// 	document.getElementById('menu-anchor').addEventListener("click", function (event) {
-		// 		document.getElementsByTagName('html')[0].classList.toggle('menu-active');
-		// 		event.preventDefault();
-		// 	})
-		// });
-	</script>
-
 	<!-- <span class="menu-anchor" id="menu-anchor"></span>
 
 	<nav class="menu">
@@ -107,7 +98,15 @@
 		<input type="checkbox" id="nav__checkbox" class="nav__checkbox">
 		<nav>
 			<label class="nav__toggle-button" for="nav__checkbox"></label>
-			<div class="nav__inner"></div>
+			<div class="nav__inner">
+
+				<a href="#/authorization/sign-in">Sign In</a>
+				<a href="#/authorization/sign-up">Sign Up</a>
+				<a href="#/authorization/password">Password</a>
+				<a href="#"></a>
+				<a href="#"></a>
+				<span onclick="APP._authorization.sendLogout();">LOGOUT</span>
+			</div>
 		</nav>
 		<main>
 			<div id="wrapper">

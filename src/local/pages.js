@@ -15,9 +15,18 @@
  */
 
 module.exports = {
+	// Authorization (access without token)
+	"/authorization/sign-in": require("routes/test/authorization/sign-in")(),
+	"/authorization/sign-up": require("routes/test/authorization/sign-up")(),
+	"/authorization/password": require("routes/test/authorization/password")(),
+
+	// Error Pages (access without token)
+	"/error/400": require("routes/default/error/400")(),
+	"/error/404": require("routes/default/error/404")(),
+	"/error/500": require("routes/default/error/500")(),
+
 	// Authorization
-	"/login/default": require("routes/login/default")(),
-	"/login/verification": require("routes/login/verification")(),
+	"/verification": require("routes/login/verification")(),
 
 	// Pages
 	"/": require("routes/homepage")(),
@@ -29,11 +38,6 @@ module.exports = {
 
 	// Registry
 	"/registry/package/:packageName": require("routes/default/error/404")(),
-
-	// Error Pages
-	"/error/400": require("routes/default/error/400")(),
-	"/error/404": require("routes/default/error/404")(),
-	"/error/500": require("routes/default/error/500")(),
 
 	// Examples
 	"/default/example/empty/:size/:color": require("routes/default/example/empty")(),

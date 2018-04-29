@@ -28,56 +28,56 @@ const { combine, timestamp, printf } = winston.format;
 // Winston init
 //--------------------------------------------------------------------------------------------------
 const getUserFriendlyFormat = printf(info => {
-	let level = `[${info.level}]`.padEnd(7).toUpperCase();
-	let time = moment().format("YYYY-MM-DD HH:mm:ss");
-	return `${time} ${level} ${info.message}`;
+   let level = `[${info.level}]`.padEnd(7).toUpperCase();
+   let time = moment().format("YYYY-MM-DD HH:mm:ss");
+   return `${time} ${level} ${info.message}`;
 });
 
 const logger = winston.createLogger({
-	levels: {
-		error: 0,
-		warn: 1,
-		info: 2,
-		debug: 4,
-		trace: 5
-	},
-	format: timestamp(),
-	transports: [
-		// NodeJS Console
-		new winston.transports.Console({
-			level: "trace",
-			colorize: true,
-			format: getUserFriendlyFormat
-		}),
+   levels: {
+      error: 0,
+      warn: 1,
+      info: 2,
+      debug: 4,
+      trace: 5
+   },
+   format: timestamp(),
+   transports: [
+      // NodeJS Console
+      // new winston.transports.Console({
+      // 	level: "trace",
+      // 	colorize: true,
+      // 	format: getUserFriendlyFormat
+      // }),
 
-		// JSON logs
-		new winston.transports.File({
-			filename: config.logger.paths.json.warn,
-			format: winston.format.json(),
-			level: "warn",
-			json: true,
-			timestamp: true
-		}),
-		new winston.transports.File({
-			filename: config.logger.paths.json.trace,
-			format: winston.format.json(),
-			level: "trace",
-			json: true,
-			timestamp: true
-		}),
+      // JSON logs
+      new winston.transports.File({
+         filename: config.logger.paths.json.warn,
+         format: winston.format.json(),
+         level: "warn",
+         json: true,
+         timestamp: true
+      }),
+      new winston.transports.File({
+         filename: config.logger.paths.json.trace,
+         format: winston.format.json(),
+         level: "trace",
+         json: true,
+         timestamp: true
+      }),
 
-		// User friendly logs
-		new winston.transports.File({
-			filename: config.logger.paths.txt.warn,
-			format: getUserFriendlyFormat,
-			level: "warn"
-		}),
-		new winston.transports.File({
-			filename: config.logger.paths.txt.trace,
-			format: getUserFriendlyFormat,
-			level: "trace"
-		})
-	]
+      // User friendly logs
+      new winston.transports.File({
+         filename: config.logger.paths.txt.warn,
+         format: getUserFriendlyFormat,
+         level: "warn"
+      }),
+      new winston.transports.File({
+         filename: config.logger.paths.txt.trace,
+         format: getUserFriendlyFormat,
+         level: "trace"
+      })
+   ]
 });
 
 //--------------------------------------------------------------------------------------------------
@@ -91,10 +91,10 @@ const logger = winston.createLogger({
  * log.error("Error description");
  */
 module.exports.error = message => {
-	if (config.logger.levels.global && config.logger.levels.error) {
-		logger.error(message);
-		console.error(message);
-	}
+   if (config.logger.levels.global && config.logger.levels.error) {
+      logger.error(message);
+      console.error(message);
+   }
 };
 
 /**
@@ -105,10 +105,10 @@ module.exports.error = message => {
  * log.warn("Warning description");
  */
 module.exports.warn = message => {
-	if (config.logger.levels.global && config.logger.levels.warn) {
-		logger.warn(message);
-		console.warn(message);
-	}
+   if (config.logger.levels.global && config.logger.levels.warn) {
+      logger.warn(message);
+      console.warn(message);
+   }
 };
 
 /**
@@ -119,10 +119,10 @@ module.exports.warn = message => {
  * log.info("Information");
  */
 module.exports.info = message => {
-	if (config.logger.levels.global && config.logger.levels.info) {
-		logger.info(message);
-		console.info(message);
-	}
+   if (config.logger.levels.global && config.logger.levels.info) {
+      logger.info(message);
+      console.info(message);
+   }
 };
 
 /**
@@ -133,9 +133,9 @@ module.exports.info = message => {
  * log.debug("Debug information");
  */
 module.exports.debug = message => {
-	if (config.logger.levels.global && config.logger.levels.debug) {
-		logger.debug(message);
-	}
+   if (config.logger.levels.global && config.logger.levels.debug) {
+      logger.debug(message);
+   }
 };
 
 /**
@@ -146,8 +146,8 @@ module.exports.debug = message => {
  * log.log("Debug information");
  */
 module.exports.trace = message => {
-	if (config.logger.levels.global && config.logger.levels.trace) {
-		logger.trace(message);
-		console.log(message);
-	}
+   if (config.logger.levels.global && config.logger.levels.trace) {
+      logger.trace(message);
+      console.log(message);
+   }
 };

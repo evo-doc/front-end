@@ -25,7 +25,7 @@ const plugin = {
 		global: {
 			_: "lodash",
 			log: "logger.module",
-			connect: "ajax.module",
+			connect: "connect.module",
 			exception: "error.module",
 			loader: "loader.module"
 		},
