@@ -6,8 +6,10 @@ chai.use(require("chai-http"));
 
 module.exports = (config, interface, tools) => {
 	describe("AUTHORIZATION", () => {
+		let userTestToken;
 		before(async () => {
-			await tools.createUserForTests();
+			userTestToken = await tools.createUserForTests();
+			console.log(userTestToken);
 		});
 
 		describe("Registration", () => {

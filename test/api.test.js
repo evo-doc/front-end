@@ -84,11 +84,16 @@ const tools = {
 	createUserForTests: async () => {
 		// Create user for testing
 		let response = await interface.user.register("userTest", "userTest", "userTest");
+		let data = JSON.parse(response.text);
 
 		if (response.status === 200) {
-			let data = JSON.parse(response.text);
-			await interface.user.activate(tools.getIdFromToken(data.token), data.token, "random");
+			await interface.user.verify(tools.getIdFromToken(data.token), data.token, "random");
+		} else {
+			response = await interface.user.login("userTest", "userTest");
+			data = JSON.parse(response.text);
 		}
+
+		return data.token;
 	}
 };
 

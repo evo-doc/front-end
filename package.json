@@ -34,7 +34,8 @@
 		"dev": "MODE=development webpack --watch",
 		"docs": "rm -rf ./docs/ && jsdoc --configure jsdoc.config.json --verbose --private",
 		"prod": "MODE=production webpack",
-		"test:all": "mocha test/main.test.js",
+		"test": "mocha",
+		"test:app": "mocha test/app.test.js",
 		"test:api": "mocha test/api.test.js",
 		"server": "nodemon server.node.js"
 	},

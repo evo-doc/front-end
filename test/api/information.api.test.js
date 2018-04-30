@@ -6,15 +6,14 @@ chai.use(require("chai-http"));
 
 module.exports = (config, interface, tools) => {
 	describe("INFORMATION", () => {
+		let userTestToken;
 		before(async () => {
-			await tools.createUserForTests();
+			userTestToken = await tools.createUserForTests();
 		});
 
 		describe("Statistics", () => {
 			it("quantity of packages, users, projects, modules", async () => {
-				let response = await interface.user.login("userTest", "userTest");
-				let token = JSON.parse(response.text).token;
-				response = await interface.statistics.getStats(token);
+				response = await interface.statistics.getStats(userTestToken);
 				expect(response.status).to.equal(200);
 				let body = JSON.parse(response.text);
 				expect(body)
@@ -35,10 +34,8 @@ module.exports = (config, interface, tools) => {
 		describe("User data", () => {
 			describe("One user", () => {
 				it("valid request", async () => {
-					let response = await interface.user.login("userTest", "userTest");
-					let token = JSON.parse(response.text).token;
-					let id = tools.getIdFromToken(token);
-					response = await interface.statistics.getUser(id, token);
+					let id = tools.getIdFromToken(userTestToken);
+					response = await interface.statistics.getUser(id, userTestToken);
 					expect(response.status).to.equal(200);
 					let body = JSON.parse(response.text);
 					expect(body)
@@ -53,32 +50,21 @@ module.exports = (config, interface, tools) => {
 				});
 
 				it("reject request with invalid id", async () => {
-					let response = await interface.user.login("userTest", "userTest");
-					let token = JSON.parse(response.text).token;
-					response = await interface.statistics.getUser(-1, token);
+					let response = await interface.statistics.getUser(-1, userTestToken);
 					expect(response.status).to.equal(404);
 				});
 			});
 
 			describe("All users", () => {
 				it("valid request", async () => {
-					let response = await interface.user.login("userTest", "userTest");
-					let token = JSON.parse(response.text).token;
-					response = await interface.statistics.getUsersAll(token);
+					let response = await interface.statistics.getUsersAll(userTestToken);
 					expect(response.status).to.equal(200);
 					let body = JSON.parse(response.text);
 					expect(body).is.a("array");
 				});
 
 				it("reject request with invalid token", async () => {
-					let response = await interface.user.login("userTest", "userTest");
-					let token = JSON.parse(response.text).token;
-					response = await interface.statistics.getUsersAll(
-						token
-							.split("")
-							.reverse()
-							.join("")
-					);
+					let response = await interface.statistics.getUsersAll(userTestToken + "a");
 					expect(response.status).to.equal(403);
 				});
 			});
