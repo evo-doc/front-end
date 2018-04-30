@@ -1,0 +1,97 @@
+const string = require("randomstring");
+const colors = require("colors");
+const chai = require("chai");
+const { assert, expect } = chai;
+chai.use(require("chai-http"));
+
+module.exports = (config, interface, tools) => {
+	describe("INFORMATION", () => {
+		before(async () => {
+			// Create user for testing
+			let response = await interface.user.register(
+				"autorizationTest",
+				"autorizationTest",
+				"autorizationTest"
+			);
+
+			if (response.status === 200) {
+				let data = JSON.parse(response.text);
+				await interface.user.activate(tools.getIdFromToken(data.token), data.token, "random");
+			}
+		});
+
+		describe("Statistics", () => {
+			it("amount - packages, users, projects, modules", async () => {
+				let response = await interface.user.login("autorizationTest", "autorizationTest");
+				let token = JSON.parse(response.text).token;
+				response = await interface.statistics.getStats(token);
+				expect(response.status).to.equal(200);
+				let body = JSON.parse(response.text);
+				expect(body)
+					.to.have.property("package_count")
+					.that.is.a("number");
+				expect(body)
+					.to.have.property("module_count")
+					.that.is.a("number");
+				expect(body)
+					.to.have.property("project_count")
+					.that.is.a("number");
+				expect(body)
+					.to.have.property("user_count")
+					.that.is.a("number");
+			});
+		});
+
+		describe("User data", () => {
+			describe("One user", () => {
+				it("return response with valid ID", async () => {
+					let response = await interface.user.login("autorizationTest", "autorizationTest");
+					let token = JSON.parse(response.text).token;
+					let id = tools.getIdFromToken(token);
+					response = await interface.statistics.getUser(id, token);
+					expect(response.status).to.equal(200);
+					let body = JSON.parse(response.text);
+					expect(body)
+						.to.have.property("id")
+						.that.is.a("number");
+					expect(body)
+						.to.have.property("name")
+						.that.is.a("string");
+					expect(body)
+						.to.have.property("email")
+						.that.is.a("string");
+				});
+
+				it("reject request with invalid ID", async () => {
+					let response = await interface.user.login("autorizationTest", "autorizationTest");
+					let token = JSON.parse(response.text).token;
+					response = await interface.statistics.getUser(-1, token);
+					expect(response.status).to.equal(404);
+				});
+			});
+
+			describe("All users", () => {
+				it("return response for all users", async () => {
+					let response = await interface.user.login("autorizationTest", "autorizationTest");
+					let token = JSON.parse(response.text).token;
+					response = await interface.statistics.getUsersAll(token);
+					expect(response.status).to.equal(200);
+					let body = JSON.parse(response.text);
+					expect(body).is.a("array");
+				});
+
+				it("reject request with invalid token", async () => {
+					let response = await interface.user.login("autorizationTest", "autorizationTest");
+					let token = JSON.parse(response.text).token;
+					response = await interface.statistics.getUsersAll(
+						token
+							.split("")
+							.reverse()
+							.join("")
+					);
+					expect(response.status).to.equal(403);
+				});
+			});
+		});
+	});
+};
