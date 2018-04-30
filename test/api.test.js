@@ -30,7 +30,7 @@ const interface = {
 				});
 		},
 
-		activate: (id, token, code) => {
+		verify: (id, token, code) => {
 			return chai
 				.request(config.ajax.host)
 				.post(`/user/activation`)
@@ -53,8 +53,8 @@ const interface = {
 	},
 
 	statistics: {
-		getStats: token => {
-			return chai
+		getStats: async token => {
+			return await chai
 				.request(config.ajax.host)
 				.get(`/stats`)
 				.query({ token: token });
@@ -79,6 +79,16 @@ const interface = {
 const tools = {
 	getIdFromToken: token => {
 		return +token.substr(0, 10);
+	},
+
+	createUserForTests: async () => {
+		// Create user for testing
+		let response = await interface.user.register("userTest", "userTest", "userTest");
+
+		if (response.status === 200) {
+			let data = JSON.parse(response.text);
+			await interface.user.activate(tools.getIdFromToken(data.token), data.token, "random");
+		}
 	}
 };
 
@@ -88,3 +98,4 @@ const tools = {
 require("./api/connection.api.test")(config, interface, tools);
 require("./api/common.api.test")(config, interface, tools);
 require("./api/information.api.test")(config, interface, tools);
+require("./api/authorization.api.test")(config, interface, tools);

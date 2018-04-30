@@ -7,22 +7,12 @@ chai.use(require("chai-http"));
 module.exports = (config, interface, tools) => {
 	describe("INFORMATION", () => {
 		before(async () => {
-			// Create user for testing
-			let response = await interface.user.register(
-				"autorizationTest",
-				"autorizationTest",
-				"autorizationTest"
-			);
-
-			if (response.status === 200) {
-				let data = JSON.parse(response.text);
-				await interface.user.activate(tools.getIdFromToken(data.token), data.token, "random");
-			}
+			await tools.createUserForTests();
 		});
 
 		describe("Statistics", () => {
-			it("amount - packages, users, projects, modules", async () => {
-				let response = await interface.user.login("autorizationTest", "autorizationTest");
+			it("quantity of packages, users, projects, modules", async () => {
+				let response = await interface.user.login("userTest", "userTest");
 				let token = JSON.parse(response.text).token;
 				response = await interface.statistics.getStats(token);
 				expect(response.status).to.equal(200);
@@ -44,8 +34,8 @@ module.exports = (config, interface, tools) => {
 
 		describe("User data", () => {
 			describe("One user", () => {
-				it("return response with valid ID", async () => {
-					let response = await interface.user.login("autorizationTest", "autorizationTest");
+				it("valid request", async () => {
+					let response = await interface.user.login("userTest", "userTest");
 					let token = JSON.parse(response.text).token;
 					let id = tools.getIdFromToken(token);
 					response = await interface.statistics.getUser(id, token);
@@ -62,8 +52,8 @@ module.exports = (config, interface, tools) => {
 						.that.is.a("string");
 				});
 
-				it("reject request with invalid ID", async () => {
-					let response = await interface.user.login("autorizationTest", "autorizationTest");
+				it("reject request with invalid id", async () => {
+					let response = await interface.user.login("userTest", "userTest");
 					let token = JSON.parse(response.text).token;
 					response = await interface.statistics.getUser(-1, token);
 					expect(response.status).to.equal(404);
@@ -71,8 +61,8 @@ module.exports = (config, interface, tools) => {
 			});
 
 			describe("All users", () => {
-				it("return response for all users", async () => {
-					let response = await interface.user.login("autorizationTest", "autorizationTest");
+				it("valid request", async () => {
+					let response = await interface.user.login("userTest", "userTest");
 					let token = JSON.parse(response.text).token;
 					response = await interface.statistics.getUsersAll(token);
 					expect(response.status).to.equal(200);
@@ -81,7 +71,7 @@ module.exports = (config, interface, tools) => {
 				});
 
 				it("reject request with invalid token", async () => {
-					let response = await interface.user.login("autorizationTest", "autorizationTest");
+					let response = await interface.user.login("userTest", "userTest");
 					let token = JSON.parse(response.text).token;
 					response = await interface.statistics.getUsersAll(
 						token
