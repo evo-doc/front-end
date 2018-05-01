@@ -22,66 +22,72 @@ class Authorization {
 		return this._storage.getData("token");
 	}
 
-	saveToken(token) {
+	_saveToken(token) {
 		this._storage.setData("token", token);
+		return true;
 	}
 
-	removeToken() {
+	_removeToken() {
 		this._storage.setData("token", "empty");
+		return true;
 	}
 
 	async sendAuthorization(username, password) {
-		this.removeToken();
-		let res = await connect.postJSON("/login", {
-			username: username,
-			password: password
-		});
+		this._removeToken();
 
-		let status = res.status;
-		let response = {};
-		await res.json().then(json => {
-			response = json;
-		});
-
-		if (res.status === 200) {
-			log.trace(`[SIGN IN] [200]: "${username}", "${password}"`);
-			this.saveToken(response.token);
+		// Backdoor
+		if (username === "testOffline" && password === "testOffline") {
+			log.debug(`[999] OFFLINE TESTING ACTIVE`);
+			this._saveToken("testOffline");
 			APP.getRequest().redirect("/");
-			return 200;
+			return true;
 		}
 
-		if (res.status === 403) {
-			log.warn(`[SIGN IN] [403]: "${username}", "${password}" -> invalid password`);
-			return 400;
+		// Regular login
+		let result;
+		try {
+			result = await connect.postJSON("/login", {
+				username: username,
+				password: password
+			});
+		} catch (e) {
+			return;
 		}
 
-		// FIXME: Server should return 403 if username is wrong (backend bug)
-		if (res.status === 404) {
-			log.warn(`[SIGN IN] [404]: "${username}", "${password}" -> invalid username`);
-			return 400;
+		if (result.status === 200) {
+			log.info(`[200] [SIGN IN]: "${username}" was signed in!`);
+			this._saveToken(result.data.token);
+			APP.getRequest().redirect("/");
+			return true;
 		}
 
-		// Unexpected status
-		log.error(`[SIGN IN] Unexpected behaviour - ${res.status}`);
-		return false;
+		if (result.status === 403) throw new error.AuthorizationWarning(400, "SIGN IN", "userpass");
+		if (result.status === 404) throw new error.AuthorizationWarning(400, "SIGN IN", "userpass");
+		throw new error.UnexpectedBehaviour(result.status, "SIGN IN", result.data);
 	}
 
 	async sendRegistration(username, password, email) {
-		let res = await connect.postJSON("/registration", {
-			username: username,
-			password: password,
-			email: email
-		});
-
-		if (res.status === 200) {
-			await res.json().then(data => {
-				this.saveToken(data.token);
+		let result;
+		try {
+			result = await connect.postJSON("/registration", {
+				username: username,
+				password: password,
+				email: email
 			});
-
-			return APP.getRequest().redirect("/");
+		} catch (e) {
+			return;
 		}
 
-		return;
+		if (result.status === 200) {
+			log.info(`[200] [REGISTRATION]: ${username} was registered!`);
+			this._saveToken(result.data.token);
+			APP.getRequest().redirect("/");
+			return true;
+		}
+
+		if (result.status === 400)
+			throw new error.AuthorizationWarning(result.status, "REGISTRATION", result.data);
+		throw new error.UnexpectedBehaviour(result.status, "REGISTRATION", result.data);
 	}
 
 	async sendVerification(code = "") {
@@ -94,24 +100,32 @@ class Authorization {
 	}
 
 	async sendLogout() {
-		this.removeToken();
-		APP._request.redirect("/");
+		this._removeToken();
+		APP.getRequest().redirect("/authorization/sign-in");
 	}
 
 	async isAuthorized() {
-		let token = this._getToken();
-		log.info(`isAuthorised ${token}, ${this._parseIDfromToken(token)}`);
-		let res = await connect.postJSON("/user/authorised", {
-			user_id: this._parseIDfromToken(token),
-			token: token
-		});
+		// Backdoor
+		if (this._getToken() === "testOffline") return true;
 
-		if (res.status === 403) {
-			APP.getRequest().redirect("/authorization/sign-in");
-			return false;
+		// Regular
+		let result;
+		let token = this._getToken();
+		try {
+			result = await connect.postJSON("/user/authorised", {
+				user_id: this._parseIDfromToken(token),
+				token: token
+			});
+		} catch (e) {
+			return false; // It was a global error
 		}
 
-		return true;
+		if (result.status === 200) {
+			log.trace(`[200] [IS AUTHORIZED]: current user is authorized`);
+			return true;
+		}
+
+		throw new error.UnexpectedBehaviour(result.status, "IS AUTHORIZED", result.data);
 	}
 }
 

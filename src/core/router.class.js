@@ -2,6 +2,8 @@
 
 // TODO: Documentation
 
+const configRouter = require("router.config.js");
+
 class Router {
 	constructor() {
 		this._pages = null;
@@ -29,28 +31,34 @@ class Router {
 	 * @param {string} path
 	 */
 	async route(path) {
-		log.trace("REQUESTED page: " + path);
-		// Try to find suitable page pattern & take args
-		let args;
-		let i = this._routes.length;
-		while (i--) {
-			let args = path.match(this._routes[i].pattern);
-			if (args) break;
+		// Try fo find route
+		let page;
+		try {
+			page = this._findRoute(path); // Has page index in roures and args from URL
+		} catch (e) {
+			return APP.getRequest().redirect("/error/404"); // Page does not exist
 		}
-		// Page does not exist
-		if (i === -1) return APP.getRequest().redirect("/error/404");
 
-		// Is Authorised
-		if (!(path.match(/\/authorization\/.*/) || path.match(/\/error\/\d{3}/))) {
-			let authorization = await APP._authorization.isAuthorized();
-			if (!authorization) return;
+		// If the page is not auth free -> check auth
+		if (!this._isAuthFreePage(path)) {
+			try {
+				if (!(await APP.getAuthorization().isAuthorized())) return;
+			} catch (e) {
+				if (e instanceof error.UnexpectedBehaviour) {
+					return APP.getRequest().redirect("/error/500");
+				}
+			}
 		}
 
 		// Run load process
 		log.trace(`[PENDING] Routing to ${path}`);
 		loader.show();
+
 		// Create page instance with its config & args
-		this._current = new this._routes[i].generator.page(this._routes[i].generator.config, args);
+		this._current = new this._routes[page.i].generator.page(
+			this._routes[page.i].generator.config,
+			page.args
+		);
 
 		// Async rendering
 		this._current
@@ -66,6 +74,24 @@ class Router {
 				if (status === 400) APP.getRequest().redirect("/error/400");
 				if (status === 500) APP.getRequest().redirect("/error/500");
 			});
+	}
+
+	_findRoute(path) {
+		let args;
+		let i = this._routes.length;
+		while (i--) {
+			args = path.match(this._routes[i].pattern);
+			if (args) return { i: i, args: args };
+		}
+		throw new error.RouteError(404, path);
+	}
+
+	_isAuthFreePage(path) {
+		let isFree = false;
+		configRouter.authFreePages.forEach(pattern => {
+			if (path.match(pattern)) isFree = true;
+		});
+		return isFree;
 	}
 }
 
