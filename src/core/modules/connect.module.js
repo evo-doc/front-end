@@ -22,7 +22,7 @@ module.exports.waitAJAX = function() {
 
 /**
  * @summary GET request
- * @description Prepare and send GET request to the defined server
+ * @description Prepare and send GET request to the server
  *
  * @param {string} url - Requested URL without GET params
  * @param {Object} data - Objects of pairs {key: value} which represents GET params
@@ -45,16 +45,13 @@ module.exports.getJSON = (url, data, optionsUser = {}) => {
 	let options = Object.assign(optionsDefault, optionsUser);
 	let requestedURL = `${config.ajax.host}${url}?${getURL}`;
 
-	// Log
 	log.trace(`GET REQUEST: ${requestedURL}`);
-
-	// Fetch
 	return fetch(requestedURL, options);
 };
 
 /**
  * @summary POST request
- * @description Prepare and send POST request to the defined server
+ * @description Prepare and send POST request to the server
  *
  * @param {string} url - Requested URL without GET params
  * @param {Object} data - Objects of pairs {key: value} which presents GET params
@@ -73,8 +70,8 @@ module.exports.postJSON = (url, data, optionsUser = {}) => {
 		}
 	};
 	let options = Object.assign(optionsDefault, optionsUser);
-
 	let requestedURL = `${config.ajax.host}${url}`;
 
+	log.trace(`Server POST request: ${requestedURL} ${options.body}`);
 	return fetch(requestedURL, options);
 };
