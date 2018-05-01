@@ -31,9 +31,9 @@ class Index extends Page {
 		let password = document.getElementById("password").value;
 
 		try {
-			await APP._authorization.sendRegistration(username, password, email);
+			await APP.getAuthorization().sendRegistration(username, password, email);
 		} catch (e) {
-			if (e instanceof error.RegistrationWarning) {
+			if (e instanceof error.AuthorizationWarning) {
 				if (e.message === "email") {
 					document.getElementById("feedback").innerHTML = e.message;
 				}
@@ -43,7 +43,9 @@ class Index extends Page {
 				return;
 			}
 
-			if (e instanceof error.UnexpectedBehaviour) return APP._request.redirect("/error/500");
+			if (e instanceof error.UnexpectedBehaviour) {
+				return APP.getRequest().redirect("/error/500");
+			}
 		}
 	}
 }
