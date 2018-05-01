@@ -26,7 +26,7 @@ const plugin = {
 			_: "lodash",
 			log: "logger.module",
 			connect: "connect.module",
-			exception: "error.module",
+			error: "error.module",
 			loader: "loader.module"
 		},
 		/**

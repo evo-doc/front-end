@@ -6,18 +6,17 @@
  * @type {exports.LanguageError}
  *
  * @example <caption>Create new instances of Errors</caption>
- * new Error.LanguageError("Message", 404);
- * new Error.PhraseError("Message");
+ * new error.LanguageError("Message", 404);
+ * new error.PhraseError("Message");
  */
 
 //--------------------------------------------------------------------------------------------------
 // Export interface
 //--------------------------------------------------------------------------------------------------
 /**
- * Language Error.
- * Throw this exception if the requested language file is not found.
- * @param {string} message - Error message
- * @param {number} [status=404] - Error status number
+ * @summary Language Error
+ * @description Throw this exception if the requested language file is not found.
+ * @param {string} localization - Localization abbr
  */
 module.exports.LocalizationError = class LocalizationError extends Error {
 	constructor(localization) {
@@ -25,30 +24,31 @@ module.exports.LocalizationError = class LocalizationError extends Error {
 		this.name = this.constructor.name;
 		this.status = 404;
 		Error.captureStackTrace(this, this.constructor);
-
 		log.error(`LocalizationError: missing [${localization}]`);
 	}
 };
 
 /**
- * Phrase Error.
- * Throw this exception if the requested phrase does not exist.
- * @param {string} message - Error message
+ * @summary Phrase Error
+ * @description Throw this exception if the requested phrase does not exist.
+ * @param {string} localization - Localization abbr
+ * @param {string} namespace - Requested namespace
+ * @param {string} key - Requested key
  */
 module.exports.PhraseError = class PhraseError extends Error {
-	constructor(language, namespace, key) {
+	constructor(localization, namespace, key) {
 		super();
 		this.name = this.constructor.name;
 		this.status = status || 500;
 		Error.captureStackTrace(this, this.constructor);
 
-		log.error(`PhraseError: missing [${language}] ${namespace}.${key}`);
+		log.error(`PhraseError: missing [${localization}] ${namespace}.${key}`);
 	}
 };
 
 /**
- * Storage error.
- * Throw this exception if a storage does not have requested key.
+ * @summary Storage error
+ * @description Throw this exception if a storage does not have requested key.
  * @param {string} storage - Storage name
  * @param {string} key - Requested key
  */
@@ -63,16 +63,52 @@ module.exports.StorageError = class StorageError extends Error {
 };
 
 /**
- * Route Error.
- * Throw this exception if the requested route is not found.
- * @param {string} message - Error message
+ * @summary Route Error
+ * @description Throw this exception if the requested route is not found.
  * @param {number} [status=404] - Error status number
+ * @param {string} path - Requested path
  */
 module.exports.RouteError = class RouteError extends Error {
-	constructor(message, status) {
+	constructor(status = 404, path) {
 		super();
 		this.name = this.constructor.name;
-		this.status = status || 404;
+		this.status = status;
 		Error.captureStackTrace(this, this.constructor);
+		log.error(`[${status}] [ROUTE]: page "${path}" does not exist`);
+	}
+};
+
+/**
+ * @summary Registration non-unique data warning
+ * @description Throw this exception if user registration data are not unique.
+ * @param {number} [status=400] - Response status
+ * @param {string} message - Error message
+ */
+module.exports.RegistrationWarning = class RegistrationWarning extends Error {
+	constructor(status = 400, message) {
+		super();
+		this.name = this.constructor.name;
+		this.status = status;
+		this.message = message;
+		Error.captureStackTrace(this, this.constructor);
+		log.debug(`[${status}] [REGISTRATION]: non-unique ${message}`);
+	}
+};
+
+/**
+ * @summary Unexpected behaviour
+ * @description Throw this exception if we receive something stange from the server.
+ * @param {number} [status=500] - Response status
+ * @param {string} action - User action
+ * @param {string} message - Error message
+ */
+module.exports.UnexpectedBehaviour = class UnexpectedBehaviour extends Error {
+	constructor(status = 500, action, message) {
+		super();
+		this.name = this.constructor.name;
+		this.status = status;
+		this.message = message;
+		Error.captureStackTrace(this, this.constructor);
+		log.error(`[${status}] [${action}]: unexpected behavaiour - ${message}`);
 	}
 };
