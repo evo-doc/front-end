@@ -9,7 +9,6 @@ module.exports = (config, interface, tools) => {
 		let userTestToken;
 		before(async () => {
 			userTestToken = await tools.createUserForTests();
-			console.log(userTestToken);
 		});
 
 		describe("Registration", () => {
@@ -130,16 +129,6 @@ module.exports = (config, interface, tools) => {
 				expect(JSON.parse(data.text)).to.equal("Invalid verification code.");
 			});
 			*/
-
-			it("invalid id", async () => {
-				let hash = string.generate();
-				let data = await interface.user.register(hash, hash, hash);
-				let body = JSON.parse(data.text);
-				let id = tools.getIdFromToken(body.token);
-				data = await interface.user.verify(id + 1, body.token, "validcode");
-				await interface.user.delete(id, body.token);
-				expect(data.status).to.equal(404);
-			});
 		});
 
 		describe("Delete", () => {
