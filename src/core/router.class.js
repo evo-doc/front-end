@@ -1,10 +1,15 @@
 "use strict";
 
-// TODO: Documentation
-
 const configRouter = require("router.config.js");
 
 class Router {
+	/**
+	 * @summary Client side routing
+	 * @description Receive URL from ***Request*** module, check if the requested URL is suitable for some available URL, parse *paths* and *params* and run init() of the page
+	 * @class
+	 *
+	 * @returns {Request} Request instance
+	 */
 	constructor() {
 		this._pages = null;
 		this._routes = [];
@@ -76,6 +81,14 @@ class Router {
 			});
 	}
 
+	/**
+	 * @summary Find route
+	 * @description Try to find requested route and return it's index in routes + parsed arguments from the URL.
+	 * @private
+	 *
+	 * @param {string} path - Requested page path
+	 * @returns {object} - Object with page index and arguments from the URL
+	 */
 	_findRoute(path) {
 		let args;
 		let i = this._routes.length;
@@ -86,6 +99,14 @@ class Router {
 		throw new error.RouteError(404, path);
 	}
 
+	/**
+	 * @summary Is page authFree?
+	 * @description Check if the requested page requires authentificated used.
+	 * @private
+	 *
+	 * @param {string} path - Requested page path
+	 * @returns {boolean}
+	 */
 	_isAuthFreePage(path) {
 		let isFree = false;
 		configRouter.authFreePages.forEach(pattern => {
