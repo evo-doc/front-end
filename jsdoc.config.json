@@ -1,7 +1,5 @@
 {
-  "plugins": [
-    "plugins/markdown"
-  ],
+  "plugins": ["plugins/markdown"],
   "recurseDepth": 10,
   "opts": {
     "template": "node_modules/tui-jsdoc-template",
@@ -18,10 +16,7 @@
     }
   },
   "source": {
-    "include": [
-      "./README.md",
-      "./src/"
-    ],
+    "include": ["./README.md", "./src/"],
     "includePattern": ".+\\.js$"
   }
 }
