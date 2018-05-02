@@ -5,6 +5,8 @@ class Application {
 	 * @summary Application container
 	 * @class
 	 *
+	 * @returns {Application} Application instance
+	 *
 	 * @example <caption>New Application instance</caption>
 	 * const App = new Application();
 	 * App.init();
