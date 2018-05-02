@@ -7,6 +7,8 @@ class Authorization {
 	 * @summary Authorization container
 	 * @description Provides (almost) independent interface for authorization.
 	 * @class
+	 *
+	 * @returns {Authorization} Authorization instance
 	 */
 	constructor() {
 		this._storage;
