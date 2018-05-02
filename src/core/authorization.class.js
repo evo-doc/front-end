@@ -3,6 +3,11 @@
 const Storage = require("storage.module");
 
 class Authorization {
+	/**
+	 * @summary Authorization container
+	 * @description Provides (almost) independent interface for authorization.
+	 * @class
+	 */
 	constructor() {
 		this._storage;
 	}
@@ -14,24 +19,48 @@ class Authorization {
 		});
 	}
 
+	/**
+	 * @summary Get user ID from his token
+	 * @param {string} token - User token
+	 * @returns {number} Parsed user ID
+	 */
 	_parseIDfromToken(token) {
 		return +token.substr(0, 10) || -1;
 	}
 
+	/**
+	 * @summary Get user token from the storage
+	 * @returns {string} User token
+	 */
 	_getToken() {
 		return this._storage.getData("token");
 	}
 
+	/**
+	 * @summary Save user token to the storage
+	 * @param {string} token - User token
+	 */
 	_saveToken(token) {
 		this._storage.setData("token", token);
 		return true;
 	}
 
+	/**
+	 * @summary Remove user token from the storage
+	 */
 	_removeToken() {
 		this._storage.setData("token", "empty");
 		return true;
 	}
 
+	/**
+	 * @summary Send sign-in request to the server
+	 * @description Send sign-in request and save user session within application. In the case of error give some feedback to user.
+	 *
+	 * @param {string} username - Username
+	 * @param {string} password - Password
+	 * @returns {null|boolean} Return null (invalid response), true (success) or throw an error (negative response).
+	 */
 	async sendAuthorization(username, password) {
 		this._removeToken();
 
@@ -66,6 +95,15 @@ class Authorization {
 		throw new error.UnexpectedBehaviour(result.status, "SIGN IN", result.data);
 	}
 
+	/**
+	 * @summary Send sign-up request to the server
+	 * @description Send sign-up request and save user session within application. In the case of error give some feedback to user.
+	 *
+	 * @param {string} username - Username
+	 * @param {string} password - Password
+	 * @param {string} email - E-mail
+	 * @returns {null|boolean} Return null (invalid response), true (success) or throw an error (negative response).
+	 */
 	async sendRegistration(username, password, email) {
 		let result;
 		try {
@@ -90,7 +128,15 @@ class Authorization {
 		throw new error.UnexpectedBehaviour(result.status, "REGISTRATION", result.data);
 	}
 
+	/**
+	 * @summary Send verification request to the server
+	 * @description Send verification request to activate the user.
+	 *
+	 * @param {string} code - Validation code
+	 * @returns {any} Nobody cares what does it returns.
+	 */
 	async sendVerification(code = "") {
+		// TODO: Verification
 		let token = this._getToken();
 		return await connect.postJSON("/user/activation", {
 			user_id: this._parseIDfromToken(token),
@@ -99,11 +145,21 @@ class Authorization {
 		});
 	}
 
+	/**
+	 * @summary User logout
+	 * @description Standard user called logout request.
+	 */
 	async sendLogout() {
 		this._removeToken();
 		APP.getRequest().redirect("/authorization/sign-in");
 	}
 
+	/**
+	 * @summary Send authorization request to the server
+	 * @description Check if user token is valid. In other case higher power throws invalid token and sign out the user.
+	 *
+	 * @returns {any} Nobody cares what does it returns :(
+	 */
 	async isAuthorized() {
 		// Backdoor
 		if (this._getToken() === "testOffline") return true;
