@@ -21,18 +21,18 @@ class Request {
 		// let root = document.getElementById("root");
 
 		/*
-			// Link Autofixer
-			root.addEventListener("mousemove", function(e) {
-				if (e.target.tagName === "A" && e.target.getAttribute("href").indexOf("#") !== 0)
-					e.target.setAttribute("href", `#${e.target.getAttribute("href")}`);
-			});
+		// Link Autofixer
+		root.addEventListener("mousemove", function(e) {
+			if (e.target.tagName === "A" && e.target.getAttribute("href").indexOf("#") !== 0)
+				e.target.setAttribute("href", `#${e.target.getAttribute("href")}`);
+		});
 		*/
 
 		document.addEventListener("click", function(e) {
-      let closest = e.target.closest("a");
-      if (closest) {
-        let href = closest.getAttribute("href");
-        self.load(self._getLinkFromHref(href));
+			let closest = e.target.closest("a");
+			if (closest) {
+				let href = closest.getAttribute("href");
+				self.load(self._getLinkFromHref(href));
 			}
 		});
 	}
