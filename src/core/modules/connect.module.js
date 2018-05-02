@@ -44,7 +44,10 @@ module.exports.getJSON = async (url, data, optionsUser = {}) => {
 	// Prepare & merge fetch options
 	const optionsDefault = {
 		method: "GET",
-		cache: config.ajax.cache
+		cache: config.ajax.cache,
+		headers: {
+			"Content-Type": "application/json"
+		}
 	};
 	let options = Object.assign(optionsDefault, optionsUser);
 	let requestedURL = `${config.ajax.host}${url}?${getURL}`;
@@ -56,7 +59,7 @@ module.exports.getJSON = async (url, data, optionsUser = {}) => {
 	let json = await response.json().then(_ => _);
 
 	// Check global errors
-	let isGlobalErrorResult = isGlobalError(status, json, options.method, hash);
+	let isGlobalErrorResult = _isGlobalError(status, json, options.method, hash);
 	if (isGlobalErrorResult !== false) throw isGlobalErrorResult;
 
 	// Success
@@ -96,7 +99,7 @@ module.exports.postJSON = async (url, data, optionsUser = {}) => {
 	let json = await response.json().then(_ => _);
 
 	// Check global errors
-	let isGlobalErrorResult = isGlobalError(status, json, options.method, hash);
+	let isGlobalErrorResult = _isGlobalError(status, json, options.method, hash);
 	if (isGlobalErrorResult !== false) throw isGlobalErrorResult;
 
 	// Success
@@ -108,8 +111,10 @@ module.exports.postJSON = async (url, data, optionsUser = {}) => {
  * @description Check global erros e.g. invalid token, data consistency etc.
  * @param {string} status
  * @param {string} data
+ *
+ * @private
  */
-function isGlobalError(status, data, method, hash) {
+function _isGlobalError(status, data, method, hash) {
 	// Global errors
 	if (status === 400 && data === "data") {
 		APP.getRequest().redirect("/error/400");
