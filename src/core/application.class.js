@@ -5,6 +5,8 @@ class Application {
 	 * @summary Application container
 	 * @class
 	 *
+	 * @returns {Application} Application instance
+	 *
 	 * @example <caption>New Application instance</caption>
 	 * const App = new Application();
 	 * App.init();
@@ -12,7 +14,6 @@ class Application {
 	constructor() {
 		this._router = null;
 		this._localization = null;
-		this._loader = null;
 		this._request = null;
 		this._authorization = null;
 	}
@@ -57,8 +58,8 @@ class Application {
 	}
 
 	/**
-	 * @summary Get singleton instance of Router class
-	 * @return {object} Router instance
+	 * @summary Get singleton instance of Authorization class
+	 * @return {object} Authorization instance
 	 */
 	getAuthorization() {
 		const Authorization = require("./authorization.class");

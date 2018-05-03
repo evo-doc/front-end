@@ -1,9 +1,8 @@
 "use strict";
 
 /**
- * Error - globally required modul via webpack. Reserves `Error` as a global variable. Contains all types of errors (exceptions) that extends Error class.
+ * Error - globally required modul via webpack. Reserves `error` as a global variable. Contains all types of errors (exceptions) that extends Error class.
  * @module Error
- * @type {exports.LanguageError}
  *
  * @example <caption>Create new instances of Errors</caption>
  * new error.LanguageError("Message", 404);
