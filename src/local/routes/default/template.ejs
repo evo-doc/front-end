@@ -9,103 +9,69 @@
 </head>
 
 <body>
-	<!-- <span class="menu-anchor" id="menu-anchor"></span>
-
-	<nav class="menu">
-		<header class="avatar">
-			<img class="profile-pic" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" alt="profile picture" />
-			<div class="edit">
-				<a href="#">
-					<i class="fa fa-pencil fa-lg"></i>
-				</a>
-			</div>
-			<br>
-			<br>
-			<h4>John Smith</h4>
-		</header>
-
-		<ul>
-			<li>
-				<a href="#/">
-					<img class="menu-icon" src="http://www.entypo.com/images/globe.svg" alt="Homepage icon"></img>
-					<span class="menu-label">Homepage</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/packages">
-					<img class="menu-icon" src="http://www.entypo.com/images/box.svg" alt="Packages icon"></img>
-					<span class="menu-label">Packages</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/upload">
-					<img class="menu-icon" src="http://www.entypo.com/images/upload.svg" alt="Packages icon"></img>
-					<span class="menu-label">Upload</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/projects">
-					<img class="menu-icon" src="http://www.entypo.com/images/folder.svg" alt="Projects icon"></img>
-					<span class="menu-label">Projects</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/docs">
-					<img class="menu-icon" src="http://www.entypo.com/images/info.svg" alt="Docs icon"></img>
-					<span class="menu-label">Docs</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/settings">
-					<img class="menu-icon" src="http://www.entypo.com/images/tools.svg" alt="Settings icon"></img>
-					<span class="menu-label">Settings</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/error/400">
-					<span class="menu-label">400</span>
-				</a>
-			</li>
-			<li>
-				<a href="#/error/404">
-					<span class="menu-label">404</span>
-				</a>
-			</li>
-			<li>
-				<a href="#/error/500">
-					<span class="menu-label">500</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#/login/default">
-					<img class="menu-icon" src="http://www.entypo.com/images/info.svg" alt="Docs icon"></img>
-					<span class="menu-label">Default</span>
-				</a>
-			</li>
-
-		</ul>
-	</nav> -->
-
-
 	<div class="screen">
 		<input type="checkbox" id="nav__checkbox" class="nav__checkbox">
 		<nav>
-			<label class="nav__toggle-button" for="nav__checkbox"></label>
+			<label class="nav__toggle-button" for="nav__checkbox">
+				<div id='toggle'><div></div></div>
+			</label>
+
 			<div class="nav__inner">
 
-				<a href="#/authorization/sign-in">Sign In</a>
+				<div class="menu__profile profile">
+					<img class="profile__avatar" alt="profile picture"/>
+					<h4 class="profile__name">Name Surname</h4>
+				</div>
+
+				<ul>
+					<li class="menu__item">
+						<a href="#/">
+							<i class="menu__icon icon-material">public</i>
+							<span class="menu__label">Homepage</span>
+						</a>
+					</li>
+
+					<li class="menu__item">
+						<a href="#/packages">
+							<i class="menu__icon fas fa-box"></i>
+							<span class="menu__label">Packages</span>
+						</a>
+					</li>
+
+					<li class="menu__item">
+						<a href="#/upload">
+						<i class="menu__icon icon-material">file_upload</i>
+							<span class="menu__label">Upload</span>
+						</a>
+					</li>
+
+					<li class="menu__item">
+						<a href="#/projects">
+							<i class="menu__icon fas fa-folder-open"></i>
+							<span class="menu__label">Projects</span>
+						</a>
+					</li>
+
+					<li class="menu__item">
+						<a href="#/docs">
+							<i class="menu__icon fas fa-file-alt"></i>
+							<span class="menu__label">Docs</span>
+						</a>
+					</li>
+
+					<li class="menu__item">
+						<a href="#/settings">
+							<i class="menu__icon fas fa-cog"></i>						
+							<span class="menu__label">Settings</span>
+						</a>
+					</li>
+				</ul>
+				<!-- <a href="#/authorization/sign-in">Sign In</a>
 				<a href="#/authorization/sign-up">Sign Up</a>
 				<a href="#/authorization/password">Password</a>
 				<a href="#"></a>
 				<a href="#"></a>
-				<span onclick="APP._authorization.sendLogout();">LOGOUT</span>
+				<span onclick="APP._authorization.sendLogout();">LOGOUT</span> -->
 			</div>
 		</nav>
 		<main>
@@ -127,5 +93,18 @@
 		</div>
 	</div>
 </body>
-
 </html>
+
+
+<!-- <li>
+	<a href="#/error/500">
+		<span class="menu-label">500</span>
+	</a>
+</li>
+
+<li>
+	<a href="#/login/default">
+		<img class="menu-icon" src="http://www.entypo.com/images/info.svg" alt="Docs icon"></img>
+		<span class="menu-label">Default</span>
+	</a>
+</li> -->

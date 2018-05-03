@@ -11,6 +11,9 @@ nav {
 	background-color: red;
 	transition: width 1s;
 	width: 0;
+
+	background: linear-gradient(180deg, #000541 68%, #786afa 100%);
+	box-shadow: inset -5px -10px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
 .nav__checkbox:checked + nav {
