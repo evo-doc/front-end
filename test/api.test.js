@@ -10,7 +10,7 @@ const config = require("../src/config/app.config");
 const interface = {
 	user: {
 		register: (username, password, email) => {
-			return chai
+			return await chai
 				.request(config.ajax.host)
 				.post("/registration")
 				.send({
@@ -21,7 +21,7 @@ const interface = {
 		},
 
 		login: (username, password) => {
-			return chai
+			return await chai
 				.request(config.ajax.host)
 				.post("/login")
 				.send({
@@ -31,7 +31,7 @@ const interface = {
 		},
 
 		verify: (id, token, code) => {
-			return chai
+			return await chai
 				.request(config.ajax.host)
 				.post(`/user/activation`)
 				.send({
@@ -42,7 +42,7 @@ const interface = {
 		},
 
 		delete: (id, token) => {
-			return chai
+			return await chai
 				.request(config.ajax.host)
 				.del(`/user`)
 				.send({
@@ -61,14 +61,14 @@ const interface = {
 		},
 
 		getUsersAll: token => {
-			return chai
+			return await chai
 				.request(config.ajax.host)
 				.get(`/user/all`)
 				.query({ token: token });
 		},
 
 		getUser: (id, token) => {
-			return chai
+			return await chai
 				.request(config.ajax.host)
 				.get(`/user`)
 				.query({ token: token, user_id: id });
