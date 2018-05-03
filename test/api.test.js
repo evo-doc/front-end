@@ -77,7 +77,7 @@ const interface = {
 };
 
 const tools = {
-	getIdFromToken: async token => {
+	getIdFromToken: token => {
 		return +token.substr(0, 10);
 	},
 
