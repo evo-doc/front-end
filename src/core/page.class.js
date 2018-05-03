@@ -4,15 +4,17 @@
 
 const configuration = require("app.config");
 
-/**
- * @summary Abstract class for routes
- * @description Defines a basic interface for rendering, etc. for each route.
- * @class
- *
- * @param {object} params - Parameters
- */
-
 class Page {
+	/**
+	 * @summary Abstract class for routes
+	 * @description Defines a basic interface for rendering, etc. for each route.
+	 * @class
+	 *
+	 * @param {object} config - Page config
+	 * @param {object} args - Arguments from the URL
+	 *
+	 * @returns {Page} Page instance
+	 */
 	constructor(config, args) {
 		this._config = config;
 		this._name = "";
@@ -21,12 +23,35 @@ class Page {
 		this._args = args;
 		this._templateDefault = require("routes/default/render/default/index.ejs");
 
-		// Initialization
 		this.init();
 	}
 
 	init() {
 		this._components = require("components.js");
+	}
+
+	renderPromise() {
+		return new Promise((resolve, reject) => {
+			this._render(resolve, reject);
+		});
+	}
+
+	_handlers() {}
+
+	_render(renderDone, renderFail) {
+		new Promise((resolve, reject) => {
+			this._getRoot().innerHTML = this._templateDefault({
+				_data: {
+					requestedUrl: JSON.stringify(this._getRouteUrl(), null, "  "),
+					args: JSON.stringify(this._getArgs(), null, "  "),
+					localization: JSON.stringify(this._getLocalization(), null, "  ")
+				}
+			});
+			1;
+			resolve();
+		}).then(() => {
+			renderDone();
+		});
 	}
 
 	_getRoot() {
@@ -48,28 +73,6 @@ class Page {
 
 	_getRouteUrl() {
 		return this._args[0];
-	}
-
-	renderPromise() {
-		return new Promise((resolve, reject) => {
-			this._render(resolve, reject);
-		});
-	}
-
-	_render(renderDone, renderFail) {
-		new Promise((resolve, reject) => {
-			this._getRoot().innerHTML = this._templateDefault({
-				_data: {
-					requestedUrl: JSON.stringify(this._getRouteUrl(), null, "  "),
-					args: JSON.stringify(this._getArgs(), null, "  "),
-					localization: JSON.stringify(this._getLocalization(), null, "  ")
-				}
-			});
-			1;
-			resolve();
-		}).then(() => {
-			renderDone();
-		});
 	}
 
 	renderContent() {}
