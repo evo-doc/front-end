@@ -24,52 +24,51 @@
 	right: 0;
 	transition: right 1s;
 }
-
-.nav__checkbox:checked + nav .nav__toggle-button #toggle div  {
-  background-color: transparent;
-  transition: all 1s;
+.nav__checkbox:checked + nav .nav__toggle-button #toggle div {
+	background-color: transparent;
+	transition: all 1s;
 }
-.nav__checkbox:checked + nav .nav__toggle-button #toggle div:before  {
-  transform-origin: top left;
-  transform: rotate(35deg);
-  transition: all 1s;
+.nav__checkbox:checked + nav .nav__toggle-button #toggle div:before {
+	transform-origin: top left;
+	transform: rotate(39deg);
+	transition: all 1s;
 }
 .nav__checkbox:checked + nav .nav__toggle-button #toggle div:after {
-  transform:  rotate(-35deg);
-  transition: all 1s;
-  transform-origin: top left;
-  
+	transform: rotate(-39deg);
+	transition: all 1s;
+	transform-origin: bottom left;
 }
 
 #toggle {
-  width: 30px;
-  height: 30px;
-  margin: 5px auto;
-  cursor: pointer;
+	width: 30px;
+	height: 30px;
+	margin: 5px auto;
+	cursor: pointer;
 }
 #toggle div,
 #toggle div:after,
 #toggle div:before {
-  width: 30px;
-  height: 4px;
-  background: #eee;
-  transition: all 0.3s;
-  border-radius: 3px;
+	width: 30px;
+	height: 4px;
+	background: #eee;
+	transition: all 0.3s;
+	border-radius: 3px;
 }
 #toggle div:after,
 #toggle div:before {
-  content: "";
-  position: absolute;
+	content: "";
+	position: absolute;
 }
 #toggle div:before {
-  top: 5px;
+	top: 5px;
 }
 #toggle div {
-  top: 10px;
-  margin-top: 13px;
+	// top: 10px;
+	margin-top: 14px;
 }
 #toggle div:after {
-  top: 21px;
+	// top: 21px;
+	bottom: 5px;
 }
 
 // #toggle.on div {
