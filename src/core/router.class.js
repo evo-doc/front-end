@@ -49,7 +49,7 @@ class Router {
 			try {
 				if (!(await APP.getAuthorization().isAuthorized())) return;
 			} catch (e) {
-				if (e instanceof error.UnexpectedBehaviourError) {
+				if (e instanceof UnexpectedBehaviourError) {
 					return APP.getRequest().redirect("/error/500");
 				}
 			}

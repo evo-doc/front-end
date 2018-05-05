@@ -61,9 +61,9 @@ class Page {
 
 	/**
 	 * @summary todo
-	 * @description Asynchronous function. May throw error.PageRenderError.
+	 * @description Asynchronous function. May throw PageRenderError.
 	 *
-	 * @example <caption>Throw an error.PageRenderError.</caption>
+	 * @example <caption>Throw an PageRenderError.</caption>
 	 * throw new PageRenderError()
 	 */
 	async __render() {

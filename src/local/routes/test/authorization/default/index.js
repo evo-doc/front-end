@@ -37,7 +37,7 @@ class Index extends Page {
 				return (document.getElementById("auth__feedback").innerHTML = e.message);
 			}
 
-			if (e instanceof error.UnexpectedBehaviourError) {
+			if (e instanceof UnexpectedBehaviourError) {
 				return APP.getRequest().redirect("/error/500");
 			}
 		}
@@ -61,7 +61,7 @@ class Index extends Page {
 				return;
 			}
 
-			if (e instanceof error.UnexpectedBehaviourError) {
+			if (e instanceof UnexpectedBehaviourError) {
 				return APP.getRequest().redirect("/error/500");
 			}
 		}
