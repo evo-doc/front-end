@@ -16,20 +16,21 @@
 
 module.exports = {
 	// Authorization (access without token)
-	"/authorization/sign-in": require("routes/test/authorization/sign-in")(),
-	"/authorization/sign-up": require("routes/test/authorization/sign-up")(),
-	"/authorization/password": require("routes/test/authorization/password")(),
+	"/authorization/default": require("routes/test/authorization/default")(),
 
 	// Error Pages (access without token)
-	"/error/400": require("routes/default/error/400")(),
-	"/error/404": require("routes/default/error/404")(),
-	"/error/500": require("routes/default/error/500")(),
+	"/error/400": require("routes/test/default/error/400")(),
+	"/error/404": require("routes/test/default/error/404")(),
+	"/error/500": require("routes/test/default/error/500")(),
+
+	"/": require("routes/test/index")(),
+
+	// -------------------------
 
 	// Authorization
 	"/verification": require("routes/login/verification")(),
 
 	// Pages
-	"/": require("routes/homepage")(),
 	"/packages": require("routes/packages")(),
 	"/projects": require("routes/projects")(),
 	"/settings": require("routes/settings")(),

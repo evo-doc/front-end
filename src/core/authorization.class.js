@@ -92,9 +92,9 @@ class Authorization {
 			return true;
 		}
 
-		if (result.status === 403) throw new error.AuthorizationWarning(400, "SIGN IN", "userpass");
-		if (result.status === 404) throw new error.AuthorizationWarning(400, "SIGN IN", "userpass");
-		throw new error.UnexpectedBehaviour(result.status, "SIGN IN", result.data);
+		if (result.status === 403) throw new AuthorizationError(400, "SIGN IN", "userpass");
+		if (result.status === 404) throw new AuthorizationError(400, "SIGN IN", "userpass");
+		throw new UnexpectedBehaviourError(result.status, "SIGN IN", result.data);
 	}
 
 	/**
@@ -126,8 +126,8 @@ class Authorization {
 		}
 
 		if (result.status === 400)
-			throw new error.AuthorizationWarning(result.status, "REGISTRATION", result.data);
-		throw new error.UnexpectedBehaviour(result.status, "REGISTRATION", result.data);
+			throw new AuthorizationError(result.status, "REGISTRATION", result.data);
+		throw new UnexpectedBehaviourError(result.status, "REGISTRATION", result.data);
 	}
 
 	/**
@@ -153,7 +153,7 @@ class Authorization {
 	 */
 	async sendLogout() {
 		this._removeToken();
-		APP.getRequest().redirect("/authorization/sign-in");
+		APP.getRequest().redirect("/authorization/default");
 	}
 
 	/**
@@ -183,7 +183,7 @@ class Authorization {
 			return true;
 		}
 
-		throw new error.UnexpectedBehaviour(result.status, "IS AUTHORIZED", result.data);
+		throw new UnexpectedBehaviourError(result.status, "IS AUTHORIZED", result.data);
 	}
 }
 
