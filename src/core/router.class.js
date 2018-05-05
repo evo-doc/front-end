@@ -44,15 +44,11 @@ class Router {
 			try {
 				if (!(await APP.getAuthorization().isAuthorized())) return;
 			} catch (e) {
-				if (e instanceof error.UnexpectedBehaviour) {
+				if (e instanceof error.UnexpectedBehaviourError) {
 					return APP.getRequest().redirect("/error/500");
 				}
 			}
 		}
-
-		// Run load process
-		log.trace(`[PENDING] Routing to ${path}`);
-		loader.show();
 
 		// Create page instance with its config & args
 		this._current = new this._routes[page.i].generator.page(
@@ -60,20 +56,18 @@ class Router {
 			page.args
 		);
 
-		// Async rendering
-		this._current
-			.renderPromise()
-			.then(() => {
-				log.trace(`[SUCCESS] Routing to ${path}`);
-				loader.hide();
-			})
-			.catch((status = 400) => {
-				log.trace(`[FAILURE] Routing to ${path}`);
-				loader.hide();
-				// Catch all possible statuses from the server
-				if (status === 400) APP.getRequest().redirect("/error/400");
-				if (status === 500) APP.getRequest().redirect("/error/500");
-			});
+		// Load page
+		try {
+			await this._current.load();
+			loader.hide();
+		} catch (e) {
+			log.trace(`[FAILURE] PageLoad process "${path}"`);
+			loader.hide();
+			// Catch all possible statuses from the server
+			if (e.status === 400) return APP.getRequest().redirect("/error/400");
+			if (e.status === 500) return APP.getRequest().redirect("/error/500");
+			return APP.getRequest().redirect("/error/500");
+		}
 	}
 
 	_findRoute(path) {
@@ -83,7 +77,7 @@ class Router {
 			args = path.match(this._routes[i].pattern);
 			if (args) return { i: i, args: args };
 		}
-		throw new error.RouteError(404, path);
+		throw new RouteNotFound(path, 404);
 	}
 
 	_isAuthFreePage(path) {

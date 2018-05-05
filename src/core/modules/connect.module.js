@@ -113,11 +113,11 @@ function isGlobalError(status, data, method, hash) {
 	// Global errors
 	if (status === 400 && data === "data") {
 		APP.getRequest().redirect("/error/400");
-		return new error.DataConsistencyError(status, method, hash);
+		return new DataConsistencyError(status, method, hash);
 	}
 	if (status === 403) {
-		APP.getRequest().redirect("/authorization/sign-in");
-		return new error.InvalidTokenError(status, method, hash);
+		APP.getRequest().redirect("/authorization/default");
+		return new InvalidTokenError(status, method, hash);
 	}
 
 	return false;
