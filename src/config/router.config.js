@@ -1,7 +1,7 @@
 module.exports = {
 	authFreePages: [
 		// Sign In, Sign Up, ...
-		/^\/authorization\/.+/,
+		/^\/authorization\/default$/,
 		// Error pages
 		/^\/error\/\d{3}/
 	]
