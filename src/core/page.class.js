@@ -22,7 +22,7 @@ class Page {
 		this._template = null;
 		this._components = null;
 		this._args = args;
-		this._templateDefault = require("routes/default/render/default/index.ejs");
+		this._templateDefault = require("routes/default/page.ejs");
 
 		this.init();
 	}
@@ -40,19 +40,32 @@ class Page {
 	 * @description das
 	 */
 	async load() {
+		loader.show();
 		log.trace(`[PENDING] PageLoad process "${this._args[0]}"`);
 
 		// Render process
 		try {
 			await this.__render();
 		} catch (e) {
-			throw new PageLoadError(this._args[0], e.status, e.message, e.note);
+			log.trace(`[FAILURE] PageLoad process "${path}"`);
+			loader.hide();
+
+			// We have global error
+			if (e instanceof error.RequestError) throw e;
+
+			// We have PageRenderError
+			if (e instanceof error.PageRenderError) {
+				let err = new error.PageLoadError(this._args[0], e.status, e.hash, e.note);
+				APP.getRequest().redirect("/error/400");
+				throw err;
+			}
 		}
 
 		// Handlers
 		this.__handlers();
 
 		log.trace(`[SUCCESS] PageLoad process "${this._args[0]}"`);
+		loader.hide();
 	}
 
 	// ----------------------------------------------------------------------------------------------
@@ -64,7 +77,7 @@ class Page {
 	 * @description Asynchronous function. May throw PageRenderError.
 	 *
 	 * @example <caption>Throw an PageRenderError.</caption>
-	 * throw new PageRenderError()
+	 * throw new error.PageRenderError()
 	 */
 	async __render() {
 		// Render

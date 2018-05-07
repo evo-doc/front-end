@@ -41,17 +41,18 @@ class Router {
 		try {
 			page = this._findRoute(path); // Has page index in roures and args from URL
 		} catch (e) {
-			return APP.getRequest().redirect("/error/404"); // Page does not exist
+			return; // Page does not exist
 		}
 
 		// If the page is not auth free -> check auth
 		if (!this._isAuthFreePage(path)) {
+			log.trace(`Page "${path}" requires an authorisation.`);
 			try {
-				if (!(await APP.getAuthorization().isAuthorized())) return;
+				await APP.getAPI()
+					.getAuthorization()
+					.isAuthorized();
 			} catch (e) {
-				if (e instanceof UnexpectedBehaviourError) {
-					return APP.getRequest().redirect("/error/500");
-				}
+				return; // Stop routing, error from isAuthorized called new redirect
 			}
 		}
 
@@ -64,14 +65,8 @@ class Router {
 		// Load page
 		try {
 			await this._current.load();
-			loader.hide();
 		} catch (e) {
-			log.trace(`[FAILURE] PageLoad process "${path}"`);
-			loader.hide();
-			// Catch all possible statuses from the server
-			if (e.status === 400) return APP.getRequest().redirect("/error/400");
-			if (e.status === 500) return APP.getRequest().redirect("/error/500");
-			return APP.getRequest().redirect("/error/500");
+			return; // Stop routing, error from load called new redirect
 		}
 	}
 
@@ -90,7 +85,9 @@ class Router {
 			args = path.match(this._routes[i].pattern);
 			if (args) return { i: i, args: args };
 		}
-		throw new RouteNotFound(path, 404);
+		let e = new error.RouteNotFound(path);
+		APP.getRequest().redirect("/error/404");
+		throw e;
 	}
 
 	/**
