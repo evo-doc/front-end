@@ -5,12 +5,16 @@ const Page = require("page.class");
 class Index extends Page {
 	constructor(config, args) {
 		super(config, args);
-		this._template = require("./index.ejs");
-		this._style = require("./index.scss");
 	}
 
 	__render() {
-		this._getRoot().innerHTML = this._template();
+		// Unexpected behaviour
+		this._getRoot().innerHTML = this._getComponent().errors({
+			_data: {
+				title: APP.getLocalization().getPhrase("error", "000_title"),
+				message: APP.getLocalization().getPhrase("error", "000_message")
+			}
+		});
 	}
 }
 

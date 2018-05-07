@@ -24,7 +24,8 @@ const plugin = {
 		 */
 		global: {
 			_: "lodash",
-			log: "logger.module",
+			log: "app.logger.module",
+			logapi: "api.logger.module",
 			connect: "connect.module",
 			error: "error.module",
 			loader: "loader.module"

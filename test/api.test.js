@@ -9,8 +9,8 @@ const config = require("../src/config/app.config");
 // -------------------------------------------------------------------------------------------------
 const interface = {
 	user: {
-		register: (username, password, email) => {
-			return chai
+		register: async (username, password, email) => {
+			return await chai
 				.request(config.ajax.host)
 				.post("/registration")
 				.send({
@@ -20,8 +20,8 @@ const interface = {
 				});
 		},
 
-		login: (username, password) => {
-			return chai
+		login: async (username, password) => {
+			return await chai
 				.request(config.ajax.host)
 				.post("/login")
 				.send({
@@ -30,8 +30,8 @@ const interface = {
 				});
 		},
 
-		verify: (id, token, code) => {
-			return chai
+		verify: async (id, token, code) => {
+			return await chai
 				.request(config.ajax.host)
 				.post(`/user/activation`)
 				.send({
@@ -41,8 +41,8 @@ const interface = {
 				});
 		},
 
-		delete: (id, token) => {
-			return chai
+		delete: async (id, token) => {
+			return await chai
 				.request(config.ajax.host)
 				.del(`/user`)
 				.send({
@@ -60,15 +60,15 @@ const interface = {
 				.query({ token: token });
 		},
 
-		getUsersAll: token => {
-			return chai
+		getUsersAll: async token => {
+			return await chai
 				.request(config.ajax.host)
 				.get(`/user/all`)
 				.query({ token: token });
 		},
 
-		getUser: (id, token) => {
-			return chai
+		getUser: async (id, token) => {
+			return await chai
 				.request(config.ajax.host)
 				.get(`/user`)
 				.query({ token: token, user_id: id });

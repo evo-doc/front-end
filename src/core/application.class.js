@@ -15,14 +15,14 @@ class Application {
 		this._router = null;
 		this._localization = null;
 		this._request = null;
-		this._authorization = null;
+		this._api = null;
 	}
 
 	init() {
 		log.info("Application Initializer");
 
 		this.getLocalization().init();
-		this.getAuthorization().init();
+		this.getAPI().init();
 		this.getRequest().init();
 		this.getRouter().init();
 	}
@@ -58,13 +58,13 @@ class Application {
 	}
 
 	/**
-	 * @summary Get singleton instance of Authorization class
-	 * @return {object} Authorization instance
+	 * @summary Get singleton instance of API class
+	 * @return {object} API instance
 	 */
-	getAuthorization() {
-		const Authorization = require("./authorization.class");
-		if (this._authorization === null) this._authorization = new Authorization();
-		return this._authorization;
+	getAPI() {
+		const API = require("./api.class");
+		if (this._api === null) this._api = new API();
+		return this._api;
 	}
 }
 

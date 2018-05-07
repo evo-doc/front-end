@@ -7,6 +7,10 @@
     "pass": "Password"
   },
   "error": {
+    "000_title": "666",
+    "000_message": "Unexpected behaviour! Please contact Satan, maybe he will help you.",
+    "001_title": "XXX",
+    "001_message": "You are not on Earth and don't have an internet connection, sorry :(",
     "400_title": "400",
     "400_message": "Bad request",
     "404_title": "404",

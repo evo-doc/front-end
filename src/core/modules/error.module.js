@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Error - globally required modul via webpack. Reserves `error` as a global variable. Contains all types of errors (exceptions) that extends Error class.
+ * Error - module.exportsly required modul via webpack. Reserves `error` as a module.exports variable. Contains all types of errors (exceptions) that extends Error class.
  * @module Error
  *
  * @example <caption>Create new instances of Errors</caption>
@@ -10,8 +10,9 @@
  */
 
 //--------------------------------------------------------------------------------------------------
-// Export interface
+// Localization
 //--------------------------------------------------------------------------------------------------
+
 /**
  * @summary Language error
  * @description Throw this exception if the requested language file is not found.
@@ -23,7 +24,7 @@ module.exports.LocalizationError = class LocalizationError extends Error {
 		this.name = this.constructor.name;
 		this.status = 404;
 		Error.captureStackTrace(this, this.constructor);
-		log.error(`LocalizationError: missing [${localization}]`);
+		log.error(`LocalizationError: missing [${localization}]§`);
 	}
 };
 
@@ -45,6 +46,10 @@ module.exports.PhraseError = class PhraseError extends Error {
 	}
 };
 
+// -------------------------------------------------------------------------------------------------
+// Storage
+// -------------------------------------------------------------------------------------------------
+
 /**
  * @summary Storage error
  * @description Throw this exception if a storage does not have requested key.
@@ -61,19 +66,30 @@ module.exports.StorageError = class StorageError extends Error {
 	}
 };
 
+// -------------------------------------------------------------------------------------------------
+// Server responses
+// -------------------------------------------------------------------------------------------------
+
 /**
- * @summary Route error
- * @description Throw this exception if the requested route is not found.
- * @param {number} [status=404] - Error status number
- * @param {string} path - Requested path
+ * @summary Request error
+ * @description Throw this exception if some ajax request failed.
+ * @param {string} type - "ERROR" or "WARN"
+ * @param {number} status - Response status
+ * @param {string} hash - Unique request hash
+ * @param {string} message - Message
+ * @param {string} note - User note
  */
-module.exports.RouteError = class RouteError extends Error {
-	constructor(status = 404, path) {
+module.exports.RequestError = class RequestError extends Error {
+	constructor(type, status, hash, message, note = "") {
 		super();
 		this.name = this.constructor.name;
 		this.status = status;
 		Error.captureStackTrace(this, this.constructor);
-		log.error(`[${status}] [ROUTE]: page "${path}" does not exist`);
+		if (type === "ERROR") {
+			log.error(`[${status}] "${hash}": ${message} (${note})`);
+		} else {
+			log.warn(`[${status}] "${hash}": ${message} (${note})`);
+		}
 	}
 };
 
@@ -84,7 +100,7 @@ module.exports.RouteError = class RouteError extends Error {
  * @param {string} action - Sign in/sign up etc.
  * @param {string} message - Error message
  */
-module.exports.AuthorizationWarning = class AuthorizationWarning extends Error {
+module.exports.AuthorizationError = class AuthorizationError extends Error {
 	constructor(status = 400, action, message) {
 		super();
 		this.name = this.constructor.name;
@@ -95,56 +111,59 @@ module.exports.AuthorizationWarning = class AuthorizationWarning extends Error {
 	}
 };
 
+// -------------------------------------------------------------------------------------------------
+// Routing
+// -------------------------------------------------------------------------------------------------
 /**
- * @summary Unexpected behaviour
- * @description Throw this exception if we receive something stange from the server.
- * @param {number} [status=500] - Response status
- * @param {string} action - User action
- * @param {string} message - Error message
+ * @summary Route not found
+ * @description Throw this exception if the requested route is not found.
+ * @param {string} path - Requested path
+ * @param {number} [status=404] - Error status number
  */
-module.exports.UnexpectedBehaviour = class UnexpectedBehaviour extends Error {
-	constructor(status = 500, action, message) {
+module.exports.RouteNotFound = class RouteNotFound extends Error {
+	constructor(path, status = 404) {
 		super();
 		this.name = this.constructor.name;
-		this.status = status;
-		this.message = message;
 		Error.captureStackTrace(this, this.constructor);
-		log.error(`[${status}] [${action}]: unexpected behavaiour - ${JSON.stringify(message)}`);
+		log.error(`[${status}] [ROUTE]: page "${path}" does not exist`);
 	}
 };
 
 /**
- * @summary Invalid token
- * @description Throw this exception if we receive 403 from the server.
- * @param {number} [status=403] - Response status
- * @param {string} action - User action
- * @param {string} hash - Request hash
+ * @summary Page load process error
+ * @description Throw this exception if page loading cannot be done. Is catched in router process.
+ * @param {string} path - Page path
+ * @param {number} status - Response status
+ * @param {string} message - Response message
+ * @param {string} [note=""] - User note
  */
-module.exports.InvalidTokenError = class InvalidTokenError extends Error {
-	constructor(status = 403, action, hash) {
+module.exports.PageLoadError = class PageLoadError extends Error {
+	constructor(path, status, hash, note) {
 		super();
 		this.name = this.constructor.name;
+		this.path = path;
 		this.status = status;
-		this.message = "Invalid token";
+		this.hash = hash;
+		this.note = note;
 		Error.captureStackTrace(this, this.constructor);
-		log.warn(`[${status}] [${action}] (${hash}): ${this.message}`);
+		log.error(`[PAGE] [${status}] (${hash}): "${path}": "${note}"`);
 	}
 };
 
 /**
- * @summary Data consistency error
- * @description Throw this exception if server return
- * @param {number} [status=403] - Response status
- * @param {string} action - User action
- * @param {string} hash - Request hash
+ * @summary Page render process error
+ * @description Throw this exception if page rendering cannot be done (ajax exceptions etc.).
+ * @param {number} status - Response status
+ * @param {string} message - Response message
+ * @param {string} [note=""] - User note
  */
-module.exports.DataConsistencyError = class DataConsistencyError extends Error {
-	constructor(status = 403, action, hash) {
+module.exports.PageRenderError = class PageRenderError extends Error {
+	constructor(status, hash, note) {
 		super();
 		this.name = this.constructor.name;
 		this.status = status;
-		this.message = "Data consistency";
+		this.hash = hash;
+		this.note = note;
 		Error.captureStackTrace(this, this.constructor);
-		log.error(`[${status}] [${action}] (${hash}): ${this.message}`);
 	}
 };

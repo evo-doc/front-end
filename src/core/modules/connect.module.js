@@ -55,19 +55,19 @@ module.exports.waitAJAX = function() {
  * @description Prepare and send GET request to the server. Responce should be JSON.
  *
  * @param {string} url - Requested URL without GET params
- * @param {Object} data - Objects of pairs {key: value} which represents GET params
+ * @param {Object} body - Objects of pairs {key: value} which represents GET params
  * @param {Object} [optionsUser={}] - User defined fetch options
  *
  * @return {Promise}
  */
-module.exports.getJSON = async (url, data, optionsUser = {}) => {
+module.exports.getJSON = async (url, body, optionsUser = {}) => {
 	// Unique ID
-	let hash = randomstring.generate(5);
+	let hash = randomstring.generate(32);
 
 	// Prepare URL get request
 	var euc = encodeURIComponent;
-	var getURL = Object.keys(data)
-		.map(key => `${euc(key)}=${euc(data[key])}`)
+	var getURL = Object.keys(body)
+		.map(key => `${euc(key)}=${euc(body[key])}`)
 		.join("&");
 
 	// Prepare & merge fetch options
@@ -82,17 +82,41 @@ module.exports.getJSON = async (url, data, optionsUser = {}) => {
 	let requestedURL = `${config.ajax.host}${url}?${getURL}`;
 
 	// Send request
-	log.trace(`Server GET (${hash}): ${requestedURL}`);
-	let response = await fetch(requestedURL, options);
+	let response;
+	try {
+		response = await fetch(requestedURL, options);
+	} catch (e) {
+		if (e instanceof TypeError && e.message === "Failed to fetch") {
+			APP.getRequest().redirect("/error/001");
+			throw e;
+		}
+	}
+
 	let status = response.status;
-	let json = await response.json().then(_ => _);
+	let statusText = response.statusText;
+	let json = await response
+		.json()
+		.then(_ => _)
+		.catch(_ => "HTML");
+
+	logapi(
+		hash,
+		// Requset
+		options.method,
+		requestedURL,
+		"see URL",
+		// Response
+		status,
+		statusText,
+		json
+	);
 
 	// Check global errors
 	let isGlobalErrorResult = _isGlobalError(status, json, options.method, hash);
 	if (isGlobalErrorResult !== false) throw isGlobalErrorResult;
 
 	// Success
-	return { status: status, data: json };
+	return { status: status, body: json, hash: hash };
 };
 
 /**
@@ -100,20 +124,20 @@ module.exports.getJSON = async (url, data, optionsUser = {}) => {
  * @description Prepare and send POST request to the server. Responce should be JSON.
  *
  * @param {string} url - Requested URL without GET params
- * @param {Object} data - Objects of pairs {key: value} which presents GET params
+ * @param {Object} body - Objects of pairs {key: value} which represents POST params
  * @param {Object} [optionsUser={}] - User defined fetch options
  *
- * @return {Promise}
+ * @return {(object|error)}
  */
-module.exports.postJSON = async (url, data, optionsUser = {}) => {
+module.exports.postJSON = async (url, body, optionsUser = {}) => {
 	// Unique ID
-	let hash = randomstring.generate(5);
+	let hash = randomstring.generate(32);
 
 	// Prepare & merge fetch options
 	const optionsDefault = {
 		method: "POST",
 		cache: config.ajax.cache,
-		body: JSON.stringify(data),
+		body: JSON.stringify(body),
 		headers: {
 			"Content-Type": "application/json"
 		}
@@ -122,36 +146,90 @@ module.exports.postJSON = async (url, data, optionsUser = {}) => {
 	let requestedURL = `${config.ajax.host}${url}`;
 
 	// Send request
-	log.trace(`Server POST (${hash}): ${requestedURL} ${options.body}`);
-	let response = await fetch(requestedURL, options);
+	let response;
+	try {
+		response = await fetch(requestedURL, options);
+	} catch (e) {
+		if (e instanceof TypeError && e.message === "Failed to fetch") {
+			APP.getRequest().redirect("/error/001");
+			throw e;
+		}
+	}
+
 	let status = response.status;
-	let json = await response.json().then(_ => _);
+	let statusText = response.statusText;
+	let json = await response
+		.json()
+		.then(_ => _)
+		.catch(_ => "HTML");
+
+	logapi(
+		hash,
+		// Requset
+		options.method,
+		requestedURL,
+		body,
+		// Response
+		status,
+		statusText,
+		json
+	);
 
 	// Check global errors
 	let isGlobalErrorResult = _isGlobalError(status, json, options.method, hash);
 	if (isGlobalErrorResult !== false) throw isGlobalErrorResult;
 
 	// Success
-	return { status: status, data: json };
+	return { status: status, body: json, hash: hash };
 };
 
 /**
  * @summary Global errors detection
  * @description Check global erros e.g. invalid token, data consistency etc.
  * @param {string} status - Response status
- * @param {string} data - Bosy of the response
+ * @param {string} body - Bosy of the response
  * @param {string} method - POST/GET/DELETE
  * @param {string} hash - A hash of the transaction.
  */
-function _isGlobalError(status, data, method, hash) {
+function _isGlobalError(status, body, method, hash) {
+	// Server unavailable
+	if (status >= 500) {
+		let e = new error.RequestError("ERROR", status, hash, "Server unavailable!", "Global");
+		APP.getRequest().redirect("/error/500");
+		return e;
+	}
+
+	// HTML body
+	if (body === "HTML") {
+		let e = new error.RequestError("ERROR", status, hash, "Cannot parse JSON!", "Global");
+		APP.getRequest().redirect("/error/500");
+		return e;
+	}
+
 	// Global errors
-	if (status === 400 && data === "data") {
+	if (status === 400 && body === "data") {
+		let e = new error.RequestError("ERROR", status, hash, "Invalid data!", "Global");
 		APP.getRequest().redirect("/error/400");
-		return new error.DataConsistencyError(status, method, hash);
+		return e;
 	}
 	if (status === 403) {
-		APP.getRequest().redirect("/authorization/sign-in");
-		return new error.InvalidTokenError(status, method, hash);
+		let e = new error.RequestError("WARN", status, hash, "Invalid token!", "Global");
+		APP.getRequest().redirect("/authorization/default");
+		return e;
+	}
+
+	// New possible token
+	if (body.hasOwnProperty("token")) {
+		APP.getAPI()
+			.getAuthorization()
+			._saveToken(body["token"]);
+	}
+
+	// Is needed verification
+	if (status === 200 && body.hasOwnProperty("verified") && body["verified"] === "false") {
+		let e = new error.RequestError("WARN", status, hash, "User is not verified!", "Global");
+		APP.getRequest().redirect("/authorization/verification");
+		return e;
 	}
 
 	return false;
