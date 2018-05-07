@@ -19,59 +19,71 @@
 			</label>
 
 			<div class="nav__inner menu">
-
 				<div class="menu__profile profile">
 					<img class="profile__avatar" alt="profile picture" />
 					<h4 class="profile__name">Name Surname</h4>
 				</div>
 
 				<ul>
-					<li class="menu__item">
+					<li class="menu__item item">
 						<a href="#/">
-							<i class="menu__icon icon-material">public</i>
-							<span class="menu__label">Homepage</span>
+							<div class="item__icon icon">
+								<i class="icon__icon-img icon-material">public</i>
+							</div>>
+							<span class="item__label">Homepage</span>
 						</a>
 					</li>
 
-					<li class="menu__item">
+					<li class="menu__item item">
 						<a href="#/registry">
-							<i class="menu__icon fas fa-box"></i>
-							<span class="menu__label">Registry</span>
+							<div class="item__icon icon">
+								<i class="icon__icon-img fas fa-box"></i>
+							</div>>
+							<span class="item__label">Registry</span>
 						</a>
 					</li>
 
-					<li class="menu__item">
+					<li class="menu__item item">
 						<a href="#/package/add">
-							<i class="menu__icon icon-material">file_upload</i>
-							<span class="menu__label">Upload package</span>
+							<div class="item__icon icon">
+								<i class="icon__icon-img icon-material">file_upload</i>
+							</div>
+							<span class="item__label">Upload package</span>
 						</a>
 					</li>
 
-					<!--
-					<li class="menu__item">
+					<li class="menu__item item">
+
 						<a href="#/projects">
-							<i class="menu__icon fas fa-folder-open"></i>
-							<span class="menu__label">Projects</span>
+							<div class="item__icon icon">
+								<i class="icon__icon-img fas fa-folder-open"></i>
+							</div>
+							<span class="item__label">Projects</span>
 						</a>
 					</li>
 
-					<li class="menu__item">
+					<li class="menu__item item">
 						<a href="#/docs">
-							<i class="menu__icon fas fa-file-alt"></i>
-							<span class="menu__label">Docs</span>
+							<div class="item__icon icon">
+								<i class="icon__icon-img fas fa-file-alt"></i>
+							</div>
+							<span class="item__label">Docs</span>
 						</a>
 					</li>
 
-					<li class="menu__item">
+					<li class="menu__item item">
 						<a href="#/settings">
-							<i class="menu__icon fas fa-cog"></i>
-							<span class="menu__label">Settings</span>
+							<div class="item__icon icon">
+								<i class="icon__icon-img fas fa-cog"></i>
+							</div>
+							<span class="item__label">Settings</span>
 						</a>
 					</li>
-					-->
 
-					<li class="menu__item">
-						<i class="menu__icon fas fa-cog"></i>
+					<li class="menu__item item">
+						<div class="item__icon icon">
+							<i class="icon__icon-img fas fa-cog"></i>
+						</div>
 						<span onclick="APP.getAPI().getAuthorization().signOut();">LOGOUT</span>
 					</li>
 				</ul>
@@ -98,7 +110,6 @@
 </body>
 
 </html>
-
 
 <!-- <li>
 	<a href="#/error/500">
