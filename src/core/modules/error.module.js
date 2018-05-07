@@ -1,12 +1,12 @@
 "use strict";
 
 /**
- * Error - globally required modul via webpack. Reserves `error` as a global variable. Contains all types of errors (exceptions) that extends Error class.
+ * Error - module.exportsly required modul via webpack. Reserves `error` as a module.exports variable. Contains all types of errors (exceptions) that extends Error class.
  * @module Error
  *
  * @example <caption>Create new instances of Errors</caption>
- * new LanguageError("Message", 404);
- * new PhraseError("Message");
+ * new error.LanguageError("Message", 404);
+ * new error.PhraseError("Message");
  */
 
 //--------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@
  * @description Throw this exception if the requested language file is not found.
  * @param {string} localization - Localization abbr
  */
-global.LocalizationError = class LocalizationError extends Error {
+module.exports.LocalizationError = class LocalizationError extends Error {
 	constructor(localization) {
 		super();
 		this.name = this.constructor.name;
@@ -35,7 +35,7 @@ global.LocalizationError = class LocalizationError extends Error {
  * @param {string} namespace - Requested namespace
  * @param {string} key - Requested key
  */
-global.PhraseError = class PhraseError extends Error {
+module.exports.PhraseError = class PhraseError extends Error {
 	constructor(localization, namespace, key) {
 		super();
 		this.name = this.constructor.name;
@@ -56,7 +56,7 @@ global.PhraseError = class PhraseError extends Error {
  * @param {string} storage - Storage name
  * @param {string} key - Requested key
  */
-global.StorageError = class StorageError extends Error {
+module.exports.StorageError = class StorageError extends Error {
 	constructor(storage, key) {
 		super();
 		this.name = this.constructor.name;
@@ -71,13 +71,36 @@ global.StorageError = class StorageError extends Error {
 // -------------------------------------------------------------------------------------------------
 
 /**
+ * @summary Request error
+ * @description Throw this exception if some ajax request failed.
+ * @param {string} type - "ERROR" or "WARN"
+ * @param {number} status - Response status
+ * @param {string} hash - Unique request hash
+ * @param {string} message - Message
+ * @param {string} note - User note
+ */
+module.exports.RequestError = class RequestError extends Error {
+	constructor(type, status, hash, message, note = "") {
+		super();
+		this.name = this.constructor.name;
+		this.status = status;
+		Error.captureStackTrace(this, this.constructor);
+		if (type === "ERROR") {
+			log.error(`[${status}] "${hash}": ${message} (${note})`);
+		} else {
+			log.warn(`[${status}] "${hash}": ${message} (${note})`);
+		}
+	}
+};
+
+/**
  * @summary Authorization data warning
  * @description Throw this exception if server refused auth/reg request because of some data error.
  * @param {number} [status=400] - Response status
  * @param {string} action - Sign in/sign up etc.
  * @param {string} message - Error message
  */
-global.AuthorizationError = class AuthorizationError extends Error {
+module.exports.AuthorizationError = class AuthorizationError extends Error {
 	constructor(status = 400, action, message) {
 		super();
 		this.name = this.constructor.name;
@@ -85,59 +108,6 @@ global.AuthorizationError = class AuthorizationError extends Error {
 		this.message = message;
 		Error.captureStackTrace(this, this.constructor);
 		log.debug(`[${status}] [${action}]: ${message}`);
-	}
-};
-
-/**
- * @summary Unexpected behaviour
- * @description Throw this exception if we receive something stange from the server.
- * @param {number} [status=500] - Response status
- * @param {string} action - User action
- * @param {string} message - Error message
- */
-global.UnexpectedBehaviourError = class UnexpectedBehaviourError extends Error {
-	constructor(status = 500, action, message) {
-		super();
-		this.name = this.constructor.name;
-		this.status = status;
-		this.message = message;
-		Error.captureStackTrace(this, this.constructor);
-		log.error(`[${status}] [${action}]: unexpected behavaiour - ${JSON.stringify(message)}`);
-	}
-};
-
-/**
- * @summary Invalid token
- * @description Throw this exception if we receive 403 from the server.
- * @param {number} [status=403] - Response status
- * @param {string} action - User action
- * @param {string} hash - Request hash
- */
-global.InvalidTokenError = class InvalidTokenError extends Error {
-	constructor(status = 403, action, hash) {
-		super();
-		this.name = this.constructor.name;
-		this.status = status;
-		this.message = "Invalid token";
-		Error.captureStackTrace(this, this.constructor);
-		log.warn(`[${status}] [${action}] (${hash}): ${this.message}`);
-	}
-};
-
-/**
- * @summary Data consistency error
- * @description Throw this exception if server return that it needs something more.
- * @param {number} [status=403] - Response status
- * @param {string} action - User action
- * @param {string} hash - Request hash
- */
-global.DataConsistencyError = class DataConsistencyError extends Error {
-	constructor(status = 403, action, hash) {
-		super();
-		this.name = this.constructor.name;
-		this.status = status;
-		Error.captureStackTrace(this, this.constructor);
-		log.error(`[${status}] [${action}] (${hash}): Data consistency`);
 	}
 };
 
@@ -150,7 +120,7 @@ global.DataConsistencyError = class DataConsistencyError extends Error {
  * @param {string} path - Requested path
  * @param {number} [status=404] - Error status number
  */
-global.RouteNotFound = class RouteNotFound extends Error {
+module.exports.RouteNotFound = class RouteNotFound extends Error {
 	constructor(path, status = 404) {
 		super();
 		this.name = this.constructor.name;
@@ -167,16 +137,16 @@ global.RouteNotFound = class RouteNotFound extends Error {
  * @param {string} message - Response message
  * @param {string} [note=""] - User note
  */
-global.PageLoadError = class PageLoadError extends Error {
-	constructor(path, status, message, note = "") {
+module.exports.PageLoadError = class PageLoadError extends Error {
+	constructor(path, status, hash, note) {
 		super();
 		this.name = this.constructor.name;
 		this.path = path;
 		this.status = status;
-		this.message = message;
+		this.hash = hash;
 		this.note = note;
 		Error.captureStackTrace(this, this.constructor);
-		log.error(`[PAGE] [${status}] (${path}): "${message}": "${note}"`);
+		log.error(`[PAGE] [${status}] (${hash}): "${path}": "${note}"`);
 	}
 };
 
@@ -187,12 +157,12 @@ global.PageLoadError = class PageLoadError extends Error {
  * @param {string} message - Response message
  * @param {string} [note=""] - User note
  */
-global.PageRenderError = class PageRenderError extends Error {
-	constructor(status, message, note = "") {
+module.exports.PageRenderError = class PageRenderError extends Error {
+	constructor(status, hash, note) {
 		super();
 		this.name = this.constructor.name;
 		this.status = status;
-		this.message = message;
+		this.hash = hash;
 		this.note = note;
 		Error.captureStackTrace(this, this.constructor);
 	}
