@@ -7,15 +7,14 @@ class Index extends Page {
 		super(config, args);
 	}
 
-	_render(renderDone, renderFail) {
+	__render() {
+		// Unexpected behaviour
 		this._getRoot().innerHTML = this._getComponent().errors({
 			_data: {
-				title: APP.getLocalization().getPhrase("error", "500_title"),
-				message: APP.getLocalization().getPhrase("error", "500_message")
+				title: APP.getLocalization().getPhrase("error", "000_title"),
+				message: APP.getLocalization().getPhrase("error", "000_message")
 			}
 		});
-
-		renderDone();
 	}
 }
 

@@ -7,15 +7,14 @@ class Index extends Page {
 		super(config, args);
 	}
 
-	_render(renderDone, renderFail) {
+	__render() {
+		// Lost insternet connection
 		this._getRoot().innerHTML = this._getComponent().errors({
 			_data: {
-				title: APP.getLocalization().getPhrase("error", "400_title"),
-				message: APP.getLocalization().getPhrase("error", "400_message")
+				title: APP.getLocalization().getPhrase("error", "001_title"),
+				message: APP.getLocalization().getPhrase("error", "001_message")
 			}
 		});
-
-		renderDone();
 	}
 }
 

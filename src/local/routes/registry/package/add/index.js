@@ -6,11 +6,11 @@ class Index extends Page {
 	constructor(config, args) {
 		super(config, args);
 		this._template = require("./index.ejs");
+		this._style = require("./index.scss");
 	}
 
-	_render(renderDone, renderFail) {
+	__render() {
 		this._getRoot().innerHTML = this._template();
-		renderDone();
 	}
 }
 

@@ -34,19 +34,20 @@
 					</li>
 
 					<li class="menu__item">
-						<a href="#/packages">
+						<a href="#/registry">
 							<i class="menu__icon fas fa-box"></i>
-							<span class="menu__label">Packages</span>
+							<span class="menu__label">Registry</span>
 						</a>
 					</li>
 
 					<li class="menu__item">
-						<a href="#/upload">
+						<a href="#/package/add">
 							<i class="menu__icon icon-material">file_upload</i>
-							<span class="menu__label">Upload</span>
+							<span class="menu__label">Upload package</span>
 						</a>
 					</li>
 
+					<!--
 					<li class="menu__item">
 						<a href="#/projects">
 							<i class="menu__icon fas fa-folder-open"></i>
@@ -67,10 +68,11 @@
 							<span class="menu__label">Settings</span>
 						</a>
 					</li>
+					-->
 
 					<li class="menu__item">
 						<i class="menu__icon fas fa-cog"></i>
-						<span onclick="APP.getAuthorization().sendLogout();">LOGOUT</span>
+						<span onclick="APP.getAPI().getAuthorization().signOut();">LOGOUT</span>
 					</li>
 				</ul>
 			</div>
