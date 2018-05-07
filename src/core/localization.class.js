@@ -78,7 +78,7 @@ class Localization {
 				`Localization change: requested localization [${localization}] not found. User localization is set to default`
 			);
 			this._storage.setData("userLocalization", this._localizationDefault);
-			throw new LocalizationError(localization);
+			throw new error.LocalizationError(localization);
 		}
 
 		// Save new language
@@ -146,13 +146,13 @@ class Localization {
 	 */
 	_findPhrase(l10n, namespace, key) {
 		if (this._localizations[l10n] === undefined) {
-			throw new LocalizationError(l10n);
+			throw new error.LocalizationError(l10n);
 		}
 		if (this._localizations[l10n][namespace] === undefined) {
-			throw new PhraseError(l10n, namespace, key);
+			throw new error.PhraseError(l10n, namespace, key);
 		}
 		if (this._localizations[l10n][namespace][key] === undefined) {
-			throw new PhraseError(l10n, namespace, key);
+			throw new error.PhraseError(l10n, namespace, key);
 		}
 		return this._localizations[l10n][namespace][key];
 	}
@@ -167,7 +167,7 @@ class Localization {
 	 * @return {object} Localization
 	 */
 	_findLocalization(l10n) {
-		if (this._localizations[l10n] === undefined) throw new LocalizationError(l10n);
+		if (this._localizations[l10n] === undefined) throw new error.LocalizationError(l10n);
 		return this._localizations[l10n];
 	}
 }

@@ -42,7 +42,7 @@ class Storage {
 	 * @returns {(object|string|number)} Data
 	 */
 	getData(key) {
-		if (this._data[key] === undefined) throw new StorageError(this._filename, key);
+		if (this._data[key] === undefined) throw new error.StorageError(this._filename, key);
 
 		return this._data[key];
 	}
