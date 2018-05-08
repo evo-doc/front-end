@@ -175,7 +175,6 @@ class Authorization {
 		let result;
 		try {
 			result = await connect.postJSON("/user/authorised", {
-				user_id: this._getUserId(),
 				token: this._getToken()
 			});
 		} catch (e) {
