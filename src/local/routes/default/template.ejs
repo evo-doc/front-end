@@ -13,9 +13,7 @@
 		<input type="checkbox" id="nav__checkbox" class="nav__checkbox">
 		<nav>
 			<label class="nav__toggle-button" for="nav__checkbox">
-				<div id='toggle'>
-					<div></div>
-				</div>
+				<div></div>
 			</label>
 
 			<div class="nav__inner menu">
@@ -48,12 +46,11 @@
 							<div class="item__icon icon">
 								<i class="icon__icon-img icon-material">file_upload</i>
 							</div>
-							<span class="item__label">Upload package</span>
+							<span class="item__label">Upload</span>
 						</a>
 					</li>
 
-					<li class="menu__item item">
-						<!--
+					<!--
 					<li class="menu__item item">
 						<a href="#/docs">
 							<div class="item__icon icon">
@@ -72,12 +69,15 @@
 						</a>
 					</li> -->
 
-						<li class="menu__item item">
+					<li class="menu__item item">
+						<a href="#/package/add">
 							<div class="item__icon icon">
 								<i class="icon__icon-img fas fa-cog"></i>
 							</div>
-							<span onclick="APP.getAPI().getAuthorization().signOut();">LOGOUT</span>
-						</li>
+							<span class="item__label" onclick="APP.getAPI().getAuthorization().signOut();">LOGOUT</span>
+						</a>
+					</li>
+
 				</ul>
 			</div>
 		</nav>
