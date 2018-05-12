@@ -35,3 +35,13 @@ module.exports.username = username => {
 	var re = /^[a-zA-Z0-9\-\_]+$/;
 	return re.test(username.toLowerCase());
 };
+
+/**
+ * @description Check if github URL is valid.
+ * @param {string} githubURL - Github URL
+ * @return {boolean} - URL is valid
+ */
+module.exports.githubURL = githubURL => {
+	var re = /^(?:https?:\/\/)?(?:www\.)?github\.com(\/[a-z0-9A-Z_.-]+){2}\/?$/;
+	return re.test(url.toLowerCase());
+};
