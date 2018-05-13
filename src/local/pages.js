@@ -33,11 +33,10 @@ module.exports = {
 	"/package/add": require("routes/registry/package/add")(),
 
 	// Interface
-	"/interface": require("routes/interface")(),
+	"/interface": require("routes/interface")()
 
 	// Temporary
 	// "/rework_example/renderer": require("routes/rework_example/renderer")(),
-	"/authorization/verification": require("routes/authorization/verification")()
 
 	// -------------------------
 
