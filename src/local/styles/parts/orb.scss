@@ -1,5 +1,7 @@
 @import "./orb/*";
 
+// Rotating orb (used in error page)
+
 .orb {
 	filter: blur(1.5px);
 	transform-style: preserve-3d;
