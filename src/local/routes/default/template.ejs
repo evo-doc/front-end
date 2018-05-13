@@ -15,16 +15,24 @@
 		<nav>
 			<div class="nav__inner menu">
 				<div class="menu__profile profile">
-					<img class="profile__avatar" alt="profile picture" />
-					<h4 class="profile__name">Name Surname</h4>
-					<span onclick="APP.getAPI().getAuthorization().signOut();">logout</span>
+
+					<div class="profile__logout" onclick="APP.getAPI().getAuthorization().signOut();">
+						<i class=" far fa-sign-out"></i>
+					</div>
+
+					<div class="profile__avatar">
+						<!-- <img class="profile__avatar" alt="profile picture" /> -->
+						<i class="avatar__icon-img icon-material">account_circle</i>
+					</div>
+					<h4 class="profile__name">Username</h4>
 				</div>
 
+				<!-- <i class="fas fa-sign-out-alt"></i> -->
 				<ul>
 					<li class="menu__item item">
 						<a href="#/">
 							<div class="item__icon icon">
-								<i class="icon__icon-img icon-material">public</i>
+								<i class="icon-material">public</i>
 							</div>
 							<span class="item__label">Homepage</span>
 						</a>
@@ -33,7 +41,7 @@
 					<li class="menu__item item">
 						<a href="#/registry">
 							<div class="item__icon icon">
-								<i class="icon__icon-img fas fa-box"></i>
+								<i class="fas fa-box"></i>
 							</div>
 							<span class="item__label">Registry</span>
 						</a>
@@ -42,7 +50,7 @@
 					<li class="menu__item item">
 						<a href="#/registry/package/add">
 							<div class="item__icon icon">
-								<i class="icon__icon-img icon-material">file_upload</i>
+								<i class="icon-material">file_upload</i>
 							</div>
 							<span class="item__label">Upload</span>
 						</a>
@@ -51,7 +59,7 @@
 					<li class="menu__item item">
 						<a href="#/dashboard">
 							<div class="item__icon icon">
-								<i class="icon__icon-img icon-material">dashboard</i>
+								<i class="icon-material">dashboard</i>
 							</div>
 							<span class="item__label">Dashboard</span>
 						</a>
@@ -61,7 +69,7 @@
 					<li class="menu__item item">
 						<a href="#/docs">
 							<div class="item__icon icon">
-								<i class="icon__icon-img fas fa-file-alt"></i>
+								<i class="fas fa-file-alt"></i>
 							</div>
 							<span class="item__label">Docs</span>
 						</a>
@@ -70,7 +78,7 @@
 					<li class="menu__item item">
 						<a href="#/docs/about">
 							<div class="item__icon icon">
-								<i class="icon__icon-img fas fa-file-alt"></i>
+								<i class="fas fa-file-alt"></i>
 							</div>
 							<span class="item__label">About Us</span>
 						</a>
