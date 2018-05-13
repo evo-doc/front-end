@@ -21,6 +21,7 @@ $loader-delay: 250ms;
 	&_hide {
 		opacity: 0 !important;
 		height: 0 !important;
+		overflow: hidden;
 		transition: height 0ms linear $loader-speed, opacity $loader-speed linear 0ms;
 	}
 }
