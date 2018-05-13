@@ -17,12 +17,6 @@
 			</label>
 
 			<div class="nav__inner menu">
-				<div class="menu__profile profile">
-					<img class="profile__avatar" alt="profile picture" />
-					<h4 class="profile__name">Name Surname</h4>
-					<span onclick="APP.getAPI().getAuthorization().signOut();">logout</span>
-				</div>
-
 				<ul>
 					<li class="menu__item item">
 						<a href="#/">
@@ -82,10 +76,34 @@
 				</ul>
 			</div>
 		</nav>
+
 		<main>
-			<div id="wrapper">
-				<div id="root"></div>
-				<footer> CTU FIT EvoDoc Team &copy; 2018</footer>
+			<div class="wrapper">
+				<!-- HEADER -->
+				<header class="wrapper__header wrapper-header">
+					<ol>
+						<li onclick="APP.getRequest().redirect('/profile')">
+							<div class="wrapper-header__text">
+								Username
+								<div class="wrapper-header__text_small">user profile</div>
+							</div>
+							<div class="wrapper-header__icon">
+								<i class="fas fa-user-astronaut"></i>
+							</div>
+						</li>
+						<li onclick="APP.getAPI().getAuthorization().signOut();">
+							<div class="wrapper-header__icon">
+								<i class="far fa-sign-out"></i>
+							</div>
+						</li>
+					</ol>
+				</header>
+
+				<!-- BODY -->
+				<div class="wrapper__body" id="root"></div>
+
+				<!-- FOOTER -->
+				<footer class="wrapper__footer"> CTU FIT EvoDoc Team &copy; 2018</footer>
 			</div>
 		</main>
 	</div>

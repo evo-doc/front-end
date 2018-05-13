@@ -7,12 +7,12 @@ main {
 	overflow-y: scroll;
 	overflow-x: hidden;
 
-	#wrapper {
+	.wrapper {
 		overflow-y: scroll;
 		height: 100%;
 	}
 
 	#root {
-		min-height: calc(100% - 40px);
+		min-height: calc(100% - #{$wrapper-header-height} - #{$wrapper-footer-height});
 	}
 }

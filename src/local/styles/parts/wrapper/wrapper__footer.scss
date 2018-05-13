@@ -1,0 +1,15 @@
+// -------------------------------------------------------------------------------------------------
+// Wrapper footer
+// -------------------------------------------------------------------------------------------------
+
+.wrapper__footer {
+	height: $wrapper-footer-height;
+	line-height: $wrapper-footer-height;
+	background-color: $ed-blue-dark;
+	box-sizing: border-box;
+	text-align: center;
+	color: white;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: 200;
+}
