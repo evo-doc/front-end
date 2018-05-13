@@ -1,0 +1,14 @@
+.stateLabel {
+	background-color: gray;
+	padding: 5px 10px;
+
+	color: white;
+	font-size: 10px;
+	text-transform: uppercase;
+	vertical-align: middle;
+	border-radius: 4px;
+	display: inline-block;
+}
+
+@include stateLabel("stable", #72cb36, 5px 18px);
+@include stateLabel("deprecated", #ff4747, 5px);

@@ -1,30 +1,22 @@
-<div class="BG0-homepage">
-
-	<div class="logo-container">
-		<img src="<%= require('./images/evodoc-logo.png') %>" alt="create image" class="create-image">
-	</div>
-	<span class="evodoc-title">EVODOC</span>
+<div class="circuit-BG">
+	<img src="<%= require('./images/circuit-blue-lines3.jpg') %>">
 
 	<!-- Search bar -->
-	<div class="searchbox">
-		<input class="search" type="text" placeholder="Search packages...">
-		<div class="also"></div>
+	<div class="search-box-flat">
+		<input class="search-box-flat__input" type="text" placeholder="Search packages...">
+		<div class="search-box-flat__search-icon">
+			<i class=" fas fa-search"></i>
+		</div>
 	</div>
-
-	<div class="circuit-image"></div>
-
-	<div class="stats">stats - packages downloaded cnt, package cnt in registry etc.</div>
-
 </div>
 
-<div class="BG1-homepage">
+<!-- Docs -->
+<div class="hp-bg">
 	<h1>What is EvoDoc ?</h1>
-
 	<p class="what-is-ED-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
 
 	<div class="what-is-evodoc-icons">
-
 		<div>
 			<img src="<%= require('./images/learn_circle.gif') %>" alt="learn image" class="learn-image">
 			<a href="">Learn</a>
@@ -34,14 +26,34 @@
 		<div>
 			<img src="<%= require('./images/create.jpg') %>" alt="create image" class="create-image">
 			<a href="">Build</a>
-			<p>Want to make your first EvoDoc package and share it with the community? Start with this walkthrough!</p>
+			<p>Would you like to make your first EvoDoc project? You can start with this walkthrough!</p>
 		</div>
 
 		<div>
 			<img src="<%= require('./images/explore_circle.gif') %>" alt="explore image" class="explore-image">
-			<a href="">Explore</a>
-			<p>Browse the thousands of packages that developers like you have created and shared with the EvoDoc community.</p>
+			<a href="#/registry">Explore</a>
+			<p>Browse packages that developers like you have created and shared with the EvoDoc community.</p>
+		</div>
+	</div>
+
+	<!-- Statistics -->
+	<div class="statistics">
+		<div class="statistics__item">
+			<i class="fa fa-users fa-5x"></i>
+			<p>8,888</p>
+			<span>Users Registered</span>
 		</div>
 
+		<div class="statistics__item">
+			<i class="fas fa-box fa-5x"></i>
+			<p>20,550</p>
+			<span>Packages Uploaded</span>
+		</div>
+
+		<div class="statistics__item">
+			<i class="fa fa-suitcase fa-5x"></i>
+			<p>1,635</p>
+			<span>Projects Created</span>
+		</div>
 	</div>
 </div>

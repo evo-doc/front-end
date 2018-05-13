@@ -9,13 +9,10 @@
 </head>
 
 <body>
+
 	<div class="screen">
 		<input type="checkbox" id="nav__checkbox" checked class="nav__checkbox">
 		<nav>
-			<label class="nav__toggle-button" for="nav__checkbox">
-				<div></div>
-			</label>
-
 			<div class="nav__inner menu">
 				<div class="menu__profile profile">
 					<img class="profile__avatar" alt="profile picture" />
@@ -79,13 +76,39 @@
 						</a>
 					</li>
 
+					<li class="menu__item item">
+						<a href="#/authorization/verification">
+							<span class="item__label">TMP - Verification</span>
+						</a>
+					</li>
+
+
 				</ul>
 			</div>
+
+			<label class="nav__toggle-button" for="nav__checkbox">
+				<div></div>
+			</label>
+
 		</nav>
+
 		<main>
 			<div id="wrapper">
+				<header>
+					<div class="header">
+						<div class="header__text text">
+							<div class="text__title">EVODOC</div>
+							<div class="text__subtitle">awesome app for the real programmers</div>
+						</div>
+						<div class="header__logo">
+							<img src="<%= require('../../resources/images/logos/evodoc-logo.png') %>" alt="evodoc logo">
+						</div>
+					</div>
+				</header>
+
 				<div id="root"></div>
-				<footer> CTU FIT EvoDoc Team &copy; 2018</footer>
+
+				<footer class="copyright"> CTU FIT EvoDoc Team &copy; 2018</footer>
 			</div>
 		</main>
 	</div>
@@ -103,16 +126,3 @@
 </body>
 
 </html>
-
-<!-- <li>
-	<a href="#/error/500">
-		<span class="menu-label">500</span>
-	</a>
-</li>
-
-<li>
-	<a href="#/login/default">
-		<img class="menu-icon" src="http://www.entypo.com/images/info.svg" alt="Docs icon"></img>
-		<span class="menu-label">Default</span>
-	</a>
-</li> -->

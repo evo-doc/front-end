@@ -1,0 +1,6 @@
+@mixin stateLabel($state, $background, $padding) {
+	.stateLabel_#{$state} {
+		background-color: $background;
+		padding: $padding;
+	}
+}

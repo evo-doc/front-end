@@ -1,0 +1,18 @@
+//sign-in radio btn, hidden
+
+.auth-inner__sign-in-tab {
+	display: none;
+
+	&:checked + .auth-inner__tab {
+		color: #fff;
+		border-color: #1c76cc;
+	}
+	&:checked
+		+ .auth-inner__tab
+		+ .auth-inner__sign-up-tab
+		+ .auth-inner__tab
+		+ .auth-inner__login-form
+		.login-form__sign-in {
+		transform: rotate(0);
+	}
+}

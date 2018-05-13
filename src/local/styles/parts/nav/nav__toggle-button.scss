@@ -2,16 +2,17 @@
 	top: 15px;
 	right: -55px;
 	width: 40px;
-	height: 31px;
-	opacity: 0.8;
-	z-index: 1000000;
+	height: 30px;
+	z-index: 10;
 	position: absolute;
 	transition: right 1s;
+	transform: scale(0.85);
 	cursor: pointer;
 }
 
 .nav__checkbox:checked + nav .nav__toggle-button {
-	right: 10px;
+	right: 15px;
+	opacity: 0.8;
 	transition: right 1s;
 }
 
@@ -20,11 +21,11 @@
 }
 
 .nav__checkbox:checked + nav .nav__toggle-button div:before {
-	transform: rotate(45deg) translate(0.2px, 0.2px) scale(0.8);
+	transform: rotate(45deg) translate(0.1px, 0.1px) scale(0.8);
 }
 
 .nav__checkbox:checked + nav .nav__toggle-button div:after {
-	transform: rotate(-45deg) translate(9px, -9.5px) scale(0.8);
+	transform: rotate(-45deg) translate(9px, -9px) scale(0.8);
 }
 
 .nav__toggle-button div,
@@ -32,8 +33,7 @@
 .nav__toggle-button div:before {
 	width: 40px;
 	height: 5px;
-	background: #eee;
-	transition: all 0.3s;
+	background: white;
 	border-radius: 3px;
 	transition: all 1s;
 }
@@ -44,7 +44,7 @@
 	position: absolute;
 }
 .nav__toggle-button div:before {
-	top: 13px;
+	top: 12.5px;
 }
 .nav__toggle-button div {
 	top: 0;

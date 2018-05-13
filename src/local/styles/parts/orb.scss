@@ -1,0 +1,13 @@
+@import "./orb/*";
+
+// Rotating orb (used in error page)
+
+.orb {
+	filter: blur(1.5px);
+	transform-style: preserve-3d;
+	position: relative;
+	display: flex;
+	width: 40vh;
+	// height: 45vh;
+	margin: 25vh;
+}

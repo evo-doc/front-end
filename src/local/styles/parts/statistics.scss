@@ -1,0 +1,12 @@
+@import "./statistics/*";
+
+.statistics {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-align: center;
+	font-size: 14px;
+	line-height: 1.5;
+
+	min-height: 220px;
+	padding-top: 30px;
+	background: rgba(174, 174, 174, 0.7);
+}

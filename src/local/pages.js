@@ -50,5 +50,8 @@ module.exports = {
 	"/dashboard/project/:pId/package/add": require("routes/dashboard/project/package/add")(),
 	// Dashboard project -> module
 	"/dashboard/project/:pId/module/add": require("routes/dashboard/project/module/add")(),
-	"/dashboard/project/:pId/module/edit/:mId": require("routes/dashboard/project/module/edit")()
+	"/dashboard/project/:pId/module/edit/:mId": require("routes/dashboard/project/module/edit")(),
+
+	// Interface
+	"/interface": require("routes/interface")()
 };

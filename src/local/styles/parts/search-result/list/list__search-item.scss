@@ -1,0 +1,18 @@
+.list__search-item {
+	border-bottom: 1px solid #d3dce6;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	text-align: left;
+
+	&:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+		margin-bottom: 0;
+	}
+
+	@media screen and (min-width: 768px) {
+		flex-wrap: nowrap;
+	}
+}

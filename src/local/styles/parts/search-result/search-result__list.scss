@@ -1,0 +1,11 @@
+.search-result__list {
+	background: #ffffff;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	padding: 26px;
+	font-size: 14px;
+	color: #8f8f8f;
+	@media screen and (min-width: 768px) {
+		padding: 30px;
+	}
+}
