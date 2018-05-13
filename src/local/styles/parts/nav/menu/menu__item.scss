@@ -1,26 +1,33 @@
 .menu__item {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.28), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.28);
-	transition: all 0.3s ease;
+	height: 60px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	&_logotype {
+		font-family: "Black Ops";
+		padding: 3px 0 0 20px;
+		letter-spacing: 1px;
+		font-size: 33px;
+		box-sizing: border-box;
+	}
 }
 
 .menu__item a {
+	display: flex;
 	width: 100%;
 	height: 100%;
 	color: white;
-	display: block;
 	text-decoration: none;
 }
 
 .menu__item:hover {
-	transform: scale(1.05);
+	.item__icon {
+		font-size: 26px;
+		transition: font-size 0.2s;
+	}
 
 	.item__label {
 		color: rgb(253, 255, 164);
-	}
-
-	.item__icon {
-		transform: scale(1.2);
-		padding-left: 22px;
 	}
 }
