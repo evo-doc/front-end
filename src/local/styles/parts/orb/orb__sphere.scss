@@ -1,0 +1,22 @@
+.orb__sphere {
+	animation: rotateSphere 10s linear infinite;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	transform-style: preserve-3d;
+
+	&:nth-of-type(1) {
+		@for $i from 1 through 10 {
+			.sphere__ring:nth-of-type(#{$i}) {
+				transform: rotateY($i * 18deg);
+			}
+		}
+	}
+	&:nth-of-type(2) {
+		@for $i from 1 through 10 {
+			.sphere__ring:nth-of-type(#{$i}) {
+				transform: rotateX($i * 18deg);
+			}
+		}
+	}
+}

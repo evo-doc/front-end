@@ -1,0 +1,20 @@
+.statistics__item {
+	color: gray;
+	width: 25%;
+	transition: all 0.75s ease-in-out;
+	display: inline-block;
+
+	&:hover {
+		transform: scale(1.1);
+		color: white;
+	}
+
+	p {
+		margin: 0;
+		font-size: 60px;
+		font-weight: bold;
+	}
+	span {
+		font-size: 18px;
+	}
+}

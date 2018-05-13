@@ -1,22 +1,19 @@
-// -------------------------------------------------------------------------------------------------
-// FIXME: @Monika
-// Stejne jako u footeru. Ted se treba divam na tenhle header a fakt nevim k cemu patri
-// a jestli se vubec pouziva.
-// -------------------------------------------------------------------------------------------------
+@import "./header/*";
 
 header {
 	width: 100%;
-	background-color: $flat-wet-asphalt;
-	margin: 0;
-	padding: 10px;
+	height: 60px;
+	background-color: #1c76cc;
 	box-sizing: border-box;
-	color: white;
+	position: fixed;
+  z-index: 1;
+}
 
-	ul {
-		list-style-type: none;
-	}
-
-	a {
-		color: white;
-	}
+.header {
+	height: 60px;
+	right: 0px;
+	margin-top: -2px;
+	display: flex;
+	position: fixed;
+	align-items: center;
 }

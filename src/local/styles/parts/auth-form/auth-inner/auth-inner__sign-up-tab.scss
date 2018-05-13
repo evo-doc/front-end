@@ -1,0 +1,11 @@
+.auth-inner__sign-up-tab {
+	display: none;
+
+	&:checked + .auth-inner__tab {
+		color: #fff;
+		border-color: #1c76cc;
+	}
+	&:checked + .auth-inner__tab + .auth-inner__login-form .login-form__sign-up {
+		transform: rotate(0);
+	}
+}

@@ -1,0 +1,7 @@
+.search-item__button {
+	order: 2;
+	margin-left: auto;
+	@media screen and (min-width: 600px) {
+		order: 10;
+	}
+}

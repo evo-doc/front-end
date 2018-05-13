@@ -1,0 +1,22 @@
+.submit {
+	width: 50%;
+	height: 60px;
+	margin-top: 45px;
+	margin-left: auto;
+	display: block;
+
+	font-weight: 600;
+	font-size: initial;
+	text-transform: uppercase;
+	color: #fff;
+	outline: none;
+	background: #1c76cc;
+	border: 5px outset #264969;
+	border-radius: 50px;
+	cursor: pointer;
+
+	&:active {
+		background: #125392;
+		transform: translateY(2px) scale(0.99);
+	}
+}

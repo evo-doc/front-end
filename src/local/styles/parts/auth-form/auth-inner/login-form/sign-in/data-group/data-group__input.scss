@@ -1,0 +1,24 @@
+.data-group__input {
+	width: 100%;
+	padding: 15px 20px;
+	margin-top: 5px;
+	color: #fff;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+	border-radius: 25px;
+	background: rgba(255, 255, 255, 0.1);
+
+	&:focus {
+		border: initial;
+		border-style: inset;
+		background: rgba(255, 255, 255, 0.16);
+	}
+}
+
+.input-invalid {
+	border: initial;
+	border-style: inset;
+	border-color: red;
+	background: hsla(0, 100%, 71%, 0.1);
+}

@@ -1,0 +1,6 @@
+.data-group__info-checkbox {
+	display: none;
+	&:checked + .data-group__pass-info {
+		display: block;
+	}
+}

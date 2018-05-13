@@ -1,0 +1,8 @@
+.search-item__text-content {
+	padding-top: 2px;
+	order: 5;
+	width: 100%;
+	@media screen and (min-width: 600px) {
+		width: auto;
+	}
+}

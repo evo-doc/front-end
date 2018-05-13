@@ -1,0 +1,8 @@
+@import "./search-box/*";
+
+.search-box {
+	width: 100%;
+	margin-left: -25px;
+	position: relative;
+	transition: opacity 0.4s linear, visibility 0.4s linear 0s;
+}
