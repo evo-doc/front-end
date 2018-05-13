@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const Page = require("page.class");
 
@@ -9,9 +9,8 @@ class Index extends Page {
 		// this._style = require("./index.scss");
 	}
 
-	_render(renderDone, renderFail) {
+	__render() {
 		this._getRoot().innerHTML = this._template();
-		renderDone();
 	}
 }
 

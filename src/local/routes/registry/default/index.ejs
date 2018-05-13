@@ -1,89 +1,52 @@
 <div class="BG0-packages">
+	<div class="package-image">
+		<img src="<%= require('./images/box.jpg') %>" alt="package image">
+	</div>
 	<div class="packages-title">Packages</div>
-
-	<!-- Search bar -->
-	<div class="search-container">
-		<div class="search-box" id="SBox">
-			<input id="search" placeholder="Search packages..." type="text">
-			<div class="also search-link" id="searchclick"></div>
+	<!-- Search box -->
+	<div class="search-box">
+		<input class="search-box__input" type="text-content" placeholder="Search packages...">
+		<div class="search-box__search-icon">
+			<i class="fas fa-search"></i>
 		</div>
 	</div>
-
 </div>
 
 <div class="BG1-packages">
 	<!-- Search results -->
-	<div class="search__container">
-		<ul class="card">
+	<div class="search-result">
+		<ul class="search-result__list list">
 
-			<li class="search-item">
-				<div class="search-item__image" style="background-image: url(http://placehold.it/100x100);"></div>
-				<div class="search-item__content">
-					<p class="text--medium">
-						<a class="packagename" href="">Package name</a>
-						<span class="label label--green text--upcase">stable</span>
-					</p>
-					<p class="text--small text--muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora animi </p>
-					<p class="text--small text--muted">Published x days/m/y ago</p>
+			<li class="list__search-item search-item">
+				<div class="search-item__image"></div>
+				<div class="search-item__text-content text-content">
+					<a class="text-content__package-name" href="">Package name</a>
+					<span class="stateLabel stateLabel_stable">stable</span>
+					<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora animi</div>
+					<div>Added x days/m/y ago by uxsername</div>
 				</div>
-				<div class="search-item__options">
-					<button class="button button--outline button--small">Add to Project
-						<button/>
+				<div class="search-item__button button">
+					<button class="button-white">Add to Project
+					</button>
 				</div>
 			</li>
 
-			<li class="search-item">
-				<div class="search-item__image" style="background-image: url(http://placehold.it/100x100);"></div>
-				<div class="search-item__content">
-					<p class="text--medium">
-						<a href="" class="packagename">Package name</a>
-						<span class="label label--red text--upcase">Deprecated</span>
-					</p>
-					<p class="text--small text--muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora animi </p>
-					<p class="text--small text--muted">Published x days/m/y ago</p>
+			<li class="list__search-item search-item">
+				<div class="search-item__image"></div>
+				<div class="search-item__text-content text-content">
+					<a class="text-content__package-name" href="">Package name</a>
+					<span class="stateLabel stateLabel_deprecated">Deprecated</span>
+					<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora animi</div>
+					<div>Added x days/m/y ago by username</div>
 				</div>
-				<div class="search-item__options">
-					<!-- <button class="button button--outline button--small">Add to Project -->
-					<button/>
-				</div>
+				<!-- <div class="search-item__button button">
+						<button class="button-white">Add to Project
+					</button>
+					</div> -->
 			</li>
-
-			<li class="search-item">
-				<div class="search-item__image" style="background-image: url(http://placehold.it/100x100);"></div>
-				<div class="search-item__content">
-					<p class="text--medium">
-						<a href="" class="packagename">Package name</a>
-						<span class="label label--green text--upcase">Stable</span>
-					</p>
-					<p class="text--small text--muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora animi </p>
-					<p class="text--small text--muted">Published x days/m/y ago</p>
-				</div>
-				<div class="search-item__options">
-					<button class="button button--outline button--small">Add to Project
-						<button/>
-				</div>
-			</li>
-
-			<li class="search-item">
-				<div class="search-item__image" style="background-image: url(http://placehold.it/100x100);"></div>
-				<div class="search-item__content">
-					<p class="text--medium">
-						<a href="" class="packagename">Package name</a>
-						<span class="label label--green text--upcase">Stable</span>
-					</p>
-					<p class="text--small text--muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora animi </p>
-					<p class="text--small text--muted">Published x days/m/y ago</p>
-				</div>
-				<div class="search-item__options">
-					<button class="button button--outline button--small">Add to Project
-						<button/>
-				</div>
-			</li>
-
 		</ul>
+
+		<div class="search-result__end">No more results.</div>
 	</div>
 
-	<div class="text--center">
-		<p class="text--small text--muted noresults">No more results.</p>
-	</div>
 </div>

@@ -1,10 +1,19 @@
 .BG0-packages {
 	width: 100%;
-	height: 22vh;
-	padding: 10px;
+	height: 155px;
+	padding-top: 10px;
 	text-align: center;
-	background-color: #7684ff;
+	background-color: white;
 	box-sizing: border-box;
+}
+
+.package-image {
+	display: inline-block;
+	height: 80px;
+	vertical-align: top;
+	img {
+		height: 100%;
+	}
 }
 
 .packages-title {
@@ -13,7 +22,7 @@
 	display: inline-block;
 	font-family: "Black Ops";
 	color: black;
-	font-size: 58px;
+	font-size: 45px;
 	text-align: center;
 	text-transform: uppercase;
 }
