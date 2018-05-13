@@ -1,50 +1,80 @@
-<div class="fullscreen auth">
+<div class="fullscreen auth-bg">
 
-	<div class="auth__sign-in sign-in">
-		<h1>Sign In</h1>
-		<form>
-			<label>
-				<span>Username or E-mail</span>
-				<input id="sign-in__usermail" type="text" />
-			</label>
-			<label>
-				<span>Password</span>
-				<input id="sign-in__password" type="password" />
-			</label>
-			<input id="sign-in__submit" type="button" value="Sign in" />
-		</form>
+	<div class="auth-form">
+		<div class="auth-form__auth-inner auth-inner">
+
+			<input id="tab1" type="radio" name="tab" class="auth-inner__sign-in-tab" checked/>
+			<label for="tab1" class="auth-inner__tab">Sign In</label>
+
+			<input id="tab2" type="radio" name="tab" class="auth-inner__sign-up-tab" />
+			<label for="tab2" class="auth-inner__tab">Sign Up</label>
+
+			<div class="auth-inner__login-form login-form">
+				<!-- Sign-in form -->
+				<div class="login-form__sign-in sign-in">
+					<form>
+						<label class="sign-in__data-group data-group">
+							<span class="data-group__label">Username / E-mail</span>
+							<input id="sign-in__usermail" class="data-group__input" type="text" />
+							<div id="sign-in__usermail-feedback" class="feedback-client"></div>
+						</label>
+
+						<label class="sign-in__data-group data-group">
+							<span class="data-group__label">Password</span>
+							<input id="sign-in__password" class="data-group__input" type="password" />
+							<div id="sign-in__password-feedback" class="feedback-client"></div>
+						</label>
+
+						<input id="sign-in__submit" class="sign-in__submit submit" type="button" value="Sign in" />
+					</form>
+
+					<!-- Server feedback -->
+					<div id="auth__feedback" class="feedback-server"></div>
+
+				</div>
+
+				<!-- Sign-up form -->
+				<div class="login-form__sign-up sign-up">
+					<form>
+						<label class="sign-up__data-group data-group">
+							<span class="data-group__label">Username</span>
+							<input id="sign-up__username" type="text" class="data-group__input" />
+							<div id="sign-up__username-feedback" class="feedback-client"></div>
+						</label>
+
+						<label class="sign-up__data-group data-group">
+							<span class="data-group__label">Email Address</span>
+							<input id="sign-up__email" type="email" class="data-group__input" />
+							<div id="sign-up__email-feedback" class="feedback-client"></div>
+						</label>
+
+						<label class="sign-up__data-group data-group">
+							<span class="data-group__label">Password</span>
+
+							<label class='fas fa-info' for='toggle-info'></label>
+							<input type='checkbox' id='toggle-info' class="data-group__info-checkbox" />
+							<div class="data-group__pass-info">Password must be 8 characters or longer and contain at least one upper and lower case letter, a number and a symbol
+								($@$!%*#?&).
+							</div>
+
+							<input id="sign-up__password" type="password" class="data-group__input" />
+							<div id="sign-up__password-feedback" class="feedback-client"></div>
+						</label>
+
+						<label class="sign-up__data-group data-group">
+							<span class="data-group__label">Repeat Password</span>
+							<input id="sign-up__password-repeat" type="password" class="data-group__input" />
+							<div id="sign-up__password-repeat-feedback" class="feedback-client"></div>
+						</label>
+
+						<input id="sign-up__submit" class="sign-up__submit submit sign-up__data-group data-group" type="button" value="Sign Up" />
+					</form>
+
+					<!-- Server feedback -->
+					<div id="auth__feedback-2" class="feedback-server"></div>
+
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<div class="auth__sign-up sign-up">
-		<h1>Sign Up</h1>
-		<form>
-			<label>
-				<span>E-mail</span>
-				<input id="sign-up__email" type="email" />
-			</label>
-			<label>
-				<span>Username</span>
-				<input id="sign-up__username" type="text" />
-			</label>
-			<label>
-				<span>Password</span>
-				<input id="sign-up__password" type="password" />
-			</label>
-			<label>
-				<span>Repeat password</span>
-				<input id="sign-up__password-repeat" type="password" />
-			</label>
-			<input id="sign-up__submit" type="button" value="Sign Up" />
-		</form>
-	</div>
-
-	<div class="auth__password">
-		<h1>It's your problem.</h1>
-		Try to Sign In again.
-	</div>
-
-	<div>Server Feedback:</div>
-	<div id="auth__feedback"></div>
-
-
 </div>
