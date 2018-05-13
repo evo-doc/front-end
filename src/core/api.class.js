@@ -10,9 +10,9 @@ class API {
 	 * @example <caption>Singleton instance in APP</caption>
 	 * APP.getAPI();
 	 *
-	 * @example <caption>Get a specific API interface and sena a request</caption>
+	 * @example <caption>Get a specific API interface and send a request</caption>
 	 * let interface = APP.getAPI().getAuthorization();
-	 * ler response = APP.getAPI().getAuthorization().signIn(username, password);
+	 * let response = APP.getAPI().getAuthorization().signIn(username, password);
 	 */
 	constructor() {
 		this._authorization = null;
