@@ -30,14 +30,16 @@ module.exports = {
 
 	// Registry
 	"/registry": require("routes/registry/default")(),
-	"/package/add": require("routes/registry/package/add")()
+	"/package/add": require("routes/registry/package/add")(),
+
+	// Interface
+	"/interface": require("routes/interface")(),
+
+	// Temporary
+	// "/rework_example/renderer": require("routes/rework_example/renderer")(),
+	"/authorization/verification": require("routes/authorization/verification")()
 
 	// -------------------------
-
-	// // Pages
-	// "/projects": require("routes/projects")(),
-	// "/settings": require("routes/settings")(),
-	// "/docs": require("routes/docs")(),
 
 	// // Registry
 	// "/registry/package/:packageName": require("routes/default/error/404")(),
