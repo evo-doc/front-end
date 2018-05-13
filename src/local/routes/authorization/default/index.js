@@ -39,31 +39,31 @@ class Index extends Page {
 		let feedbackClientPassword = document.getElementById("sign-in__password-feedback");
 		let invalid = false;
 
-		usermail.classList.remove("input-invalid");
-		password.classList.remove("input-invalid");
-		feedbackClientUsermail.innerHTML = "";
-		feedbackClientPassword.innerHTML = "";
+		// usermail.classList.remove("input-invalid");
+		// password.classList.remove("input-invalid");
+		// feedbackClientUsermail.innerHTML = "";
+		// feedbackClientPassword.innerHTML = "";
 
-		if (!usermail.value) {
-			// if no value entered
-			usermail.classList.add("input-invalid"); // add class if entered value is invalid
-			feedbackClientUsermail.innerHTML = "Please enter a Username / E-mail.";
-			invalid = true;
-		} else if (!validation.email(usermail.value) && !validation.username(usermail.value)) {
-			usermail.classList.add("input-invalid");
-			feedbackClientUsermail.innerHTML = "Invalid Username or Email.";
-			invalid = true;
-		}
+		// if (!usermail.value) {
+		// 	// if no value entered
+		// 	usermail.classList.add("input-invalid"); // add class if entered value is invalid
+		// 	feedbackClientUsermail.innerHTML = "Please enter a Username or E-mail.";
+		// 	invalid = true;
+		// } else if (!validation.email(usermail.value) && !validation.username(usermail.value)) {
+		// 	usermail.classList.add("input-invalid");
+		// 	feedbackClientUsermail.innerHTML = "Invalid Username or Email.";
+		// 	invalid = true;
+		// }
 
-		if (!password.value) {
-			password.classList.add("input-invalid");
-			feedbackClientPassword.innerHTML = "Please enter your Password.";
-			invalid = true;
-		} else if (!validation.pass(password.value)) {
-			password.classList.add("input-invalid");
-			feedbackClientPassword.innerHTML = "Invalid password.";
-			invalid = true;
-		}
+		// if (!password.value) {
+		// 	password.classList.add("input-invalid");
+		// 	feedbackClientPassword.innerHTML = "Please enter your Password.";
+		// 	invalid = true;
+		// } else if (!validation.pass(password.value)) {
+		// 	password.classList.add("input-invalid");
+		// 	feedbackClientPassword.innerHTML = "Invalid password.";
+		// 	invalid = true;
+		// }
 
 		if (invalid) {
 			return;
@@ -100,59 +100,59 @@ class Index extends Page {
 
 		let invalid = false;
 
-		username.classList.remove("input-invalid");
-		email.classList.remove("input-invalid");
-		password.classList.remove("input-invalid");
-		passwordRepeat.classList.remove("input-invalid");
-		feedbackClientUsername.innerHTML = "";
-		feedbackClientEmail.innerHTML = "";
-		feedbackClientPassword.innerHTML = "";
-		feedbackClientPasswordRepeat.innerHTML = "";
+		// username.classList.remove("input-invalid");
+		// email.classList.remove("input-invalid");
+		// password.classList.remove("input-invalid");
+		// passwordRepeat.classList.remove("input-invalid");
+		// feedbackClientUsername.innerHTML = "";
+		// feedbackClientEmail.innerHTML = "";
+		// feedbackClientPassword.innerHTML = "";
+		// feedbackClientPasswordRepeat.innerHTML = "";
 
-		if (!username.value) {
-			username.classList.add("input-invalid");
-			feedbackClientUsername.innerHTML = "Please enter a Username.";
-			invalid = true;
-		} else if (!validation.username(username.value)) {
-			username.classList.add("input-invalid");
-			feedbackClientUsername.innerHTML = "Please enter a valid Username.";
-			invalid = true;
-		}
+		// if (!username.value) {
+		// 	username.classList.add("input-invalid");
+		// 	feedbackClientUsername.innerHTML = "Please enter a Username.";
+		// 	invalid = true;
+		// } else if (!validation.username(username.value)) {
+		// 	username.classList.add("input-invalid");
+		// 	feedbackClientUsername.innerHTML = "Please enter a valid Username.";
+		// 	invalid = true;
+		// }
 
-		if (!email.value) {
-			email.classList.add("input-invalid");
-			feedbackClientEmail.innerHTML = "Please provide your E-mail.";
-			invalid = true;
-		} else if (!validation.email(email.value)) {
-			email.classList.add("input-invalid");
-			feedbackClientEmail.innerHTML = "Please enter a valid Email.";
-			invalid = true;
-		}
+		// if (!email.value) {
+		// 	email.classList.add("input-invalid");
+		// 	feedbackClientEmail.innerHTML = "Please provide your E-mail.";
+		// 	invalid = true;
+		// } else if (!validation.email(email.value)) {
+		// 	email.classList.add("input-invalid");
+		// 	feedbackClientEmail.innerHTML = "Please enter a valid Email.";
+		// 	invalid = true;
+		// }
 
-		if (!password.value) {
-			password.classList.add("input-invalid");
-			feedbackClientPassword.innerHTML = "Please enter a Password.";
-			invalid = true;
-		} else if (!validation.pass(password.value)) {
-			password.classList.add("input-invalid");
-			feedbackClientPassword.innerHTML = "Please enter a valid Password.";
-			invalid = true;
-		}
+		// if (!password.value) {
+		// 	password.classList.add("input-invalid");
+		// 	feedbackClientPassword.innerHTML = "Please enter a Password.";
+		// 	invalid = true;
+		// } else if (!validation.pass(password.value)) {
+		// 	password.classList.add("input-invalid");
+		// 	feedbackClientPassword.innerHTML = "Please enter a valid Password.";
+		// 	invalid = true;
+		// }
 
-		if (!passwordRepeat.value) {
-			passwordRepeat.classList.add("input-invalid");
-			feedbackClientPasswordRepeat.innerHTML = "Please enter your Password again.";
-			invalid = true;
-		} else if (passwordRepeat.value != password.value) {
-			passwordRepeat.classList.add("input-invalid");
-			password.classList.add("input-invalid");
-			feedbackClientPasswordRepeat.innerHTML = "Passwords do not match.";
-			invalid = true;
-		}
+		// if (!passwordRepeat.value) {
+		// 	passwordRepeat.classList.add("input-invalid");
+		// 	feedbackClientPasswordRepeat.innerHTML = "Please enter your Password again.";
+		// 	invalid = true;
+		// } else if (passwordRepeat.value != password.value) {
+		// 	passwordRepeat.classList.add("input-invalid");
+		// 	password.classList.add("input-invalid");
+		// 	feedbackClientPasswordRepeat.innerHTML = "Passwords do not match.";
+		// 	invalid = true;
+		// }
 
-		if (invalid) {
-			return;
-		}
+		// if (invalid) {
+		// 	return;
+		// }
 
 		try {
 			await APP.getAPI()

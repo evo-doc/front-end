@@ -5,8 +5,10 @@ const Page = require("page.class");
 class Index extends Page {
 	constructor(config, args) {
 		super(config, args);
+		console.log("here");
+
 		this._template = require("./index.ejs");
-		this._template = require("./index.scss");
+		this._style = require("./index.scss");
 	}
 
 	__render() {
