@@ -10,7 +10,7 @@
 
 <body>
 	<div class="screen">
-		<input type="checkbox" id="nav__checkbox" class="nav__checkbox">
+		<input type="checkbox" id="nav__checkbox" checked class="nav__checkbox">
 		<nav>
 			<label class="nav__toggle-button" for="nav__checkbox">
 				<div></div>
@@ -20,6 +20,7 @@
 				<div class="menu__profile profile">
 					<img class="profile__avatar" alt="profile picture" />
 					<h4 class="profile__name">Name Surname</h4>
+					<span onclick="APP.getAPI().getAuthorization().signOut();">logout</span>
 				</div>
 
 				<ul>
@@ -42,7 +43,7 @@
 					</li>
 
 					<li class="menu__item item">
-						<a href="#/package/add">
+						<a href="#/registry/package/add">
 							<div class="item__icon icon">
 								<i class="icon__icon-img icon-material">file_upload</i>
 							</div>
@@ -50,7 +51,16 @@
 						</a>
 					</li>
 
-					<!--
+					<li class="menu__item item">
+						<a href="#/dashboard">
+							<div class="item__icon icon">
+								<i class="icon__icon-img icon-material">dashboard</i>
+							</div>
+							<span class="item__label">Dashboard</span>
+						</a>
+					</li>
+
+
 					<li class="menu__item item">
 						<a href="#/docs">
 							<div class="item__icon icon">
@@ -61,21 +71,11 @@
 					</li>
 
 					<li class="menu__item item">
-						<a href="#/settings">
+						<a href="#/docs/about">
 							<div class="item__icon icon">
-								<i class="icon__icon-img fas fa-cog"></i>
+								<i class="icon__icon-img fas fa-file-alt"></i>
 							</div>
-							<span class="item__label">Settings</span>
-						</a>
-					</li>
-					-->
-
-					<li class="menu__item item">
-						<a href="#/package/add">
-							<div class="item__icon icon">
-								<i class="icon__icon-img fas fa-cog"></i>
-							</div>
-							<span class="item__label" onclick="APP.getAPI().getAuthorization().signOut();">LOGOUT</span>
+							<span class="item__label">About Us</span>
 						</a>
 					</li>
 
