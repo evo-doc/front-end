@@ -100,7 +100,7 @@ const tools = {
 // -------------------------------------------------------------------------------------------------
 // TESTS
 // -------------------------------------------------------------------------------------------------
-require("./api/connection.api.test")(config, interface, tools);
-require("./api/common.api.test")(config, interface, tools);
-require("./api/information.api.test")(config, interface, tools);
-require("./api/authorization.api.test")(config, interface, tools);
+// require("./api/connection.api.test")(config, interface, tools);
+// require("./api/common.api.test")(config, interface, tools);
+// require("./api/information.api.test")(config, interface, tools);
+// require("./api/authorization.api.test")(config, interface, tools);
