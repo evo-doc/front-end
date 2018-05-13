@@ -28,21 +28,27 @@ module.exports = {
 	// Homepage
 	"/": require("routes/homepage")(),
 
+	// Docs
+	"/docs": require("routes/docs/default")(),
+	"/docs/about": require("routes/docs/about")(),
+
 	// Registry
 	"/registry": require("routes/registry/default")(),
-	"/package/add": require("routes/registry/package/add")()
+	"/registry/package/add": require("routes/registry/package/add")(),
+	"/registry/package/show/:pkgId": require("routes/registry/package/show")(),
 
-	// -------------------------
+	// Profile
+	"/profile": require("routes/profile/default")(),
+	"/profile/settings": require("routes/profile/settings")(),
 
-	// // Pages
-	// "/projects": require("routes/projects")(),
-	// "/settings": require("routes/settings")(),
-	// "/docs": require("routes/docs")(),
-
-	// // Registry
-	// "/registry/package/:packageName": require("routes/default/error/404")(),
-
-	// // Examples
-	// "/default/example/empty/:size/:color": require("routes/default/example/empty")(),
-	// "/default/example/render/:behaviour/": require("routes/default/example/renderer")()
+	// Dashboard
+	"/dashboard": require("routes/dashboard/default")(),
+	// Dashboard project
+	"/dashboard/project/:pId": require("routes/dashboard/project/default")(),
+	"/dashboard/project/:pId/settings": require("routes/dashboard/project/settings")(),
+	// Dashboard project -> pacakge add
+	"/dashboard/project/:pId/package/add": require("routes/dashboard/project/package/add")(),
+	// Dashboard project -> module
+	"/dashboard/project/:pId/module/add": require("routes/dashboard/project/module/add")(),
+	"/dashboard/project/:pId/module/edit/:mId": require("routes/dashboard/project/module/edit")()
 };

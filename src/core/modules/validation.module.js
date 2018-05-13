@@ -2,7 +2,7 @@
 /**
  * @summary Provides an interface for validation
  * @module Validation
- * @example <caption> how to inclued validation module </caption>
+ * @example <caption> How to include validation module </caption>
  * const validation = require("validation.module")
  */
 
@@ -17,12 +17,12 @@ module.exports.email = email => {
 };
 
 /**
- * @description Determine whether pass is valid.
+ * @description Determine whether password is valid.
  * @param {string} pass - Users password
- * @return {boolean} - Pass is valid
+ * @return {boolean} - Password is valid
  */
 module.exports.pass = pass => {
-	var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+	var re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 	return re.test(pass.toLowerCase());
 };
 
@@ -34,4 +34,14 @@ module.exports.pass = pass => {
 module.exports.username = username => {
 	var re = /^[a-zA-Z0-9\-\_]+$/;
 	return re.test(username.toLowerCase());
+};
+
+/**
+ * @description Check if github URL is valid.
+ * @param {string} githubURL - Github URL
+ * @return {boolean} - URL is valid
+ */
+module.exports.githubURL = githubURL => {
+	var re = /^(?:https?:\/\/)?(?:www\.)?github\.com(\/[a-z0-9A-Z_.-]+){2}\/?$/;
+	return re.test(url.toLowerCase());
 };
