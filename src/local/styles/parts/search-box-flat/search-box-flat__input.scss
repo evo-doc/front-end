@@ -6,6 +6,19 @@
 	font-size: 18px;
 	outline: none;
 	color: rgb(71, 71, 71);
-	border: 4px solid #2377cd;
+	border: 4px solid #1c76cc;
 	border-right-style: none;
+	background: white;
+	border-radius: 0;
+
+	&:focus {
+		border: 5px solid #075ca2;
+		border-right-style: none;
+		box-shadow: none;
+		outline: none;
+	}
+	&:focus + .search-box-flat__search-icon {
+		border: 5px solid #075ca2;
+		border-left-style: none;
+	}
 }

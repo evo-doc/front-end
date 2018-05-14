@@ -9,4 +9,11 @@
 	box-shadow: 5px 4px 6px 0 hsla(0, 0%, 56%, 0.59), 7px 2px 3px 0 hsla(0, 0%, 75%, 0.11);
 	border: 2px outset hsla(0, 0%, 86%, 0.78);
 	border-radius: 6px 0px 0px 6px;
+
+	&:focus + .search-box__search-icon {
+		border: 2px outset #5f8ee4;
+		border-radius: 0 6px 6px 0;
+		box-shadow: inset -1px -1px 20px 14px rgba(31, 147, 206, 0.25), inset 17px 15px 0 6px #fff,
+			0 0 6px #5f8ee4;
+	}
 }
