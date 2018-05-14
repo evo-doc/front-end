@@ -1,15 +1,14 @@
-input[type],
+input,
 textarea {
-	// padding: 15px 20px;
 	padding: 0.6em 1em;
 	border-radius: 25px;
-	background: rgba(255, 255, 255, 0.1);
 	border: 2px inset;
 	box-shadow: inset 1px 1px rgba(0, 0, 0, 0.03);
 
+	background: hsla(0, 0%, 100%, 0.16);
+
 	&:focus {
 		outline: none;
-		background: rgba(255, 255, 255, 0.16);
 		border-color: #5f8ee4;
 		box-shadow: 0 0 6px #5f8ee4;
 	}
@@ -17,7 +16,7 @@ textarea {
 
 input[type].valid {
 	border-color: green;
-	background: #66fe6b2e;
+	background: rgba(156, 255, 88, 0.27);
 
 	&:focus {
 		box-shadow: 0 0 5px 1px #6fce72;
