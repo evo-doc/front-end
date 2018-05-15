@@ -6,4 +6,8 @@
 	overflow: hidden;
 	border: 4px solid rgba(255, 255, 255, 0.89);
 	box-shadow: 0 0 9px 5px hsla(0, 0%, 100%, 0.39);
+
+	> a {
+		color: white;
+	}
 }

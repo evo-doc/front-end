@@ -9,6 +9,18 @@ body {
 }
 
 a {
-	color: inherit;
+	color: #0c4a84;
 	text-decoration: none;
+
+	&:visited {
+		// color: #105190;
+		color: #1c76cc;
+	}
+	&:hover {
+		color: orange;
+	}
+	&:active {
+		color: #dd6819;
+		// transform: translateY	(5%);
+	}
 }
