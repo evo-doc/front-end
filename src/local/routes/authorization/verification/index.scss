@@ -1,0 +1,14 @@
+.auth-bg {
+	display: flex;
+	background: url("../images/bg0.jpg") bottom right no-repeat fixed;
+	background: url("../images/code-img.png") bottom right no-repeat fixed;
+	background-size: cover;
+}
+
+.verification-title {
+	margin: 0 15px 10px 5px;
+	display: inline-block;
+	font-size: 22px;
+	color: #fff;
+	border-bottom: 2px solid #1c76cc;
+}

@@ -1,11 +1,17 @@
-<div class="fullscreen">
+<div class="fullscreen auth-bg">
+	<div class="auth-form">
+		<div class="auth-form__auth-inner auth-inner">
 
-	<div class="verification">
-		<h1>Verification</h1>
-		<form>
-			<input type="text" name="Verification" id="verification__key">
-			<input id="verification__submit" type="button" value="Send verification code" />
-		</form>
+			<div class="verification-title">Verification</div>
+
+			<form>
+				<div class="data-group">
+					<span class="data-group__label">verification code</span>
+					<input id="verification__key" class="data-group__input" type="text" name="Verification" />
+				</div>
+				<input id="verification__submit" class="submit" type="button" value="Send" />
+			</form>
+
+		</div>
 	</div>
-
 </div>
