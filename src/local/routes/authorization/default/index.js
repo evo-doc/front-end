@@ -55,6 +55,7 @@ class Index extends Page {
 			invalid = true;
 		}
 
+		/*
 		if (!password.value) {
 			password.classList.add("input-invalid");
 			feedbackClientPassword.innerHTML = "Please enter your Password.";
@@ -64,6 +65,7 @@ class Index extends Page {
 			feedbackClientPassword.innerHTML = "Invalid password.";
 			invalid = true;
 		}
+		*/
 
 		if (invalid) {
 			return;
