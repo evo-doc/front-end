@@ -7,9 +7,9 @@ let win;
 function createWindow() {
 	win = new BrowserWindow({
 		title: "EvoDoc",
-		width: 1000,
+		width: 1020,
 		height: 600,
-		minWidth: 1000,
+		minWidth: 1020,
 		minHeight: 600
 	});
 
