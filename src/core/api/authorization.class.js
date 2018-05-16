@@ -137,6 +137,13 @@ class Authorization {
 
 		if (result.status === 200) {
 			log.trace(`[200] User was successfully verified.`);
+			APP.getRequest().redirect("/");
+			return;
+		}
+
+		if (result.status === 400) {
+			log.trace(`[400] User is already verified.`);
+			APP.getRequest().redirect("/");
 			return;
 		}
 

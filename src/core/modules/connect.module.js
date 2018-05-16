@@ -228,7 +228,14 @@ function _isGlobalError(status, body, method, hash) {
 	// Is needed verification
 	if (status === 200 && body.hasOwnProperty("verified") && body["verified"] === "false") {
 		let e = new error.RequestError("WARN", status, hash, "User is not verified!", "Global");
-		APP.getRequest().redirect("/authorization/verification");
+
+		console.log(APP.getRouter()._current);
+
+		if (
+			APP.getRouter()._current === null ||
+			APP.getRouter()._current._args[0] !== "/authorization/verification"
+		)
+			APP.getRequest().redirect("/authorization/verification");
 		return e;
 	}
 
