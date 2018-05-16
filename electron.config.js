@@ -9,7 +9,7 @@ function createWindow() {
 		title: "EvoDoc",
 		width: 1000,
 		height: 600,
-		minWidth: 400,
+		minWidth: 1000,
 		minHeight: 600
 	});
 
@@ -21,7 +21,7 @@ function createWindow() {
 		})
 	);
 
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 
 	win.on("closed", () => {
 		win = null;
