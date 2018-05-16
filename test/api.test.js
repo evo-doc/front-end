@@ -4,6 +4,8 @@ const { assert, expect } = chai;
 chai.use(require("chai-http"));
 const config = require("../src/config/app.config");
 
+// FIXME: Deprecated API
+
 // -------------------------------------------------------------------------------------------------
 // API INTERFACE
 // -------------------------------------------------------------------------------------------------
