@@ -80,9 +80,7 @@ How to write [annotations](http://usejsdoc.org/tags-type.html).
 
 
 ### Components
-Within pages may exist elements (components) that are used more than once,
-but with different texts etc., e.g. buttons, tiles, even whole templates (e.g. error pages).
-They are defined in `./src/local/components/**` and auto-loaded into all page classes.
+Within pages may exist elements (components) that are used more than once, but with different texts etc., e.g. buttons, tiles, even whole templates (e.g. error pages). They are defined in `./src/local/components/**` and auto-loaded into all page classes.
 
 `components.js` assumes the existence of `index.ejs` file(s), the name of their parent folder will be used as a unique id of the component and as a part of the exported interaface.
 
@@ -109,10 +107,7 @@ this._getRoot().innerHTML += this.getComponent().tileNewsletter({
 });
 ```
 
-Or as an argument of their main template:
-```
-TODO: Example
-```
+Or as an argument of their main template, see [webpack ejs-loader](https://github.com/okonet/ejs-loader).
 
 
 ### Localization
@@ -135,27 +130,24 @@ A pattern may look like `/path/path/:param/path/:param/path`. It means if we req
 
 Links:
 
-```
+```html
 <a href="#/route/page">  # good - parsed by Request class
 <a href="#route/page">   # bad - redirects to nowhere
 <a href="/route/page">   # bad - redirects to nowhere
 <a href="route/page">    # bad - redirects to nowhere
 ```
 
-### Global CSS
-TODO: Documentation
-
-### Testing
-TODO: Documentation
-
-## Core Modules
-TODO: Documentation
-
-### Logger
-
-A logger is coded as a module based on `winston` package (`./src/core/modules/logger.module.js`). Logs have 5 levels, you can enable/disable them at `./src/config/app.config.js`.
-
+### Modules
+Modules (`./src/core/modules`) are classes or interfaces that could be required manually via
+```js
+const module = require("name.module");
 ```
+or automatically via `webpack.config.js` file (may cause conflict of global variables).
+
+#### Logger
+A logger is coded as a module based on `winston` package (`./src/core/modules/app.logger.module.js`). Logs have 5 levels, you can enable/disable them at `./src/config/app.config.js`.
+
+```js
 log.error("Message");   // Critical errors
 log.warn("Message");    // Warnings
 log.info("Message");    // Information
@@ -163,9 +155,18 @@ log.debug("Message");   // Debug
 log.trace("Message");   // Detailed
 ```
 
-
-## Require modules
+### Global CSS
 TODO: Documentation
+
+### Testing
+```shell
+yarn test     # run all tests
+yarn test:app # run only app tests
+yarn test:api # run only API tests
+```
+[Mocha](https://mochajs.org) is used as an environment and [chai](http://www.chaijs.com) as an assertion library. Tests have their own folder (`./test`). First level tests `./test/*.test.js` are run automatically. They could run other test modules in subfolders.
+
+
 
 ## How to create .app/.exe/...
-TODO: Documentation
+See [electron-packager](https://github.com/electron-userland/electron-packager) and [electron-builder](https://github.com/electron-userland/electron-builder).
