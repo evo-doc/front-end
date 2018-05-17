@@ -78,6 +78,17 @@ How to write [annotations](http://usejsdoc.org/tags-type.html).
 └── yarn.lock
 ```
 
+### CSS Structure
+Project uses [Sass](https://sass-lang.com/guide) preprocessor, which adds special features such as variables, nested rules, inline imports and mixins into CSS.
+
+Global styles used within the whole project are placed in styles folder and divided into several sections: mixins, parts and ui elements.
+Global styles also include `_variables.scss` with global variables,`_palette.scss` with color variables and `main.scss` file, which collects all global style sheets: global UI elements, parts, variables, palette, mixins and libraries.
+
+Styles which relate only to a certain page or component are placed in the same folder with them and connected via `index.js` for pages and `components.js` for components.
+
+For naming classes we use the [BEM](http://getbem.com/naming/) (Block, Element, Modifier) naming convention.
+Each block is placed into its own folder and imported by a corresponding file.
+Each blocks folder contains files with its elements and may also contain folders with new blocks.
 
 ### Components
 Within pages may exist elements (components) that are used more than once,
@@ -117,7 +128,7 @@ TODO: Example
 
 ### Localization
 
-The application supports multilanguage insterfaces.
+The application supports multilanguage interfaces.
 
 ```
 ./src/config/app.config.json      # constains settings (default language etc)
@@ -169,3 +180,8 @@ TODO: Documentation
 
 ## How to create .app/.exe/...
 TODO: Documentation
+
+
+### How to create a new page
+
+When creating a new page, we add a folder with corresponding name to `./src/local/routes/**`. We then add the `index.js` file ,the page controller, to the page folder. Page controller may require some additional files, such as `index.ejs` file - template of the page,  `index.scss` - stylesheets of the page and also various folders, such as `images` folder containing images used in the page, `ejs` folder containing additional templates and `scss` folder containing additional stylesheets that are required in `index.scss`.
