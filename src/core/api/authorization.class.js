@@ -37,6 +37,7 @@ class Authorization {
 			log.debug(`[000] OFFLINE TESTING ACTIVE`);
 			this._saveToken("test");
 			APP.getRequest().redirect("/");
+			document.getElementById("username_profile").innerHTML = "TEST MODE";
 			return true;
 		}
 
@@ -55,6 +56,7 @@ class Authorization {
 			log.info(`[200] User "${username}" was signed in!`);
 			this._saveToken(result.body.token);
 			APP.getRequest().redirect("/");
+			document.getElementById("username_profile").innerHTML = username;
 			return;
 		}
 
